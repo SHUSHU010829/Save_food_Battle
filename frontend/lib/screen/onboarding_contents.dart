@@ -18,11 +18,11 @@ List<OnboardingContents> contents = [
   OnboardingContents(
     title: "多人同居",
     image: "assets/images/image2.png",
-    desc:"功能介紹二",
+    desc: "功能介紹二",
   ),
   OnboardingContents(
     title: "食材掃描",
     image: "assets/images/image3.png",
-    desc:"功能介紹三",
+    desc: "功能介紹三",
   ),
 ];

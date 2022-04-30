@@ -14,9 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Food_Battle_App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        
-      ),
+      theme: ThemeData(),
       home: const OnboardingScreen(),
     );
   }

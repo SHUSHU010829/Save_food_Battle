@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/size_config.dart';
 import 'package:frontend/screen/onboarding_contents.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -15,7 +14,11 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final _controller = PageController();
   int _currentPage = 0;
-  List colors = [const Color(0xffDAD3C8), const Color(0xffFFE5DE), const Color(0xffDCF6E6)];
+  List colors = [
+    const Color(0xffDAD3C8),
+    const Color(0xffFFE5DE),
+    const Color(0xffDCF6E6)
+  ];
 
   AnimatedContainer _buildDots({int? index}) {
     return AnimatedContainer(
@@ -59,7 +62,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       children: [
                         Image.asset(
                           contents[i].image,
-                          height: SizeConfig.blockV! * 35,
+                          height: SizeConfig.blockV! * 40,
                         ),
                         SizedBox(
                           height: (height >= 880) ? 60 : 30,
@@ -67,8 +70,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Text(
                           contents[i].title,
                           textAlign: TextAlign.center,
-                          style: 
-                          TextStyle(
+                          style: TextStyle(
                             fontFamily: 'GenJyuuGothic',
                             fontWeight: FontWeight.w700,
                             fontSize: (width <= 550) ? 30 : 35,
