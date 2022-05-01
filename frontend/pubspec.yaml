@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   google_fonts: ^2.3.2
+  font_awesome_flutter: ^10.1.0
   flutter:
     sdk: flutter
 
@@ -83,11 +84,15 @@ flutter:
         - asset: assets/fonts/GenJyuuGothic-Heavy.ttf
           weight: 700
         - asset: assets/fonts/GenJyuuGothic-Medium.ttf
-          weight: 500
         - asset: assets/fonts/GenJyuuGothic-Light.ttf
           weight: 300
         - asset: assets/fonts/GenJyuuGothic-ExtraLight.ttf
           weight: 200
+    - family: MontserratSubrayada
+      fonts:
+        - asset: assets/fonts/MontserratSubrayada-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/MontserratSubrayada-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
