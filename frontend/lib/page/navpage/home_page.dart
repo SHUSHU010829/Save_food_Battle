@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +18,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: const Color.fromRGBO(250, 249, 246, 1),
       body: Container(
         padding:
-            const EdgeInsets.only(left: 30, right: 30, top: 45, bottom: 30),
+            const EdgeInsets.only(left: 32, right: 32, top: 56, bottom: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(
-                      width: 13,
+                      width: 16,
                     ),
                     const Text(
                       "Hi,",
@@ -59,21 +61,10 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              "WALLETS",
-              style: TextStyle(
-                fontFamily: 'MontserratSubrayada',
-                fontSize: 20,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
+              height: 16,
             ),
             Container(
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromRGBO(91, 116, 98, 1),
@@ -90,39 +81,163 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(10.0),
                 color: const Color.fromRGBO(250, 249, 246, 1),
               ),
-              
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,     
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        "20,600",
+                        "WALLETS",
                         style: TextStyle(
-                          fontSize: 22,
+                          fontFamily: 'MontserratSubrayada',
+                          fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-
-                      Text(
-                        "代繳: 0",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: const [
+                          Text(
+                            "＄",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "20,600",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: const Color.fromRGBO(148, 163, 144, 1),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: const [
+                          Text(
+                            " 代繳：",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "＄",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Text(
+                            "0",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () => {},
+                      child: const Text(
+                        "  See More  ",
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 1.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                          const EdgeInsets.all(12),
+                        ),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromRGBO(40, 40, 40, 1),
+                        ),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromRGBO(148, 163, 144, 1),
+                        ),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                      ),
                     ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromRGBO(91, 116, 98, 1),
+                  width: 3,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.6),
+                    spreadRadius: 2,
+                    blurRadius: 6,
+                    offset: const Offset(1, 4), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(10.0),
+                color: const Color.fromRGBO(250, 249, 246, 1),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "SHOPPING LIST",
+                        style: TextStyle(
+                          fontFamily: 'MontserratSubrayada',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
