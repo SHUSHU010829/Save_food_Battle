@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/size_config.dart';
 import 'package:frontend/screen/onboarding_contents.dart';
 
+import '../page/navpage/main_page.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -110,7 +112,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ? Padding(
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const MainPage()));
+                            },
                             child: const Text("START"),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.black,

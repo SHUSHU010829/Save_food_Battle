@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screen/onboarding_screen.dart';
+import 'package:frontend/page/navpage/main_page.dart'; // ignore: unused_import
+import 'screen/onboarding_screen.dart'; // ignore: unused_import
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Food_Battle_App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        fontFamily: 'GenJyuuGothic',
+      ),
       home: const OnboardingScreen(),
     );
   }
