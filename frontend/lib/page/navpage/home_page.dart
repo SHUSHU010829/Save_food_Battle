@@ -43,16 +43,17 @@ class _HomePageState extends State<HomePage> {
                       "Hi,",
                       style: TextStyle(
                         color: Color.fromRGBO(27, 38, 42, 1),
-                        fontFamily: 'GenJyuuGothic',
+                        fontFamily: 'Montserrat',
                         fontSize: 22,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     const Text(
                       " User",
                       style: TextStyle(
                         color: Color.fromRGBO(27, 38, 42, 1),
-                        fontFamily: 'GenJyuuGothic',
-                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w800,
                         fontSize: 22,
                       ),
                     ),
@@ -107,10 +108,11 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: const [
                           Text(
-                            "＄",
+                            "\$",
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontSize: 20,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           SizedBox(
@@ -119,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             "20,600",
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                             ),
@@ -139,25 +142,28 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             " 代繳：",
                             style: TextStyle(
+                              fontFamily: 'GenRyuMin',
                               fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           SizedBox(
                             height: 8,
                           ),
                           Text(
-                            "＄",
+                            "\$",
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Text(
                             "0",
                             style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
@@ -174,9 +180,10 @@ class _HomePageState extends State<HomePage> {
                       child: const Text(
                         "  See More  ",
                         style: TextStyle(
+                          fontFamily: 'Montserrat',
                           fontSize: 12,
                           height: 1.0,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       style: ButtonStyle(

@@ -88,11 +88,42 @@ flutter:
           weight: 300
         - asset: assets/fonts/GenJyuuGothic-ExtraLight.ttf
           weight: 200
-    - family: MontserratSubrayada
+    - family: Montserrat
       fonts:
-        - asset: assets/fonts/MontserratSubrayada-Bold.ttf
+        - asset: assets/fonts/Montserrat-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
-        - asset: assets/fonts/MontserratSubrayada-Regular.ttf
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Montserrat-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Montserrat-Thin.ttf
+          weight: 100
+    - family: GenRyuMin
+      fonts:
+        - asset: assets/fonts/GenRyuMin-B.ttc
+          weight: 800
+        - asset: assets/fonts/GenRyuMin-SB.ttc
+          weight: 700
+        - asset: assets/fonts/GenRyuMin-H.ttc
+          weight: 600
+        - asset: assets/fonts/GenRyuMin-M.ttc
+          weight: 500
+        - asset: assets/fonts/GenRyuMin-R.ttc
+          weight: 400
+        - asset: assets/fonts/GenRyuMin-L.ttc
+          weight: 300
+        - asset: assets/fonts/GenRyuMin-EL.ttc
+          weight: 200
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
