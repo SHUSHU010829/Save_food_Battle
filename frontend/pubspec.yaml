@@ -108,6 +108,12 @@ flutter:
           weight: 200
         - asset: assets/fonts/Montserrat-Thin.ttf
           weight: 100
+    - family: MontserratSubrayada
+      fonts:
+        - asset: assets/fonts/MontserratSubrayada-Bold.ttf
+          weight: 900
+        - asset: assets/fonts/MontserratSubrayada-Regular.ttf
+          weight: 800
     - family: GenRyuMin
       fonts:
         - asset: assets/fonts/GenRyuMin-B.ttc
@@ -124,6 +130,7 @@ flutter:
           weight: 300
         - asset: assets/fonts/GenRyuMin-EL.ttc
           weight: 200
+    
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
