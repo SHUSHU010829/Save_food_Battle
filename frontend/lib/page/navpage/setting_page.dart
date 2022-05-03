@@ -16,14 +16,28 @@ class _SettingPageState extends State<SettingPage> {
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
         child: ListView(
           children: [
-            const Text(
-              "Setting",
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Montserrat',
-                color: Color.fromRGBO(40, 40, 40, 1),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Setting",
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Montserrat',
+                    color: Color.fromRGBO(40, 40, 40, 1),
+                  ),
+                ),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/頭像.png'),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 32,
