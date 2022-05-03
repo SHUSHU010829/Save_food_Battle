@@ -22,7 +22,7 @@ class _ScanPageState extends State<ScanPage> {
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Montserrat',
               ),
-            )
+            ),
           ],
         ),
       ),

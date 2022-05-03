@@ -73,19 +73,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           contents[i].title,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontFamily: 'GenJyuuGothic',
+                            fontFamily: 'GenRyuMin',
                             fontWeight: FontWeight.w700,
                             fontSize: (width <= 550) ? 30 : 35,
                           ),
                         ),
                         const SizedBox(
-                          height: 15,
+                          height: 24,
                         ),
                         Text(
                           contents[i].desc,
                           style: TextStyle(
-                            fontFamily: 'GenJyuuGothic',
-                            fontWeight: FontWeight.w500,
+                            fontFamily: 'GenRyuMin',
+                            fontWeight: FontWeight.w600,
                             fontSize: (width <= 550) ? 17 : 25,
                           ),
                           textAlign: TextAlign.center,
@@ -118,7 +118,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   MaterialPageRoute(
                                       builder: (context) => const MainPage()));
                             },
-                            child: const Text("START"),
+                            child: const Text(
+                              "START",
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
                               primary: Colors.black,
                               shape: RoundedRectangleBorder(
@@ -152,6 +158,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   textStyle: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: (width <= 550) ? 13 : 17,
+                                    fontFamily: 'Montserrat',
                                   ),
                                 ),
                               ),
@@ -162,7 +169,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     curve: Curves.easeIn,
                                   );
                                 },
-                                child: const Text("NEXT"),
+                                child: const Text(
+                                  "NEXT",
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.black,
                                   shape: RoundedRectangleBorder(

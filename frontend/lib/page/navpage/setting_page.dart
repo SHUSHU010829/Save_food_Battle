@@ -153,7 +153,11 @@ class _SettingPageState extends State<SettingPage> {
           scale: 0.7,
           child: CupertinoSwitch(
             value: isActive,
-            onChanged: (bool val) {},
+            onChanged: (bool val) {
+              setState(() {});
+            },
+            activeColor: const Color.fromRGBO(31, 49, 51, 1),
+            trackColor: const Color.fromRGBO(177, 186, 171, 1),
           ),
         ),
       ],
@@ -167,7 +171,15 @@ class _SettingPageState extends State<SettingPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              title: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'GenRyuMin',
+                  color: Color.fromRGBO(40, 40, 40, 1),
+                ),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: const [
@@ -206,7 +218,7 @@ class _SettingPageState extends State<SettingPage> {
                       fontFamily: 'Montserrat',
                     ),
                   ),
-                )
+                ),
               ],
             );
           },
