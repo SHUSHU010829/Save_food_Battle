@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:frontend/constants.dart';
 import 'package:frontend/size_config.dart';
 import 'package:frontend/screen/onboarding_contents.dart';
 
@@ -151,7 +152,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 },
                                 child: const Text(
                                   "SKIP",
-                                  style: TextStyle(color: Colors.black),
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: englishFontfamily),
                                 ),
                                 style: TextButton.styleFrom(
                                   elevation: 0,

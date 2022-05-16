@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/constants.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: Container(
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
         child: ListView(
@@ -24,8 +26,8 @@ class _SettingPageState extends State<SettingPage> {
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w500,
-                    fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(40, 40, 40, 1),
+                    fontFamily: englishFontfamily,
+                    color: textColor,
                   ),
                 ),
                 Container(
@@ -46,7 +48,7 @@ class _SettingPageState extends State<SettingPage> {
               children: const [
                 Icon(
                   Icons.border_color_rounded,
-                  color: Color.fromRGBO(35, 60, 58, 1),
+                  color: primaryColor7,
                 ),
                 SizedBox(
                   width: 8,
@@ -56,8 +58,8 @@ class _SettingPageState extends State<SettingPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
-                    fontFamily: 'GenRyuMin',
-                    color: Color.fromRGBO(40, 40, 40, 1),
+                    fontFamily: chineseFontfamily,
+                    color: textColor,
                   ),
                 )
               ],
@@ -81,7 +83,7 @@ class _SettingPageState extends State<SettingPage> {
               children: const [
                 Icon(
                   Icons.volume_up_rounded,
-                  color: Color.fromRGBO(35, 60, 58, 1),
+                  color: primaryColor7,
                 ),
                 SizedBox(
                   width: 8,
@@ -91,8 +93,8 @@ class _SettingPageState extends State<SettingPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
-                    fontFamily: 'GenRyuMin',
-                    color: Color.fromRGBO(40, 40, 40, 1),
+                    fontFamily: chineseFontfamily,
+                    color: textColor,
                   ),
                 )
               ],
@@ -119,7 +121,7 @@ class _SettingPageState extends State<SettingPage> {
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(40, 40, 40, 1),
+                    color: textColor,
                   ),
                 ),
                 style: OutlinedButton.styleFrom(
@@ -145,8 +147,8 @@ class _SettingPageState extends State<SettingPage> {
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w700,
-            fontFamily: 'GenRyuMin',
-            color: Color.fromRGBO(40, 40, 40, 1),
+            fontFamily: chineseFontfamily,
+            color: textColor,
           ),
         ),
         Transform.scale(
@@ -156,8 +158,8 @@ class _SettingPageState extends State<SettingPage> {
             onChanged: (bool val) {
               setState(() {});
             },
-            activeColor: const Color.fromRGBO(31, 49, 51, 1),
-            trackColor: const Color.fromRGBO(177, 186, 171, 1),
+            activeColor: primaryColor8,
+            trackColor: primaryColor1,
           ),
         ),
       ],
@@ -176,8 +178,8 @@ class _SettingPageState extends State<SettingPage> {
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'GenRyuMin',
-                  color: Color.fromRGBO(40, 40, 40, 1),
+                  fontFamily: chineseFontfamily,
+                  color: textColor,
                 ),
               ),
               content: Column(
@@ -187,21 +189,21 @@ class _SettingPageState extends State<SettingPage> {
                     "Option 1",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontFamily: 'Montserrat',
+                      fontFamily: englishFontfamily,
                     ),
                   ),
                   Text(
                     "Option 2",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontFamily: 'Montserrat',
+                      fontFamily: englishFontfamily,
                     ),
                   ),
                   Text(
                     "Option 3",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontFamily: 'Montserrat',
+                      fontFamily: englishFontfamily,
                     ),
                   ),
                 ],
@@ -215,7 +217,7 @@ class _SettingPageState extends State<SettingPage> {
                     "Close",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontFamily: 'Montserrat',
+                      fontFamily: englishFontfamily,
                     ),
                   ),
                 ),
@@ -234,8 +236,8 @@ class _SettingPageState extends State<SettingPage> {
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                fontFamily: 'GenRyuMin',
-                color: Color.fromRGBO(40, 40, 40, 1),
+                fontFamily: chineseFontfamily,
+                color: textColor,
               ),
             ),
             const Icon(

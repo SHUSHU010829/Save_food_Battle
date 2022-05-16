@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants.dart';
 import 'package:frontend/page/navpage/home_page.dart';
 import 'package:frontend/page/navpage/scan_page.dart';
 import 'package:frontend/page/navpage/setting_page.dart';
@@ -28,50 +29,51 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(250, 249, 246, 1),
+      backgroundColor: backgroundColor,
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          unselectedFontSize: 0,
-          selectedFontSize: 0,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color.fromRGBO(250, 249, 246, 1),
-          onTap: onTap,
-          currentIndex: currentIndex,
-          selectedItemColor: const Color.fromRGBO(118, 139, 119, 1),
-          unselectedItemColor: const Color.fromRGBO(177, 169, 169, 0.8),
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          elevation: 0,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.house_rounded,
-                size: 28,
-              ),
-              label: 'Home',
+        unselectedFontSize: 0,
+        selectedFontSize: 0,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: backgroundColor,
+        onTap: onTap,
+        currentIndex: currentIndex,
+        selectedItemColor: primaryColor5,
+        unselectedItemColor: textColor2,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        elevation: 0,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+              size: 32,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.document_scanner_rounded,
-                size: 28,
-              ),
-              label: 'Scan',
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.document_scanner_rounded,
+              size: 32,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.folder_copy_rounded,
-                size: 28,
-              ),
-              label: 'Foodstore',
+            label: 'Scan',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.folder_copy_rounded,
+              size: 32,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings_rounded,
-                size: 28,
-              ),
-              label: 'Setting',
+            label: 'Foodstore',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings_rounded,
+              size: 32,
             ),
-          ]),
+            label: 'Setting',
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:frontend/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(250, 249, 246, 1),
+      backgroundColor: backgroundColor,
       body: Container(
         padding:
             const EdgeInsets.only(left: 32, right: 32, top: 56, bottom: 32),
@@ -42,8 +41,8 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       "Hi,",
                       style: TextStyle(
-                        color: Color.fromRGBO(27, 38, 42, 1),
-                        fontFamily: 'Montserrat',
+                        color: primaryColor9,
+                        fontFamily: englishFontfamily,
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
                       ),
@@ -51,8 +50,8 @@ class _HomePageState extends State<HomePage> {
                     const Text(
                       " User",
                       style: TextStyle(
-                        color: Color.fromRGBO(27, 38, 42, 1),
-                        fontFamily: 'Montserrat',
+                        color: primaryColor9,
+                        fontFamily: englishFontfamily,
                         fontWeight: FontWeight.w800,
                         fontSize: 22,
                       ),
@@ -68,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color.fromRGBO(91, 116, 98, 1),
+                  color: primaryColor4,
                   width: 3,
                 ),
                 boxShadow: [
@@ -91,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         "WALLETS",
                         style: TextStyle(
-                          fontFamily: 'MontserratSubrayada',
+                          fontFamily: englishSpecialFontfamily,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
@@ -108,9 +107,9 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: const [
                           Text(
-                            "\$",
+                            "\$ ",
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: englishFontfamily,
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                             ),
@@ -121,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             "20,600",
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: englishFontfamily,
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                             ),
@@ -131,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(
-                    height: 4,
+                    height: 16,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -140,11 +139,11 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         children: const [
                           Text(
-                            " 代繳：",
+                            "代繳：",
                             style: TextStyle(
-                              fontFamily: 'GenRyuMin',
+                              fontFamily: chineseFontfamily,
                               fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w900,
                             ),
                           ),
                           SizedBox(
@@ -153,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             "\$",
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: englishFontfamily,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
@@ -161,9 +160,9 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             "0",
                             style: TextStyle(
-                              fontFamily: 'Montserrat',
+                              fontFamily: englishFontfamily,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
@@ -180,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                       child: const Text(
                         "  See More  ",
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
+                          fontFamily: englishFontfamily,
                           fontSize: 12,
                           height: 1.0,
                           fontWeight: FontWeight.w500,
@@ -192,10 +191,10 @@ class _HomePageState extends State<HomePage> {
                         ),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         foregroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromRGBO(40, 40, 40, 1),
+                          textColor,
                         ),
                         backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromRGBO(148, 163, 144, 1),
+                          primaryColor2,
                         ),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -216,7 +215,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color.fromRGBO(91, 116, 98, 1),
+                  color: primaryColor4,
                   width: 3,
                 ),
                 boxShadow: [
@@ -228,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
                 borderRadius: BorderRadius.circular(10.0),
-                color: const Color.fromRGBO(250, 249, 246, 1),
+                color: backgroundColor,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -239,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         "SHOPPING LIST",
                         style: TextStyle(
-                          fontFamily: 'MontserratSubrayada',
+                          fontFamily: englishSpecialFontfamily,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
