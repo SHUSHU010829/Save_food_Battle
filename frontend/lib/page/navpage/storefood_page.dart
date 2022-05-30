@@ -1,20 +1,9 @@
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
-
+import '../../models/storefood_carditem1.dart';
 import '../storefood/instant_food_page.dart';
 
-class CardItem {
-  final String urlImage;
-  final String title;
-  final String date;
-
-  const CardItem({
-    required this.urlImage,
-    required this.title,
-    required this.date,
-  });
-}
 
 class StorefoodPage extends StatefulWidget {
   const StorefoodPage({Key? key}) : super(key: key);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/models/tobuy_model.dart';
+import 'package:frontend/widgets/tobuy_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,6 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<TobuyModel> tobuys = [];
+  TextEditingController tobuyController = TextEditingController(text: "");
+
   get mainAxisAlignment => null;
 
   @override
@@ -245,14 +250,53 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 24),
                   Column(
                     children: [
-                      Expanded(
-                        child: Container(),
-                      ),
+                      //todo 加上以下這段，整個 column 爆掉
+                      // Expanded(
+                      //   child: Column(
+                      //     children: tobuys
+                      //         .map((item) => TobuyItem(
+                      //               title: item.title,
+                      //             ))
+                      //         .toList(),
+                      //   ),
+                      // ),
                       Container(
-                        padding: const EdgeInsets.all(16),
-                        child: buildInsertButton(),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.only(bottom: 50),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: secondary1,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  controller: tobuyController,
+                                  decoration: const InputDecoration.collapsed(
+                                      hintText: "Add tobuy..."),
+                                ),
+                              ),
+                              //todo 查一下為什麼加上以下這個為爆掉
+                              // GestureDetector(
+                              //   onTap: () {
+                              //     print(tobuyController.text);
+                              //     setState(() {
+                              //       tobuys.add(TobuyModel(
+                              //           title: tobuyController.text,
+                              //           isDone: false));
+                              //       tobuyController.text = "";
+                              //     });
+                              //   },
+                              // ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -264,12 +308,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  Widget buildInsertButton() => ElevatedButton(
-        onPressed: () {},
-        child: Text(
-          'Insert item',
-          style: TextStyle(fontSize: 24),
-        ),
-      );
 }
