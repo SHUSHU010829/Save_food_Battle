@@ -245,6 +245,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
+                  Column(
+                    children: [
+                      Expanded(
+                        child: Container(),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        child: buildInsertButton(),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -253,4 +264,12 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Widget buildInsertButton() => ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          'Insert item',
+          style: TextStyle(fontSize: 24),
+        ),
+      );
 }

@@ -1,16 +1,31 @@
 # 畢業專題
+
 ## 食物拯救計畫
+
+### backend
 
 ```bash
 npm install
 
 ```
 
-## flutter_cubit
+### frontend
 
-A new Flutter project.
+食物拯救計畫前端介面。
 
-### Getting Started
+#### 使用工具
+
+- Flutter
+  - google_fonts
+  - font_awesome_flutter
+  - toggle_switch
+  - cupertino_icons
+  - anim_search_bar
+  - get
+  - cloud_firestore
+  - firebase_core
+
+#### Getting Started
 
 This project is a starting point for a Flutter application.
 
