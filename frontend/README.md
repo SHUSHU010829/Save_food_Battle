@@ -1,6 +1,18 @@
 # frontend
 
-A new Flutter project.
+食物拯救計畫前端介面。
+
+## 使用工具
+
+- Flutter
+  - google_fonts
+  - font_awesome_flutter
+  - toggle_switch
+  - cupertino_icons
+  - anim_search_bar
+  - get
+  - cloud_firestore
+  - firebase_core
 
 ## Getting Started
 
