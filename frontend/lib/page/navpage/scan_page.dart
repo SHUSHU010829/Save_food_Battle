@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
-import 'package:frontend/page/scanpage/bill_scan_page.dart';
-import 'package:frontend/page/scanpage/food_scan_page.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class ScanPage extends StatefulWidget {

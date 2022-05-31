@@ -19,7 +19,6 @@ class _TobuyItemState extends State<TobuyItem> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
         margin: const EdgeInsets.only(
           bottom: 20,
         ),

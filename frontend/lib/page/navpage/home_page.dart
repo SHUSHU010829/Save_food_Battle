@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/models/tobuy_model.dart';
+import 'package:frontend/page/homepage/tobuy_page.dart';
 import 'package:frontend/widgets/tobuy_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,239 +69,191 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 16,
             ),
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: primaryColor4,
-                  width: 3,
+            InkWell(
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: primaryColor4,
+                    width: 3,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.6),
+                      spreadRadius: 2,
+                      blurRadius: 6,
+                      offset: const Offset(1, 4), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color.fromRGBO(250, 249, 246, 1),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.6),
-                    spreadRadius: 2,
-                    blurRadius: 6,
-                    offset: const Offset(1, 4), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(10.0),
-                color: const Color.fromRGBO(250, 249, 246, 1),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "WALLETS",
-                        style: TextStyle(
-                          fontFamily: englishSpecialFontfamily,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "WALLETS",
+                          style: TextStyle(
+                            fontFamily: englishSpecialFontfamily,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          Text(
-                            "\$ ",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: const [
+                            Text(
+                              "\$ ",
+                              style: TextStyle(
+                                fontFamily: englishFontfamily,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "20,600",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
+                            SizedBox(
+                              height: 8,
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: const [
-                          Text(
-                            "代繳：",
-                            style: TextStyle(
-                              fontFamily: chineseFontfamily,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w900,
+                            Text(
+                              "20,600",
+                              style: TextStyle(
+                                fontFamily: englishFontfamily,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "\$",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            "0",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () => {},
-                      child: const Text(
-                        "  See More  ",
-                        style: TextStyle(
-                          fontFamily: englishFontfamily,
-                          fontSize: 12,
-                          height: 1.0,
-                          fontWeight: FontWeight.w500,
+                          ],
                         ),
-                      ),
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.all(12),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: const [
+                            Text(
+                              "代繳：",
+                              style: TextStyle(
+                                fontFamily: chineseFontfamily,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "\$",
+                              style: TextStyle(
+                                fontFamily: englishFontfamily,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                fontFamily: englishFontfamily,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                          textColor,
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () => {},
+                        child: const Text(
+                          "  See More  ",
+                          style: TextStyle(
+                            fontFamily: englishFontfamily,
+                            fontSize: 12,
+                            height: 1.0,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          primaryColor2,
-                        ),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.all(12),
+                          ),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                            textColor,
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            primaryColor2,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TobuyPage(),
+                ),
               ),
             ),
             const SizedBox(
-              height: 16,
+              height: 24,
             ),
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: primaryColor4,
-                  width: 3,
+            Center(
+              child: OutlinedButton(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text("Shopping List"),
+                    SizedBox(width: 10),
+                    Icon(Icons.add_shopping_cart_rounded)
+                  ],
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.6),
-                    spreadRadius: 2,
-                    blurRadius: 6,
-                    offset: const Offset(1, 4), // changes position of shadow
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TobuyPage(),
                   ),
-                ],
-                borderRadius: BorderRadius.circular(10.0),
-                color: backgroundColor,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "SHOPPING LIST",
-                        style: TextStyle(
-                          fontFamily: englishSpecialFontfamily,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  side: const BorderSide(width: 3.0, color: textColor2),
+                  padding: const EdgeInsets.all(20.0),
+                  fixedSize: const Size(300, 80),
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: englishSpecialFontfamily,
                   ),
-                  const SizedBox(height: 24),
-                  Column(
-                    children: [
-                      //todo 加上以下這段，整個 column 爆掉
-                      // Expanded(
-                      //   child: Column(
-                      //     children: tobuys
-                      //         .map((item) => TobuyItem(
-                      //               title: item.title,
-                      //             ))
-                      //         .toList(),
-                      //   ),
-                      // ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.only(bottom: 50),
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: secondary1,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: TextFormField(
-                                  controller: tobuyController,
-                                  decoration: const InputDecoration.collapsed(
-                                      hintText: "Add tobuy..."),
-                                ),
-                              ),
-                              //todo 查一下為什麼加上以下這個為爆掉
-                              // GestureDetector(
-                              //   onTap: () {
-                              //     print(tobuyController.text);
-                              //     setState(() {
-                              //       tobuys.add(TobuyModel(
-                              //           title: tobuyController.text,
-                              //           isDone: false));
-                              //       tobuyController.text = "";
-                              //     });
-                              //   },
-                              // ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  onPrimary: primaryColor9,
+                  shadowColor: primaryColor1,
+                  shape: const StadiumBorder(),
+                ),
               ),
             ),
           ],
