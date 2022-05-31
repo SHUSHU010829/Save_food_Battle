@@ -1,6 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
@@ -10,9 +14,26 @@ class ScanPage extends StatefulWidget {
 }
 
 class _ScanPageState extends State<ScanPage> {
+  // this part is switch botton
   bool showScan = true;
   void toggleView() {
     setState(() => showScan = !showScan);
+  }
+
+  Barcode? result;
+  QRViewController? controller;
+  final GlobalKey qrkey = GlobalKey(debugLabel: 'QR');
+
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller!.resumeCamera();
+    }
   }
 
   @override
@@ -37,7 +58,7 @@ class _ScanPageState extends State<ScanPage> {
                 ),
                 ToggleSwitch(
                   minWidth: 64.0,
-                  initialLabelIndex: 1,
+                  initialLabelIndex: 0,
                   cornerRadius: 8.0,
                   activeFgColor: backgroundColor,
                   inactiveBgColor: textColor2,
@@ -67,10 +88,13 @@ class _ScanPageState extends State<ScanPage> {
             const SizedBox(
               height: 40,
             ),
-            Container(),
+            // Qr Scanner
+            
           ],
         ),
       ),
     );
   }
+
+  
 }
