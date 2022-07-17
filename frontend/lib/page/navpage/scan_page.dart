@@ -42,8 +42,9 @@ class _ScanPageState extends State<ScanPage> {
       backgroundColor: backgroundColor,
       body: Container(
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
-        child: ListView(
+        child: Column(
           children: [
+            //* BAR
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -70,7 +71,7 @@ class _ScanPageState extends State<ScanPage> {
                     Icons.set_meal,
                   ],
                   activeBgColors: const [
-                    [primaryColor3],
+                    [primaryColor2],
                     [primaryColor4]
                   ],
                   onToggle: (index) {
@@ -88,13 +89,11 @@ class _ScanPageState extends State<ScanPage> {
             const SizedBox(
               height: 40,
             ),
-            // Qr Scanner
+            //* Qr Scanner
             
           ],
         ),
       ),
     );
   }
-
-  
 }

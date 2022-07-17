@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class PopupAlert extends StatefulWidget {
   const PopupAlert({Key? key}) : super(key: key);
