@@ -50,7 +50,7 @@ class _ScanPageState extends State<ScanPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Scanwwe",
+                  "Scan",
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w500,
@@ -72,7 +72,7 @@ class _ScanPageState extends State<ScanPage> {
                     Icons.set_meal,
                   ],
                   activeBgColors: const [
-                    [primaryColor2],
+                    [primaryColor3],
                     [primaryColor4]
                   ],
                   onToggle: (index) {
@@ -93,7 +93,7 @@ class _ScanPageState extends State<ScanPage> {
             //* Qr Scanner
             Container(
               width: double.infinity,
-              height: 500,
+              height: 400,
               alignment: Alignment.center,
               child: Container(
                 width: 200,
@@ -101,8 +101,65 @@ class _ScanPageState extends State<ScanPage> {
                 color: Colors.green[300],
               ),
             ),
-            const SizedBox(
-              height: 24,
+            //* 功能按鈕
+            Container(
+              //! 置中不知為何搞不定，未來修正
+              padding: const EdgeInsets.only(left: 80),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Icon(Icons.highlight),
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(const CircleBorder()),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(20)),
+                          backgroundColor: MaterialStateProperty.all(
+                              primaryColor5), // <-- Button color
+                          overlayColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return primaryColor2;
+                              }
+                              return null; // <-- Splash color
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 40,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Icon(Icons.edit),
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(const CircleBorder()),
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(20)),
+                          backgroundColor: MaterialStateProperty.all(
+                              primaryColor5), // <-- Button color
+                          overlayColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return primaryColor2;
+                              }
+                              return null; // <-- Splash color
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
