@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/models/tobuy_model.dart';
 import 'package:frontend/page/homepage/tobuy_page.dart';
+import 'package:frontend/widgets/popup_alert.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // 首頁 Bar
+                //* 首頁 Bar
                 Row(
                   children: [
                     Container(
@@ -64,34 +65,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                // 提醒彈跳視窗
-                IconButton(
-                  icon: const Icon(Icons.notifications),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('加入購物車'),
-                          ),
-                        ],
-                        title: const Text('食材用盡提醒'),
-                        contentPadding: const EdgeInsets.all(20.0),
-                        content: const Text('內文'),
-                      ),
-                    );
-                  },
-                ),
+                //* 提醒彈跳視窗
+                // ignore: todo
+                //TODO: 尚未完成
+                const PopupAlert(),
               ],
             ),
             const SizedBox(
               height: 16,
             ),
-            // 錢包區塊
+            //* 錢包區塊
             InkWell(
               child: Container(
                 padding: const EdgeInsets.all(24),
@@ -248,7 +231,9 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 24,
             ),
-            // 購物清單
+            //* 購物清單
+            // ignore: todo
+            //TODO: 將清單併入首頁
             Center(
               child: OutlinedButton(
                 child: Row(
