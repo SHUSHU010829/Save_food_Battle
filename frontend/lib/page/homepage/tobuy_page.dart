@@ -70,7 +70,7 @@ class _TobuyPageState extends State<TobuyPage> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print(tobuyController.text);
+                          //print(tobuyController.text);
                           setState(() {
                             tobuys.add(TobuyModel(
                                 title: tobuyController.text, isDone: false));

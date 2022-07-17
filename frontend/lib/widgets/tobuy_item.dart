@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TobuyItem extends StatefulWidget {
   final String title;
-  TobuyItem({required this.title});
+  const TobuyItem({required this.title});
 
   @override
   _TobuyItemState createState() => _TobuyItemState();

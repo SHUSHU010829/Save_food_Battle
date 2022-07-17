@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
-import 'package:frontend/page/navpage/storefood_page.dart';
 import '../../models/storefood_carditem1.dart';
 
 class InstantFoodPage extends StatelessWidget {

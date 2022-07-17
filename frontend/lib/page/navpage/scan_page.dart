@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -30,9 +28,9 @@ class _ScanPageState extends State<ScanPage> {
   void reassemble() {
     super.reassemble();
     if (Platform.isAndroid) {
-      controller!.pauseCamera();
+      controller?.pauseCamera();
     } else if (Platform.isIOS) {
-      controller!.resumeCamera();
+      controller?.resumeCamera();
     }
   }
 
@@ -44,12 +42,15 @@ class _ScanPageState extends State<ScanPage> {
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
         child: Column(
           children: [
+            const SizedBox(
+              height: 24,
+            ),
             //* BAR
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Scan",
+                  "Scanwwe",
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.w500,
@@ -90,7 +91,19 @@ class _ScanPageState extends State<ScanPage> {
               height: 40,
             ),
             //* Qr Scanner
-            
+            Container(
+              width: double.infinity,
+              height: 500,
+              alignment: Alignment.center,
+              child: Container(
+                width: 200,
+                height: 200,
+                color: Colors.green[300],
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
           ],
         ),
       ),
