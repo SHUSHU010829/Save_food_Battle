@@ -120,7 +120,7 @@ class _SettingPageState extends State<SettingPage> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    fontFamily: 'Montserrat',
+                    fontFamily: englishFontfamily,
                     color: textColor,
                   ),
                 ),
