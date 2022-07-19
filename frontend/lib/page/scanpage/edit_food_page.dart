@@ -1,5 +1,4 @@
 // ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/models/data/scanFood/edititem_data.dart';
@@ -20,6 +19,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
       backgroundColor: backgroundColor,
       body: Container(
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
+        //! Incorrect use of ParentDataWidget. <-- 錯誤訊息不知道哪出錯了：）
         child: ListView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
@@ -142,91 +142,92 @@ class _EditFoodPageState extends State<EditFoodPage> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildCard({required FoodItem edit_item}) => Container(
-        height: 88,
-        padding: const EdgeInsets.only(bottom: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: primaryColor9,
-              width: 2,
-            ),
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            boxShadow: const [
-              BoxShadow(
-                color: primaryColor2,
-                offset: Offset(6.0, 6.0), //陰影x軸偏移量
-                blurRadius: 5, //陰影模糊程度
-                spreadRadius: 0, //陰影擴散程度
-              ),
-            ],
+  Widget buildCard({required FoodItem edit_item}) => GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EditDetailPage(edit_item: edit_item),
           ),
-          child: Row(
-            children: [
-              SizedBox(
-                height: 100,
-                width: 100,
-                child: Expanded(
-                  child: AspectRatio(
-                    aspectRatio: 4 / 3,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Material(
-                        child: Ink.image(
-                          image: NetworkImage(
-                            edit_item.urlImage,
-                          ),
-                          fit: BoxFit.cover,
-                          child: InkWell(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const EditFoodPage(),
-                              ),
+        ),
+        child: Container(
+          height: 88,
+          padding: const EdgeInsets.only(bottom: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: primaryColor9,
+                width: 2,
+              ),
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              boxShadow: const [
+                BoxShadow(
+                  color: primaryColor2,
+                  offset: Offset(6.0, 6.0), //陰影x軸偏移量
+                  blurRadius: 5, //陰影模糊程度
+                  spreadRadius: 0, //陰影擴散程度
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 4 / 3,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Material(
+                          child: Ink.image(
+                            image: NetworkImage(
+                              edit_item.urlImage,
                             ),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 50,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Column(
-                  children: [
-                    Text(
-                      edit_item.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: englishFontfamily,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      edit_item.date,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: englishFontfamily,
-                      ),
-                    ),
-                  ],
+                const SizedBox(
+                  width: 50,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Column(
+                    children: [
+                      Text(
+                        edit_item.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: englishFontfamily,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        edit_item.date,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: englishFontfamily,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

@@ -11,9 +11,7 @@ import 'package:frontend/page/storefood/food_detail_page.dart';
 import 'package:frontend/page/storefood/instant_food_page.dart';
 
 class StorefoodPage extends StatefulWidget {
-  const StorefoodPage({
-    Key? key
-  }) : super(key: key);
+  const StorefoodPage({Key? key}) : super(key: key);
 
   @override
   State<StorefoodPage> createState() => _StorefoodPageState();
@@ -234,87 +232,88 @@ class _StorefoodPageState extends State<StorefoodPage> {
         ),
       );
 
-  Widget buildCard2({required AllCardItem all_card_item}) => Container(
-        height: 88,
-        padding: const EdgeInsets.only(left: 32, right: 24, bottom: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: primaryColor9,
-              width: 2,
+  Widget buildCard2({required AllCardItem all_card_item}) => GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FoodDetailPage(
+              all_card_item: all_card_item,
             ),
-            color: Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            boxShadow: const [
-              BoxShadow(
-                color: primaryColor2,
-                offset: Offset(6.0, 6.0), //陰影x軸偏移量
-                blurRadius: 5, //陰影模糊程度
-                spreadRadius: 0, //陰影擴散程度
-              ),
-            ],
           ),
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          child: Row(
-            children: [
-              SizedBox(
-                height: 100,
-                width: 100,
-                child: Expanded(
-                  child: AspectRatio(
-                    aspectRatio: 4 / 3,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Material(
-                        child: Ink.image(
-                          image: NetworkImage(
-                            all_card_item.urlImage,
-                          ),
-                          fit: BoxFit.cover,
-                          child: InkWell(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FoodDetailPage(
-                                  all_card_item: all_card_item,
-                                ),
-                              ),
+        ),
+        child: Container(
+          height: 88,
+          padding: const EdgeInsets.only(left: 32, right: 24, bottom: 16),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: primaryColor9,
+                width: 2,
+              ),
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              boxShadow: const [
+                BoxShadow(
+                  color: primaryColor2,
+                  offset: Offset(6.0, 6.0), //陰影x軸偏移量
+                  blurRadius: 5, //陰影模糊程度
+                  spreadRadius: 0, //陰影擴散程度
+                ),
+              ],
+            ),
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: Row(
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 4 / 3,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Material(
+                          child: Ink.image(
+                            image: NetworkImage(
+                              all_card_item.urlImage,
                             ),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 50,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Column(
-                  children: [
-                    Text(
-                      all_card_item.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: englishFontfamily,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      all_card_item.date,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: englishFontfamily,
-                      ),
-                    ),
-                  ],
+                const SizedBox(
+                  width: 50,
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Column(
+                    children: [
+                      Text(
+                        all_card_item.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: englishFontfamily,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        all_card_item.date,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: englishFontfamily,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

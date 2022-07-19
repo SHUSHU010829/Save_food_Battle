@@ -112,7 +112,6 @@ class _ScanPageState extends State<ScanPage> {
             ),
             //* 功能按鈕
             Container(
-              //! 置中不知為何搞不定，未來修正
               padding: const EdgeInsets.only(left: 80),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
