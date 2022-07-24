@@ -2,19 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/models/food_edit_carditem.dart';
 
-class EditDetailPage extends StatelessWidget {
+// ignore: must_be_immutable
+class EditDetailPage extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final FoodItem edit_item;
 
-  EditDetailPage({
+  const EditDetailPage({
     Key? key,
     // ignore: non_constant_identifier_names
     required this.edit_item,
   }) : super(key: key);
+
+  @override
+  State<EditDetailPage> createState() => _EditDetailPageState();
+}
+
+class _EditDetailPageState extends State<EditDetailPage> {
   List<String> items = ["冷藏", "冷凍", "儲藏室"];
-  // List<String> items1 = ['All', 'Place1', 'Place2', 'Place3', 'Place4'];
-  // String? dropdownValue = 'All';
-  // TextEditingController textController = TextEditingController();
+  List<String> types = ['甜點', '肉類', '蔬菜', '水果', '其他'];
+
+  String? dropdownValue = '甜點';
+  TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -67,7 +75,7 @@ class EditDetailPage extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    edit_item.title,
+                    widget.edit_item.title,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w500,
@@ -112,6 +120,9 @@ class EditDetailPage extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 8,
+              ),
               SingleChildScrollView(
                 child: Column(
                   children: [
@@ -150,8 +161,9 @@ class EditDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 24,
               ),
+              //* 有效日期
               const Text(
                 "有效日期",
                 style: TextStyle(
@@ -162,7 +174,7 @@ class EditDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 24,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -180,7 +192,7 @@ class EditDetailPage extends StatelessWidget {
                     ),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      side: const BorderSide(width: 3, color: primaryColor7),
+                      side: const BorderSide(width: 3, color: primaryColor4),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -193,7 +205,7 @@ class EditDetailPage extends StatelessWidget {
                     icon: const Icon(
                       Icons.remove_circle_outline,
                       size: 32,
-                      color: primaryColor7,
+                      color: primaryColor4,
                     ),
                   ),
                   const SizedBox(
@@ -212,7 +224,7 @@ class EditDetailPage extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      edit_item.date,
+                      widget.edit_item.date,
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
@@ -230,7 +242,7 @@ class EditDetailPage extends StatelessWidget {
                     icon: const Icon(
                       Icons.add_circle_outline,
                       size: 32,
-                      color: primaryColor7,
+                      color: primaryColor4,
                     ),
                   ),
                   OutlinedButton(
@@ -246,7 +258,7 @@ class EditDetailPage extends StatelessWidget {
                     ),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      side: const BorderSide(width: 3, color: primaryColor7),
+                      side: const BorderSide(width: 3, color: primaryColor4),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -255,10 +267,11 @@ class EditDetailPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 24,
+                height: 32,
               ),
+              //* 數量＆類別
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     "數量",
@@ -268,6 +281,9 @@ class EditDetailPage extends StatelessWidget {
                       fontFamily: chineseFontfamily,
                       color: textColor,
                     ),
+                  ),
+                  const SizedBox(
+                    width: 148,
                   ),
                   Column(
                     children: const [
@@ -280,16 +296,67 @@ class EditDetailPage extends StatelessWidget {
                           color: textColor,
                         ),
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      // Container(child: _dropDown()),
                     ],
                   ),
                 ],
               ),
               const SizedBox(
-                height: 40,
+                height: 24,
+              ),
+              Row(
+                children: [
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "3",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: chineseFontfamily,
+                        color: textColor,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(width: 1.5, color: primaryColor7),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          bottomLeft: Radius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "盒(Boxs)",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: chineseFontfamily,
+                        color: textColor,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(width: 1.5, color: primaryColor7),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 40,
+                  ),
+                  Container(child: _dropDown()),
+                ],
+              ),
+              const SizedBox(
+                height: 80,
               ),
               //* 底部按鈕
               Align(
@@ -359,49 +426,53 @@ class EditDetailPage extends StatelessWidget {
         ),
       );
 
-  // Widget _dropDown() {
-  //   return DecoratedBox(
-  //     decoration: BoxDecoration(
-  //       //color: primaryColor1,
-  //       border: Border.all(
-  //         color: primaryColor6,
-  //         width: 2,
-  //         style: BorderStyle.solid,
-  //       ),
-  //       borderRadius: BorderRadius.circular(40),
-  //     ),
-  //     child: Padding(
-  //       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-  //       child: SizedBox(
-  //         width: 80.0,
-  //         child: DropdownButton(
-  //           isExpanded: true,
-  //           value: dropdownValue,
-  //           icon: const Icon(
-  //             Icons.arrow_circle_down,
-  //             color: primaryColor8,
-  //             size: 24,
-  //           ),
-  //           elevation: 16,
-  //           style: const TextStyle(
-  //             color: primaryColor8,
-  //             fontSize: 16,
-  //             fontWeight: FontWeight.w600,
-  //             fontFamily: englishFontfamily,
-  //           ),
-  //           underline: Container(),
-  //           items: items.map<DropdownMenuItem<String>>(
-  //             (String value) {
-  //               return DropdownMenuItem<String>(
-  //                 value: value,
-  //                 child: Text(value),
-  //               );
-  //             },
-  //           ).toList(),
-  //           onChanged: (String? newValue) {},
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget _dropDown() {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        //color: primaryColor1,
+        border: Border.all(
+          color: primaryColor6,
+          width: 2,
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        child: SizedBox(
+          width: 80.0,
+          child: DropdownButton(
+            isExpanded: true,
+            value: dropdownValue,
+            icon: const Icon(
+              Icons.arrow_circle_down,
+              color: primaryColor8,
+              size: 24,
+            ),
+            elevation: 16,
+            style: const TextStyle(
+              color: primaryColor8,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              fontFamily: chineseFontfamily,
+            ),
+            underline: Container(),
+            items: types.map<DropdownMenuItem<String>>(
+              (String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              },
+            ).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+              });
+            },
+          ),
+        ),
+      ),
+    );
+  }
 }
