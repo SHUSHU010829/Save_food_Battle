@@ -72,11 +72,11 @@ class _StorefoodPageState extends State<StorefoodPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                SizedBox(width: 32),
+                SizedBox(width: 30),
                 Text(
                   "即期食品",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: FontWeight.w700,
                     fontFamily: chineseFontfamily,
                     color: textColor,
@@ -101,11 +101,11 @@ class _StorefoodPageState extends State<StorefoodPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                SizedBox(width: 24),
+                SizedBox(width: 30),
                 Text(
                   "全部食品",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: FontWeight.w700,
                     fontFamily: chineseFontfamily,
                     color: textColor,
@@ -184,24 +184,22 @@ class _StorefoodPageState extends State<StorefoodPage> {
 
   Widget buildCard1({required CardItem card_item}) => SizedBox(
         width: 120,
+        // height: 100,
         child: Column(
           children: [
             Expanded(
-              child: AspectRatio(
-                aspectRatio: 4 / 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Material(
-                    child: Ink.image(
-                      image: NetworkImage(card_item.urlImage),
-                      fit: BoxFit.cover,
-                      child: InkWell(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => InstantFoodPage(
-                              card_item: card_item,
-                            ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Material(
+                  child: Ink.image(
+                    image: NetworkImage(card_item.urlImage),
+                    fit: BoxFit.cover,
+                    child: InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InstantFoodPage(
+                            card_item: card_item,
                           ),
                         ),
                       ),
@@ -243,7 +241,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
           ),
         ),
         child: Container(
-          height: 88,
+          height: 80,
           padding: const EdgeInsets.only(left: 32, right: 24, bottom: 16),
           child: Container(
             decoration: BoxDecoration(
@@ -262,52 +260,97 @@ class _StorefoodPageState extends State<StorefoodPage> {
                 ),
               ],
             ),
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             child: Row(
               children: [
                 SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 4 / 3,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Material(
-                          child: Ink.image(
-                            image: NetworkImage(
-                              all_card_item.urlImage,
-                            ),
-                            fit: BoxFit.cover,
-                          ),
+                  height: 80,
+                  width: 80,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Material(
+                      child: Ink.image(
+                        image: NetworkImage(
+                          all_card_item.urlImage,
                         ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  width: 50,
+                  width: 24,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Column(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        all_card_item.title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: englishFontfamily,
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            all_card_item.title,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: englishFontfamily,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Row(
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center, // 內裝元件置中對齊
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: secondary5, // 綠色背景
+                                ),
+                                child: Text(
+                                  all_card_item.date,
+                                  style: const TextStyle(
+                                    color: textColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: englishFontfamily,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center, // 內裝元件置中對齊
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: secondary6, // 綠色背景
+                                ),
+                                child: Text(
+                                  all_card_item.place,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: textColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: englishFontfamily,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 2),
-                      Text(
-                        all_card_item.date,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: englishFontfamily,
-                        ),
+                      const SizedBox(
+                        width: 40,
+                      ),
+                      //进度条显示40%，会显示一个半圆
+                      CircularProgressIndicator(
+                        backgroundColor: Colors.grey[200],
+                        valueColor: const AlwaysStoppedAnimation(secondary4),
+                        value: double.parse(all_card_item.use),
                       ),
                     ],
                   ),

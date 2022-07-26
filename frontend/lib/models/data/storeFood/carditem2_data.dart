@@ -9,6 +9,7 @@ List<AllCardItem> foods2 = [
     count: '1顆',
     place: '櫥櫃',
     method: '常溫',
+    use: '0.4',
   ),
   const AllCardItem(
     urlImage:
@@ -18,6 +19,7 @@ List<AllCardItem> foods2 = [
     place: '櫥櫃',
     method: '常溫',
     date: '05/20',
+    use: '0.7',
   ),
   const AllCardItem(
     urlImage:
@@ -27,6 +29,7 @@ List<AllCardItem> foods2 = [
     count: '3根',
     place: '櫥櫃',
     method: '常溫',
+    use: '0.3',
   ),
   const AllCardItem(
     urlImage:
@@ -36,6 +39,7 @@ List<AllCardItem> foods2 = [
     count: '2顆',
     place: '櫥櫃',
     method: '常溫',
+    use: '0.5',
   ),
   const AllCardItem(
     urlImage:
@@ -45,5 +49,6 @@ List<AllCardItem> foods2 = [
     count: '8顆',
     place: '冰箱',
     method: '冷藏',
+    use: '0.1',
   ),
 ];

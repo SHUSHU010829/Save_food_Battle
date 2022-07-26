@@ -81,7 +81,7 @@ class FoodDetailPage extends StatelessWidget {
                               style: const TextStyle(
                                 color: secondary2,
                                 fontSize: 20,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 fontFamily: englishFontfamily,
                               ),
                             ),
@@ -101,7 +101,7 @@ class FoodDetailPage extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: textColor,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 fontFamily: englishFontfamily,
                               ),
                             ),
@@ -121,7 +121,7 @@ class FoodDetailPage extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: primaryColor8,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
                                 fontFamily: englishFontfamily,
                               ),
                             ),
@@ -164,6 +164,35 @@ class FoodDetailPage extends StatelessWidget {
                       child: InkWell(
                         onTap: () {},
                       ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "編輯食材",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: chineseFontfamily,
+                              color: textColor,
+                            ),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
