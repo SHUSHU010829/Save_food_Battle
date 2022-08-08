@@ -23,6 +23,7 @@ class FoodDetailPage extends StatelessWidget {
         ),
         body: Column(
           children: [
+            //* 食材標頭
             Container(
               padding: const EdgeInsets.only(
                   left: 16, top: 16, right: 16, bottom: 40),
@@ -133,6 +134,7 @@ class FoodDetailPage extends StatelessWidget {
                 ],
               ),
             ),
+            //* Body
             Container(
               padding: const EdgeInsets.only(left: 32, top: 24, right: 24),
               child: Column(
@@ -175,7 +177,123 @@ class FoodDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showModalBottomSheet<void>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  height: 392,
+                                  color: secondary5,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Column(
+                                          children: [
+                                            const Text(
+                                              "有效日期",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: chineseFontfamily,
+                                                color: textColor,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 16,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                IconButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.remove_circle_outline,
+                                                    size: 32,
+                                                    color: primaryColor4,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    bottom:
+                                                        5, // Space between underline and text
+                                                  ),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    border: Border(
+                                                      bottom: BorderSide(
+                                                        color: Colors.amber,
+                                                        width:
+                                                            2.0, // Underline thickness
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    all_card_item.date,
+                                                    style: const TextStyle(
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily:
+                                                          englishFontfamily,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  icon: const Icon(
+                                                    Icons.add_circle_outline,
+                                                    size: 32,
+                                                    color: primaryColor4,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 16,
+                                            ),
+                                            const Text(
+                                              "收納地點",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: chineseFontfamily,
+                                                color: textColor,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 16,
+                                        ),
+                                        ElevatedButton(
+                                          child:
+                                              const Text('Close BottomSheet'),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                           child: const Text(
                             "編輯食材",
                             style: TextStyle(

@@ -3,9 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/size_config.dart';
-import 'package:frontend/screen/onboarding_contents.dart';
-
-import '../page/navpage/main_page.dart';
+import 'package:frontend/page/openScreen/onboarding_contents.dart';
+import '../navpage/main_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
