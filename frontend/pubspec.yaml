@@ -38,6 +38,7 @@ dependencies:
   anim_search_bar: ^2.0.2
   get: ^4.6.5
   qr_code_scanner: ^1.0.0
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:

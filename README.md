@@ -2,7 +2,7 @@
 
 ## 食物拯救計畫
 
-### backend
+### Backend
 
 食物拯救計畫後端。
 
@@ -18,18 +18,25 @@ npm start
 
 食物拯救計畫前端介面
 
-#### About Flutter
+#### 架構
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+SAVE_FOOD_BATTLE
+├── OpenScreen (歡迎視窗)
+├── HomePage (首頁)
+│ ├── FoodAlert (通知)
+│ │ ├── 即將耗盡
+│ │ ├── cubit
+│ │ │ └── counter_cubit.dart
+│ │ └── view
+│ ├── Wallet (錢包)
+│ └── ToBuyList (購物清單)
+├── ScanPage (掃描發票/食材辨識頁)
+│ ├── InvoiceInput (發票輸入)
+│ ├── FoodScan (食材辨識輸入)
+├── StorefoodPage (食材庫存頁)
+│ ├── InstantFood (即將過期)
+│ ├── AllFood (所有食材)
+├── SettingPage (食材庫存頁)
 
 #### 使用工具
 
@@ -40,6 +47,7 @@ samples, guidance on mobile development, and a full API reference.
   - cupertino_icons
   - anim_search_bar
   - get
+  - flutter_bloc
 
 #### 注意
 
