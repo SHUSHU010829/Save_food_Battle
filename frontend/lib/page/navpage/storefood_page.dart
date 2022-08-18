@@ -7,8 +7,9 @@ import 'package:frontend/models/data/storefood/carditem1_data.dart';
 import 'package:frontend/models/storefood_carditem1.dart';
 import 'package:frontend/models/data/storefood/carditem2_data.dart';
 import 'package:frontend/models/storefood_carditem2.dart';
-import 'package:frontend/page/storefood/food_detail_page.dart';
 import 'package:frontend/page/storefood/instant_food_page.dart';
+// import 'package:frontend/page/storefood/food_detail_page.dart';
+import 'package:frontend/page/storefood/foodDetail/food_detail.dart';
 
 class StorefoodPage extends StatefulWidget {
   const StorefoodPage({Key? key}) : super(key: key);

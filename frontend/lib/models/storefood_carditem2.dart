@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class AllCardItem {
   final String urlImage;
   final String title;
