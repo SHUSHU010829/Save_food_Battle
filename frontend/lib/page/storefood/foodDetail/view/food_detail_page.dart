@@ -22,7 +22,7 @@ class FoodDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => FoodDetailCubit(),
-      child: const FoodDetailView(),
+      child: FoodDetailView(all_card_item: all_card_item),
     );
   }
 }
