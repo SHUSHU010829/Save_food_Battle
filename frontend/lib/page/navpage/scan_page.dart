@@ -100,14 +100,14 @@ class _ScanPageState extends State<ScanPage> {
                 width: 200,
                 height: 200,
                 color: Colors.green[300],
-                child: InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EditFoodPage(),
-                    ),
-                  ),
-                ),
+                // child: InkWell(
+                //   onTap: () => Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const EditFoodPage(),
+                //     ),
+                //   ),
+                // ),
               ),
             ),
             //* 功能按鈕
