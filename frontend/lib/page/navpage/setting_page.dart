@@ -24,7 +24,7 @@ class _SettingPageState extends State<SettingPage> {
     RendererBinding.instance.setSemanticsEnabled(true);
     return Scaffold(
       backgroundColor: backgroundColor,
-            appBar: AppBar(
+      appBar: AppBar(
         title: const Text('Api 串接練習'),
         centerTitle: true,
       ),
@@ -214,7 +214,6 @@ class _SettingPageState extends State<SettingPage> {
   List<Article> _listOfArticlesFromJson(json) => (json as List)
       .map((e) => Article.fromJson(e as Map<String, dynamic>))
       .toList();
-}
 
 //   Row buildNotificationOptionRow(String title, bool isActive) {
 //     return Row(
@@ -327,4 +326,4 @@ class _SettingPageState extends State<SettingPage> {
 //       ),
 //     );
 //   }
-// }
+}
