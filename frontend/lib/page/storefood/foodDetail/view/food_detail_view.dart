@@ -11,14 +11,12 @@ import 'package:frontend/page/storefood/foodDetail/food_detail.dart';
 /// {@endtemplate}
 
 class FoodDetailView extends StatelessWidget {
-  // ignore: non_constant_identifier_names
   final AllCardItem all_card_item;
 
   /// {@macro counter_view}
 
   const FoodDetailView({
     Key? key,
-    // ignore: non_constant_identifier_names
     required this.all_card_item,
   }) : super(key: key);
 
