@@ -40,15 +40,9 @@ SAVE_FOOD_BATTLE
 
 #### 使用工具
 
-- Flutter
-  - google_fonts
-  - font_awesome_flutter
-  - toggle_switch
-  - cupertino_icons
-  - anim_search_bar
-  - get
-  - flutter_bloc
+- Flutter:
+  - 詳細資訊請查閱-> Save_food_Battle/frontend/pubspec.yaml
 
 #### 注意
 
-可以在 vscode 插件載 "Better Comments"可以看到更多種類的註解。
+可以在 vscode 插件載 "Better Comments" 可以看到更多種類的註解。
