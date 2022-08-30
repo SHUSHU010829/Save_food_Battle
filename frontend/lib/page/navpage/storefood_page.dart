@@ -1,10 +1,14 @@
-// ignore_for_file: non_constant_identifier_names
-
-import 'dart:math';
+// ignore_for_file: non_constant_identifier_names, unused_element, library_prefixes, unused_local_variable
 
 import 'package:anim_search_bar/anim_search_bar.dart';
+import 'package:faker/faker.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/dbHelper/user/mongodb.dart';
+import 'package:frontend/models/user_allstorefood_model.dart';
+import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:frontend/models/data/storefood/carditem1_data.dart';
 import 'package:frontend/models/storefood_carditem1.dart';
 import 'package:frontend/models/data/storefood/carditem2_data.dart';
@@ -25,6 +29,17 @@ class _StorefoodPageState extends State<StorefoodPage> {
   String? dropdownValue = 'All';
   TextEditingController textController = TextEditingController();
 
+  var titleController = TextEditingController();
+  var yearController = TextEditingController();
+  var monthController = TextEditingController();
+  var dayController = TextEditingController();
+  var countController = TextEditingController();
+  var unitController = TextEditingController();
+  var splaceController = TextEditingController();
+  var smethodController = TextEditingController();
+  var usedController = TextEditingController();
+
+  //  int var =int.parse(yearController.text);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,95 +135,172 @@ class _StorefoodPageState extends State<StorefoodPage> {
                   //* 添加食物
                   OutlinedButton(
                     onPressed: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: 460,
-                            color: secondary5,
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          "Insert Data",
-                                          style: TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: chineseFontfamily,
-                                            color: textColor,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                        ),
-                                        TextField(
-                                          decoration: InputDecoration(
-                                              labelText: "Title"),
-                                        ),
-                                        TextField(
-                                          decoration: InputDecoration(
-                                              labelText: "year"),
-                                        ),
-                                        TextField(
-                                          decoration: InputDecoration(
-                                              labelText: "month"),
-                                        ),
-                                        TextField(
-                                          decoration:
-                                              InputDecoration(labelText: "day"),
-                                        ),
-                                        TextField(
-                                          decoration:
-                                              InputDecoration(labelText: "數量"),
-                                        ),
-                                        TextField(
-                                          decoration:
-                                              InputDecoration(labelText: "單位"),
-                                        ),
-                                        TextField(
-                                          decoration: InputDecoration(
-                                              labelText: "收納地點"),
-                                        ),
-                                        TextField(
-                                          decoration: InputDecoration(
-                                              labelText: "收藏方式"),
-                                        ),
-                                        TextField(
-                                          decoration:
-                                              InputDecoration(labelText: "已使用"),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 50,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      OutlinedButton(
-                                        onPressed: () {},
-                                        child: const Text("Genrerate"),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Text('Enter'),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InsertFoodPage(),
+                        ),
                       );
+                      // showModalBottomSheet<void>(
+                      //   context: context,
+                      //   builder: (BuildContext context) {
+                      //     return Container(
+                      //       height: 460,
+                      //       color: secondary5,
+                      //       child: Center(
+                      //         child: Column(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           mainAxisSize: MainAxisSize.min,
+                      //           children: <Widget>[
+                      //             Padding(
+                      //               padding: const EdgeInsets.all(10.0),
+                      //               child: Column(
+                      //                 children: [
+                      //                   const Text(
+                      //                     "Insert Data",
+                      //                     style: TextStyle(
+                      //                       fontSize: 22,
+                      //                       fontWeight: FontWeight.w700,
+                      //                       fontFamily: chineseFontfamily,
+                      //                       color: textColor,
+                      //                     ),
+                      //                   ),
+                      //                   TextField(
+                      //                     controller: titleController,
+                      //                     decoration: const InputDecoration(
+                      //                         labelText: "Title"),
+                      //                   ),
+                      //                   Row(
+                      //                     children: [
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: yearController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "year"),
+                      //                         ),
+                      //                       ),
+                      //                       const SizedBox(
+                      //                         width: 3,
+                      //                       ),
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: monthController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "month"),
+                      //                         ),
+                      //                       ),
+                      //                       const SizedBox(
+                      //                         width: 3,
+                      //                       ),
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: dayController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "day"),
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                   Row(
+                      //                     children: [
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: countController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "數量"),
+                      //                         ),
+                      //                       ),
+                      //                       const SizedBox(
+                      //                         width: 3,
+                      //                       ),
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: unitController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "單位"),
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                   Row(
+                      //                     children: [
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: splaceController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "收納地點"),
+                      //                         ),
+                      //                       ),
+                      //                       const SizedBox(
+                      //                         width: 3,
+                      //                       ),
+                      //                       Expanded(
+                      //                         child: TextField(
+                      //                           controller: splaceController,
+                      //                           decoration:
+                      //                               const InputDecoration(
+                      //                                   labelText: "收藏方式"),
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                   TextField(
+                      //                     controller: usedController,
+                      //                     decoration: const InputDecoration(
+                      //                         labelText: "已使用"),
+                      //                   ),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //             const SizedBox(
+                      //               height: 3,
+                      //             ),
+                      //             Row(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceBetween,
+                      //               children: [
+                      //                 const SizedBox(
+                      //                   width: 3,
+                      //                 ),
+                      //                 OutlinedButton(
+                      //                   onPressed: () {
+                      //                     _fakeData();
+                      //                   },
+                      //                   child: const Text("Genrerate"),
+                      //                 ),
+                      //                 ElevatedButton(
+                      //                   onPressed: () {
+                      //                     _insertData(
+                      //                       titleController.text,
+                      //                       yearController.text,
+                      //                       monthController.text,
+                      //                       dayController.text,
+                      //                       countController.text,
+                      //                       unitController.text,
+                      //                       splaceController.text,
+                      //                       smethodController.text,
+                      //                       usedController.text,
+                      //                     );
+                      //                   },
+                      //                   child: const Text('Enter'),
+                      //                 ),
+                      //                 const SizedBox(
+                      //                   width: 3,
+                      //                 ),
+                      //               ],
+                      //             )
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // );
                     },
                     child: const Text(
                       "新增食材",
@@ -247,6 +339,66 @@ class _StorefoodPageState extends State<StorefoodPage> {
       ),
     );
   }
+
+  // Future<void> _insertData(
+  //   String title,
+  //   String year,
+  //   String month,
+  //   String day,
+  //   String count,
+  //   String unit,
+  //   String place,
+  //   String storeMethod,
+  //   String used,
+  // ) async {
+  //   var _id = M.ObjectId(); // store Unique id inside our variable
+  //   final data = UserMongoDbModel(
+  //     id: _id,
+  //     title: title,
+  //     year: year,
+  //     month: month,
+  //     day: day,
+  //     count: count,
+  //     unit: unit,
+  //     place: place,
+  //     storeMethod: storeMethod,
+  //     used: used,
+  //   );
+  //   var result = await MongoDatabase.insert(data);
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text("Inserted ID" + _id.$oid),
+  //     ),
+  //   );
+  //   _clearAll();
+  // }
+
+  // void _clearAll() {
+  //   titleController.text = "";
+  //   yearController.text = "";
+  //   monthController.text = "";
+  //   dayController.text = "";
+  //   countController.text = "";
+  //   unitController.text = "";
+  //   splaceController.text = "";
+  //   smethodController.text = "";
+  //   usedController.text = "";
+  // }
+
+  // void _fakeData() {
+  //   final fakerFa = Faker(provider: FakerDataProvider());
+  //   setState(() {
+  //     titleController.text = fakerFa.lorem.word();
+  //     yearController.text = Random().nextInt(22).toString();
+  //     monthController.text = Random().nextInt(12).toString();
+  //     dayController.text = Random().nextInt(31).toString();
+  //     countController.text = Random().nextInt(10).toString();
+  //     unitController.text = fakerFa.lorem.word();
+  //     splaceController.text = fakerFa.lorem.word();
+  //     smethodController.text = fakerFa.lorem.word();
+  //     usedController.text = Random().nextInt(100).toString();
+  //   });
+  // }
 
   Widget _dropDown() {
     return DecoratedBox(
