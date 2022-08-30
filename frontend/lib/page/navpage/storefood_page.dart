@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:math';
+
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
@@ -99,20 +101,133 @@ class _StorefoodPageState extends State<StorefoodPage> {
             ),
             const SizedBox(height: 24),
             //* 全部食品卡片
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                SizedBox(width: 30),
-                Text(
-                  "全部食品",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: chineseFontfamily,
-                    color: textColor,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // const SizedBox(width: 1),
+                  const Text(
+                    "全部食品",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: chineseFontfamily,
+                      color: textColor,
+                    ),
                   ),
-                ),
-              ],
+                  //* 添加食物
+                  OutlinedButton(
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 460,
+                            color: secondary5,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Column(
+                                      children: const [
+                                        Text(
+                                          "Insert Data",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: chineseFontfamily,
+                                            color: textColor,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 50,
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: "Title"),
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: "year"),
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: "month"),
+                                        ),
+                                        TextField(
+                                          decoration:
+                                              InputDecoration(labelText: "day"),
+                                        ),
+                                        TextField(
+                                          decoration:
+                                              InputDecoration(labelText: "數量"),
+                                        ),
+                                        TextField(
+                                          decoration:
+                                              InputDecoration(labelText: "單位"),
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: "收納地點"),
+                                        ),
+                                        TextField(
+                                          decoration: InputDecoration(
+                                              labelText: "收藏方式"),
+                                        ),
+                                        TextField(
+                                          decoration:
+                                              InputDecoration(labelText: "已使用"),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 50,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      OutlinedButton(
+                                        onPressed: () {},
+                                        child: const Text("Genrerate"),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        child: const Text('Enter'),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: const Text(
+                      "新增食材",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: chineseFontfamily,
+                        color: primaryColor8,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 16),
             Expanded(
