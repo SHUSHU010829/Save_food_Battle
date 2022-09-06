@@ -1,4 +1,4 @@
-// ignore_for_file: library_prefixes, unnecessary_null_comparison
+// ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable
 
 import 'dart:math';
 import 'package:faker/faker.dart';
