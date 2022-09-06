@@ -1,14 +1,11 @@
-// ignore_for_file: non_constant_identifier_names, unused_element, library_prefixes, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, avoid_print, unnecessary_string_interpolations, prefer_const_constructors
 
 import 'package:anim_search_bar/anim_search_bar.dart';
-import 'package:faker/faker.dart';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
-import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:frontend/models/data/storefood/carditem1_data.dart';
 import 'package:frontend/models/storefood_carditem1.dart';
 import 'package:frontend/models/data/storefood/carditem2_data.dart';
@@ -118,6 +115,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
             //* 全部食品卡片
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
+              //＊ 標頭＋按鈕
               child: Row(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,172 +133,22 @@ class _StorefoodPageState extends State<StorefoodPage> {
                   //* 添加食物
                   OutlinedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const InsertFoodPage(),
-                        ),
-                      );
-                      // showModalBottomSheet<void>(
-                      //   context: context,
-                      //   builder: (BuildContext context) {
-                      //     return Container(
-                      //       height: 460,
-                      //       color: secondary5,
-                      //       child: Center(
-                      //         child: Column(
-                      //           mainAxisAlignment: MainAxisAlignment.center,
-                      //           mainAxisSize: MainAxisSize.min,
-                      //           children: <Widget>[
-                      //             Padding(
-                      //               padding: const EdgeInsets.all(10.0),
-                      //               child: Column(
-                      //                 children: [
-                      //                   const Text(
-                      //                     "Insert Data",
-                      //                     style: TextStyle(
-                      //                       fontSize: 22,
-                      //                       fontWeight: FontWeight.w700,
-                      //                       fontFamily: chineseFontfamily,
-                      //                       color: textColor,
-                      //                     ),
-                      //                   ),
-                      //                   TextField(
-                      //                     controller: titleController,
-                      //                     decoration: const InputDecoration(
-                      //                         labelText: "Title"),
-                      //                   ),
-                      //                   Row(
-                      //                     children: [
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: yearController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "year"),
-                      //                         ),
-                      //                       ),
-                      //                       const SizedBox(
-                      //                         width: 3,
-                      //                       ),
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: monthController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "month"),
-                      //                         ),
-                      //                       ),
-                      //                       const SizedBox(
-                      //                         width: 3,
-                      //                       ),
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: dayController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "day"),
-                      //                         ),
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                   Row(
-                      //                     children: [
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: countController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "數量"),
-                      //                         ),
-                      //                       ),
-                      //                       const SizedBox(
-                      //                         width: 3,
-                      //                       ),
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: unitController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "單位"),
-                      //                         ),
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                   Row(
-                      //                     children: [
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: splaceController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "收納地點"),
-                      //                         ),
-                      //                       ),
-                      //                       const SizedBox(
-                      //                         width: 3,
-                      //                       ),
-                      //                       Expanded(
-                      //                         child: TextField(
-                      //                           controller: splaceController,
-                      //                           decoration:
-                      //                               const InputDecoration(
-                      //                                   labelText: "收藏方式"),
-                      //                         ),
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                   TextField(
-                      //                     controller: usedController,
-                      //                     decoration: const InputDecoration(
-                      //                         labelText: "已使用"),
-                      //                   ),
-                      //                 ],
-                      //               ),
-                      //             ),
-                      //             const SizedBox(
-                      //               height: 3,
-                      //             ),
-                      //             Row(
-                      //               mainAxisAlignment:
-                      //                   MainAxisAlignment.spaceBetween,
-                      //               children: [
-                      //                 const SizedBox(
-                      //                   width: 3,
-                      //                 ),
-                      //                 OutlinedButton(
-                      //                   onPressed: () {
-                      //                     _fakeData();
-                      //                   },
-                      //                   child: const Text("Genrerate"),
-                      //                 ),
-                      //                 ElevatedButton(
-                      //                   onPressed: () {
-                      //                     _insertData(
-                      //                       titleController.text,
-                      //                       yearController.text,
-                      //                       monthController.text,
-                      //                       dayController.text,
-                      //                       countController.text,
-                      //                       unitController.text,
-                      //                       splaceController.text,
-                      //                       smethodController.text,
-                      //                       usedController.text,
-                      //                     );
-                      //                   },
-                      //                   child: const Text('Enter'),
-                      //                 ),
-                      //                 const SizedBox(
-                      //                   width: 3,
-                      //                 ),
-                      //               ],
-                      //             )
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     );
-                      //   },
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const InsertFoodPage(),
+                      //   ),
                       // );
+                      Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return InsertFoodPage();
+                                  },
+                                  settings: RouteSettings(arguments: null)))
+                          .then((value) {
+                        setState(() {});
+                      });
                     },
                     child: const Text(
                       "新增食材",
@@ -322,15 +170,42 @@ class _StorefoodPageState extends State<StorefoodPage> {
               ),
             ),
             const SizedBox(height: 16),
+            //* 食物卡片區
             Expanded(
               child: MediaQuery.removePadding(
                 context: context,
                 removeTop: true,
-                child: ListView.separated(
-                  itemCount: 5,
-                  separatorBuilder: (context, _) => const SizedBox(width: 12),
-                  itemBuilder: (context, index) =>
-                      buildCard2(all_card_item: foods2[index]),
+                child: FutureBuilder(
+                  future: MongoDatabase.getData(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      if (snapshot.hasData) {
+                        var totalData = snapshot.data.length;
+                        print("Total Data: " + totalData.toString());
+                        // return ListView.builder(
+                        //   itemCount: snapshot.data.length,
+                        //   itemBuilder: (context, index) {
+                        //     return displayCard(UserMongoDbModel.fromJson(snapshot.data[index]));
+                        //   },
+                        // );
+                        return ListView.separated(
+                          itemCount: snapshot.data.length,
+                          separatorBuilder: (context, _) =>
+                              const SizedBox(width: 12),
+                          itemBuilder: (context, index) => displayCard(
+                              UserMongoDbModel.fromJson(snapshot.data[index])),
+                        );
+                      } else {
+                        return const Center(
+                          child: Text("倉庫是空的喔！"),
+                        );
+                      }
+                    }
+                  },
                 ),
               ),
             ),
@@ -340,66 +215,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
     );
   }
 
-  // Future<void> _insertData(
-  //   String title,
-  //   String year,
-  //   String month,
-  //   String day,
-  //   String count,
-  //   String unit,
-  //   String place,
-  //   String storeMethod,
-  //   String used,
-  // ) async {
-  //   var _id = M.ObjectId(); // store Unique id inside our variable
-  //   final data = UserMongoDbModel(
-  //     id: _id,
-  //     title: title,
-  //     year: year,
-  //     month: month,
-  //     day: day,
-  //     count: count,
-  //     unit: unit,
-  //     place: place,
-  //     storeMethod: storeMethod,
-  //     used: used,
-  //   );
-  //   var result = await MongoDatabase.insert(data);
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text("Inserted ID" + _id.$oid),
-  //     ),
-  //   );
-  //   _clearAll();
-  // }
-
-  // void _clearAll() {
-  //   titleController.text = "";
-  //   yearController.text = "";
-  //   monthController.text = "";
-  //   dayController.text = "";
-  //   countController.text = "";
-  //   unitController.text = "";
-  //   splaceController.text = "";
-  //   smethodController.text = "";
-  //   usedController.text = "";
-  // }
-
-  // void _fakeData() {
-  //   final fakerFa = Faker(provider: FakerDataProvider());
-  //   setState(() {
-  //     titleController.text = fakerFa.lorem.word();
-  //     yearController.text = Random().nextInt(22).toString();
-  //     monthController.text = Random().nextInt(12).toString();
-  //     dayController.text = Random().nextInt(31).toString();
-  //     countController.text = Random().nextInt(10).toString();
-  //     unitController.text = fakerFa.lorem.word();
-  //     splaceController.text = fakerFa.lorem.word();
-  //     smethodController.text = fakerFa.lorem.word();
-  //     usedController.text = Random().nextInt(100).toString();
-  //   });
-  // }
-
+  //* 下落選單
   Widget _dropDown() {
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -450,6 +266,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
     );
   }
 
+  //* 即期食物卡片區
   Widget buildCard1({required CardItem card_item}) => SizedBox(
         width: 120,
         // height: 100,
@@ -498,16 +315,17 @@ class _StorefoodPageState extends State<StorefoodPage> {
         ),
       );
 
-  Widget buildCard2({required AllCardItem all_card_item}) => GestureDetector(
+  //* 全部食物卡片區
+  Widget displayCard(UserMongoDbModel data) => GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FoodDetailPage(
-              all_card_item: all_card_item,
-            ),
-          ),
-        ),
+        // onTap: () => Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => FoodDetailPage(
+        //       all_card_item: data,
+        //     ),
+        //   ),
+        // ),
         child: Container(
           height: 80,
           padding: const EdgeInsets.only(left: 32, right: 24, bottom: 16),
@@ -530,20 +348,29 @@ class _StorefoodPageState extends State<StorefoodPage> {
             ),
             child: Row(
               children: [
-                SizedBox(
-                  height: 80,
-                  width: 80,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Material(
-                      child: Ink.image(
-                        image: NetworkImage(
-                          all_card_item.urlImage,
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                // SizedBox(
+                //   height: 80,
+                //   width: 80,
+                //   child: ClipRRect(
+                //     borderRadius: BorderRadius.circular(8),
+                //     child: Material(
+                //       child: Ink.image(
+                //         image: NetworkImage(
+                //           all_card_item.urlImage,
+                //         ),
+                //         fit: BoxFit.cover,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(
+                  width: 16,
+                ),
+                //* 圓形進度條
+                CircularProgressIndicator(
+                  backgroundColor: Colors.grey[200],
+                  valueColor: const AlwaysStoppedAnimation(secondary4),
+                  value: double.parse(data.used),
                 ),
                 const SizedBox(
                   width: 24,
@@ -553,75 +380,96 @@ class _StorefoodPageState extends State<StorefoodPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            all_card_item.title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: englishFontfamily,
+                      SizedBox(
+                        width: 200,
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 2),
+                            Text(
+                              data.title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: englishFontfamily,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            children: [
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                alignment: Alignment.center, // 內裝元件置中對齊
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color: secondary5, // 綠色背景
-                                ),
-                                child: Text(
-                                  all_card_item.date,
-                                  style: const TextStyle(
-                                    color: textColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: englishFontfamily,
+                            const SizedBox(height: 6),
+                            Row(
+                              children: [
+                                //* 有效期限：月日
+                                Container(
+                                  height: 20,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  alignment: Alignment.center, // 內裝元件置中對齊
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: secondary5, // 綠色背景
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "${data.month} / ${data.day}",
+                                      style: const TextStyle(
+                                        color: textColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: englishFontfamily,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                alignment: Alignment.center, // 內裝元件置中對齊
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color: secondary6, // 綠色背景
+                                const SizedBox(
+                                  width: 8,
                                 ),
-                                child: Text(
-                                  all_card_item.place,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: textColor,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: englishFontfamily,
+                                //* 存放地點
+                                Container(
+                                  height: 20,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  alignment: Alignment.center, // 內裝元件置中對齊
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: secondary6, // 綠色背景
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "# ${data.place}",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: textColor,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: englishFontfamily,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      //进度条显示40%，会显示一个半圆
-                      CircularProgressIndicator(
-                        backgroundColor: Colors.grey[200],
-                        valueColor: const AlwaysStoppedAnimation(secondary4),
-                        value: double.parse(all_card_item.use),
-                      ),
+                      // const SizedBox(
+                      //   width: 40,
+                      // ),
                     ],
                   ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return InsertFoodPage();
+                                },
+                                settings: RouteSettings(arguments: data)))
+                        .then((value) {
+                      setState(() {});
+                    });
+                  },
+                  icon: Icon(Icons.edit),
                 ),
               ],
             ),

@@ -9,20 +9,20 @@ import 'package:frontend/page/storefood/foodDetail/food_detail.dart';
 /// {@endtemplate}
 class FoodDetailPage extends StatelessWidget {
   // ignore: non_constant_identifier_names
-  final AllCardItem all_card_item;
+  // final AllCardItem all_card_item;
 
   /// {@macro counter_page}
   const FoodDetailPage({
     super.key,
     // ignore: non_constant_identifier_names
-    required this.all_card_item,
+    // required this.all_card_item,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => FoodDetailCubit(),
-      child: FoodDetailView(all_card_item: all_card_item),
+      child: FoodDetailView(),
     );
   }
 }

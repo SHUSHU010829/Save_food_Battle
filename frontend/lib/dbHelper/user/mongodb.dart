@@ -15,6 +15,29 @@ class MongoDatabase {
     userCollection = db.collection(USER_COLLECTION);
   }
 
+  //* Display Data
+  static Future<List<Map<String, dynamic>>> getData() async {
+    final arrData = await userCollection.find().toList();
+    return arrData;
+  }
+
+  //* Update Data
+  static Future<void> update(UserMongoDbModel data) async {
+    var result = await userCollection.findOne({"_id": data.id});
+    result['title'] = data.title;
+    result['year'] = data.year;
+    result['month'] = data.month;
+    result['day'] = data.day;
+    result['count'] = data.count;
+    result['unit'] = data.unit;
+    result['place'] = data.place;
+    result['storeMethod'] = data.storeMethod;
+    result['used'] = data.used;
+    var response = await userCollection.save(result);
+    inspect(response);
+  }
+
+  //* Insert Data
   static Future<String> insert(UserMongoDbModel data) async {
     try {
       var result = await userCollection.insert(data.toJson());
