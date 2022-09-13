@@ -5,7 +5,6 @@ import 'package:frontend/page/storefood/foodDetail/food_detail_observer.dart';
 import 'page/openScreen/onboarding_screen.dart'; // ignore: unused_import
 import 'package:bloc/bloc.dart'; // ignore: unused_import
 
-// 叔叔
 void main() async {
   Bloc.observer = FoodDetailObserver();
   WidgetsFlutterBinding.ensureInitialized();
