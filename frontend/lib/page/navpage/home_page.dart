@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/models/tobuy_model.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<TobuyModel> tobuys = [];
   TextEditingController tobuyController = TextEditingController(text: "");
+
 
   get mainAxisAlignment => null;
 
@@ -68,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 //* 提醒彈跳視窗
                 // ignore: todo
-                //TODO: 尚未完成
+                //TODO 尚未完成
                 const PopupAlert(),
               ],
             ),
