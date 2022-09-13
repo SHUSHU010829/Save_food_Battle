@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
-import 'package:frontend/page/scanpage/edit_food_page.dart';
+// import 'package:frontend/page/scanpage/edit_food_page.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
