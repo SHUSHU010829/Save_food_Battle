@@ -92,23 +92,73 @@ class _ScanPageState extends State<ScanPage> {
               height: 40,
             ),
             //* Qr Scanner
-            Container(
-              width: double.infinity,
-              height: 400,
-              alignment: Alignment.center,
-              child: Container(
-                width: 200,
-                height: 200,
-                color: Colors.green[300],
-                // child: InkWell(
-                //   onTap: () => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const EditFoodPage(),
-                //     ),
-                //   ),
-                // ),
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Icon(Icons.highlight),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(const CircleBorder()),
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(20)),
+                        backgroundColor: MaterialStateProperty.all(
+                            primaryColor5), // <-- Button color
+                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                          (states) {
+                            if (states.contains(MaterialState.pressed)) {
+                              return primaryColor2;
+                            }
+                            return null; // <-- Splash color
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Icon(Icons.edit),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(const CircleBorder()),
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(20)),
+                        backgroundColor: MaterialStateProperty.all(
+                            primaryColor5), // <-- Button color
+                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                          (states) {
+                            if (states.contains(MaterialState.pressed)) {
+                              return primaryColor2;
+                            }
+                            return null; // <-- Splash color
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 36),
+                Container(
+                  // width: double.infinity,
+                  // height: 200,
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.green[300],
+                    // child: InkWell(
+                    //   onTap: () => Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const EditFoodPage(),
+                    //     ),
+                    //   ),
+                    // ),
+                  ),
+                ),
+              ],
             ),
             //* 功能按鈕
             Container(
@@ -116,57 +166,7 @@ class _ScanPageState extends State<ScanPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Icon(Icons.highlight),
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all(const CircleBorder()),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(20)),
-                          backgroundColor: MaterialStateProperty.all(
-                              primaryColor5), // <-- Button color
-                          overlayColor:
-                              MaterialStateProperty.resolveWith<Color?>(
-                            (states) {
-                              if (states.contains(MaterialState.pressed)) {
-                                return primaryColor2;
-                              }
-                              return null; // <-- Splash color
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Icon(Icons.edit),
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all(const CircleBorder()),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(20)),
-                          backgroundColor: MaterialStateProperty.all(
-                              primaryColor5), // <-- Button color
-                          overlayColor:
-                              MaterialStateProperty.resolveWith<Color?>(
-                            (states) {
-                              if (states.contains(MaterialState.pressed)) {
-                                return primaryColor2;
-                              }
-                              return null; // <-- Splash color
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                children: [],
               ),
             ),
           ],
