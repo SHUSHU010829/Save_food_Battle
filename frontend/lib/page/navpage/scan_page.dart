@@ -1,9 +1,12 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
-// import 'package:frontend/page/scanpage/edit_food_page.dart';
+import 'package:frontend/widgets/stepper_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+// import 'package:frontend/page/scanpage/edit_food_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
@@ -44,20 +47,35 @@ class _ScanPageState extends State<ScanPage> {
         child: Column(
           children: [
             const SizedBox(
-              height: 24,
+              height: 48,
             ),
             //* BAR
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  "Scan",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: englishFontfamily,
-                    color: textColor,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      "Scan",
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: englishFontfamily,
+                        color: textColor,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "發票/食物掃描",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: chineseFontfamily,
+                        color: textColor,
+                      ),
+                    ),
+                  ],
                 ),
                 ToggleSwitch(
                   minWidth: 64.0,
@@ -88,87 +106,8 @@ class _ScanPageState extends State<ScanPage> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 40,
-            ),
             //* Qr Scanner
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Icon(Icons.highlight),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(const CircleBorder()),
-                        padding:
-                            MaterialStateProperty.all(const EdgeInsets.all(20)),
-                        backgroundColor: MaterialStateProperty.all(
-                            primaryColor5), // <-- Button color
-                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                          (states) {
-                            if (states.contains(MaterialState.pressed)) {
-                              return primaryColor2;
-                            }
-                            return null; // <-- Splash color
-                          },
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Icon(Icons.edit),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(const CircleBorder()),
-                        padding:
-                            MaterialStateProperty.all(const EdgeInsets.all(20)),
-                        backgroundColor: MaterialStateProperty.all(
-                            primaryColor5), // <-- Button color
-                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                          (states) {
-                            if (states.contains(MaterialState.pressed)) {
-                              return primaryColor2;
-                            }
-                            return null; // <-- Splash color
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 36),
-                Container(
-                  // width: double.infinity,
-                  // height: 200,
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    color: Colors.green[300],
-                    // child: InkWell(
-                    //   onTap: () => Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const EditFoodPage(),
-                    //     ),
-                    //   ),
-                    // ),
-                  ),
-                ),
-              ],
-            ),
-            //* 功能按鈕
-            Container(
-              padding: const EdgeInsets.only(left: 80),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [],
-              ),
-            ),
+            const Expanded(child: StepperWidget()),
           ],
         ),
       ),
