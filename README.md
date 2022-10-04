@@ -46,3 +46,9 @@ SAVE_FOOD_BATTLE
 #### 注意
 
 可以在 vscode 插件載 "Better Comments" 可以看到更多種類的註解。
+
+#### 致謝
+
+icon:  
+  Food icons created by FBJan - Flaticon
+  Battle icons created by Royyan Wijaya - Flaticon
