@@ -9,6 +9,7 @@ import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
 import 'package:frontend/models/data/storefood/carditem1_data.dart';
 import 'package:frontend/models/storefood_carditem1.dart';
 import 'package:frontend/page/storefood/instant_food_page.dart';
+import 'package:frontend/widgets/all_food_card.dart';
 
 class StorefoodPage extends StatefulWidget {
   const StorefoodPage({Key? key}) : super(key: key);
@@ -23,14 +24,17 @@ class _StorefoodPageState extends State<StorefoodPage> {
   TextEditingController textController = TextEditingController();
 
   var titleController = TextEditingController();
+
   var yearController = TextEditingController();
   var monthController = TextEditingController();
   var dayController = TextEditingController();
   var countController = TextEditingController();
-  var unitController = TextEditingController();
+  // var unitController = TextEditingController();
   var splaceController = TextEditingController();
   var smethodController = TextEditingController();
   var usedController = TextEditingController();
+
+  // get deadline => null;
 
   //  int var =int.parse(yearController.text);
   @override
@@ -78,7 +82,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
             //* 即期食品卡片
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,44 +171,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
             ),
             const SizedBox(height: 16),
             //* 食物卡片區
-            Expanded(
-              child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: FutureBuilder(
-                  future: MongoDatabase.getData(),
-                  builder: (context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else {
-                      if (snapshot.hasData) {
-                        var totalData = snapshot.data.length;
-                        print("Total Data: " + totalData.toString());
-                        // return ListView.builder(
-                        //   itemCount: snapshot.data.length,
-                        //   itemBuilder: (context, index) {
-                        //     return displayCard(UserMongoDbModel.fromJson(snapshot.data[index]));
-                        //   },
-                        // );
-                        return ListView.separated(
-                          itemCount: snapshot.data.length,
-                          separatorBuilder: (context, _) =>
-                              const SizedBox(width: 12),
-                          itemBuilder: (context, index) => displayCard(
-                              UserMongoDbModel.fromJson(snapshot.data[index])),
-                        );
-                      } else {
-                        return const Center(
-                          child: Text("倉庫是空的喔！"),
-                        );
-                      }
-                    }
-                  },
-                ),
-              ),
-            ),
+            AllfoodCardWidget(),
           ],
         ),
       ),
@@ -308,168 +275,6 @@ class _StorefoodPageState extends State<StorefoodPage> {
               ),
             ),
           ],
-        ),
-      );
-
-  //* 全部食物卡片區
-  Widget displayCard(UserMongoDbModel data) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        // onTap: () => Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => FoodDetailPage(
-        //       all_card_item: data,
-        //     ),
-        //   ),
-        // ),
-        child: Container(
-          height: 80,
-          padding: const EdgeInsets.only(left: 32, right: 24, bottom: 16),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: primaryColor9,
-                width: 2,
-              ),
-              color: Colors.white,
-              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-              boxShadow: const [
-                BoxShadow(
-                  color: primaryColor2,
-                  offset: Offset(6.0, 6.0), //陰影x軸偏移量
-                  blurRadius: 5, //陰影模糊程度
-                  spreadRadius: 0, //陰影擴散程度
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                // SizedBox(
-                //   height: 80,
-                //   width: 80,
-                //   child: ClipRRect(
-                //     borderRadius: BorderRadius.circular(8),
-                //     child: Material(
-                //       child: Ink.image(
-                //         image: NetworkImage(
-                //           all_card_item.urlImage,
-                //         ),
-                //         fit: BoxFit.cover,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                const SizedBox(
-                  width: 16,
-                ),
-                //* 圓形進度條
-                CircularProgressIndicator(
-                  backgroundColor: Colors.grey[200],
-                  valueColor: const AlwaysStoppedAnimation(secondary4),
-                  value: double.parse(data.used),
-                ),
-                const SizedBox(
-                  width: 24,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 2),
-                            Text(
-                              data.title,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: englishFontfamily,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                //* 有效期限：月日
-                                Container(
-                                  height: 20,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  alignment: Alignment.center, // 內裝元件置中對齊
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: secondary5, // 綠色背景
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "${data.month} / ${data.day}",
-                                      style: const TextStyle(
-                                        color: textColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: englishFontfamily,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                //* 存放地點
-                                Container(
-                                  height: 20,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  alignment: Alignment.center, // 內裝元件置中對齊
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: secondary6, // 綠色背景
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "# ${data.place}",
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: textColor,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: englishFontfamily,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      // const SizedBox(
-                      //   width: 40,
-                      // ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return InsertFoodPage();
-                                },
-                                settings: RouteSettings(arguments: data)))
-                        .then((value) {
-                      setState(() {});
-                    });
-                  },
-                  icon: Icon(Icons.edit),
-                ),
-              ],
-            ),
-          ),
         ),
       );
 }
