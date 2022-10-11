@@ -21,12 +21,12 @@ class _IdentityPageState extends State<IdentityPage> {
         child: Column(
           children: [
             const SizedBox(
-              height: 48,
+              height: 40,
             ),
             //* BAR
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [

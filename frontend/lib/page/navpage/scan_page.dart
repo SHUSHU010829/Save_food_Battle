@@ -47,7 +47,7 @@ class _ScanPageState extends State<ScanPage> {
         child: Column(
           children: [
             const SizedBox(
-              height: 48,
+              height: 40,
             ),
             //* BAR
             Row(

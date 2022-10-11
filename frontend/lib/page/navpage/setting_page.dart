@@ -29,7 +29,7 @@ class _SettingPageState extends State<SettingPage> {
       //   centerTitle: true,
       // ),
       body: Container(
-        padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
+        padding: const EdgeInsets.only(left: 32, top: 40, right: 24),
         child: ListView(
           children: [
             Row(
