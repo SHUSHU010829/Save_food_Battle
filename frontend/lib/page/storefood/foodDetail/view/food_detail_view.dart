@@ -1,9 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/constants.dart';
-import 'package:frontend/models/storefood_carditem2.dart';
-import 'package:frontend/page/storefood/foodDetail/food_detail.dart';
 
 /// {@template counter_view}
 /// A [StatelessWidget] which reacts to the provided

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class TobuyItem extends StatefulWidget {
   final String title;
-  const TobuyItem({required this.title});
+
+  const TobuyItem({Key? key, required this.title}) : super(key: key);
 
   @override
   _TobuyItemState createState() => _TobuyItemState();

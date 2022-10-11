@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:frontend/constants.dart';
 
 class QrScanWidget extends StatefulWidget {
   const QrScanWidget({Key? key}) : super(key: key);

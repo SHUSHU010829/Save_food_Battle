@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/models/storefood_carditem2.dart';
 import 'package:frontend/page/storefood/foodDetail/food_detail.dart';
 
 /// {@template counter_page}
@@ -22,7 +21,7 @@ class FoodDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => FoodDetailCubit(),
-      child: FoodDetailView(),
+      child: const FoodDetailView(),
     );
   }
 }
