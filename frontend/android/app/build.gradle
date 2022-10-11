@@ -48,6 +48,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        minSdkVersion 21   
     }
 
     buildTypes {
@@ -56,6 +57,15 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
+    }
+    //tfseting
+    android{
+        compileSdkVersion 32 
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+        noCompress 'lite'
     }
 }
 

@@ -1,9 +1,13 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/page/navpage/main_page.dart'; // ignore: unused_import
 import 'package:frontend/page/storefood/foodDetail/food_detail_observer.dart';
 import 'page/openScreen/onboarding_screen.dart'; // ignore: unused_import
 import 'package:bloc/bloc.dart'; // ignore: unused_import
+
+//willamgit push github
+List<CameraDescription>? cameras;
 
 void main() async {
   Bloc.observer = FoodDetailObserver();
