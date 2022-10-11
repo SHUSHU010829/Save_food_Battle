@@ -1,4 +1,4 @@
-// ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable
+// ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable, avoid_print
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,6 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
-                      // Food Title
                       const SizedBox(height: 10),
                       // 商品名
                       TextFormField(
@@ -190,6 +189,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                         ],
                       ),
                       const SizedBox(height: 10),
+                      // 數量
                       TextFormField(
                         controller: countController,
                         maxLines: null,
@@ -235,6 +235,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                       //   decoration: const InputDecoration(labelText: "單位"),
                       // ),
                       const SizedBox(height: 30),
+                      // 收納地點＋收藏方式
                       Row(
                         children: [
                           Expanded(
@@ -307,6 +308,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                         ],
                       ),
                       const SizedBox(height: 30),
+                      // 已使用百分比
                       TextFormField(
                         controller: usedController,
                         keyboardType:
@@ -352,56 +354,63 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                 const SizedBox(
                   height: 90,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // ignore: todo
-                    //TODO 在確認資料後跳出視窗詢問繼續輸入或是返回
-                    ElevatedButton(
-                      onPressed: () {
-                        final isValidForm = formKey.currentState!.validate();
-                        if (isValidForm) {
-                          if (_checkInsertUpdate == "Update") {
-                            _updateData(
-                                data?.id,
-                                titleController.text,
-                                _dateTime.year.toString(),
-                                _dateTime.month.toString(),
-                                _dateTime.day.toString(),
-                                countController.text,
-                                // unitController.text,
-                                splaceController.text,
-                                smethodController.text,
-                                usedController.text);
-                          } else {
-                            _insertData(
-                                titleController.text,
-                                _dateTime.year.toString(),
-                                _dateTime.month.toString(),
-                                _dateTime.day.toString(),
-                                countController.text,
-                                // unitController.text,
-                                splaceController.text,
-                                smethodController.text,
-                                usedController.text);
-                          }
-                        }
-                      },
-                      child: Text(_checkInsertUpdate),
-                      style: ElevatedButton.styleFrom(
-                        primary: secondary6,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 50, vertical: 10),
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          color: secondary3,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: chineseFontfamily,
-                        ),
-                      ),
+                // 送出按鈕
+                // ignore: todo
+                //TODO 在確認資料後跳出視窗詢問繼續輸入或是返回
+                ElevatedButton(
+                  onPressed: () {
+                    final isValidForm = formKey.currentState!.validate();
+                    String d, m;
+                    if (isValidForm) {
+                      if (_dateTime.day < 10 && _dateTime.day > 0) {
+                        d = '0${_dateTime.day}';
+                      } else {
+                        d = '${_dateTime.day}';
+                      }
+                      if (_dateTime.month < 10 && _dateTime.month > 0) {
+                        m = '0${_dateTime.month}';
+                      } else {
+                        m = '${_dateTime.month}';
+                      }
+                      if (_checkInsertUpdate == "Update") {
+                        _updateData(
+                            data?.id,
+                            titleController.text,
+                            _dateTime.year.toString(),
+                            m,
+                            d,
+                            countController.text,
+                            // unitController.text,
+                            splaceController.text,
+                            smethodController.text,
+                            usedController.text);
+                      } else {
+                        _insertData(
+                            titleController.text,
+                            _dateTime.year.toString(),
+                            m,
+                            d,
+                            countController.text,
+                            // unitController.text,
+                            splaceController.text,
+                            smethodController.text,
+                            usedController.text);
+                      }
+                    }
+                  },
+                  child: Text(_checkInsertUpdate),
+                  style: ElevatedButton.styleFrom(
+                    primary: secondary6,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 10),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      color: secondary3,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: chineseFontfamily,
                     ),
-                  ],
-                )
+                  ),
+                ),
               ],
             ),
           ),
