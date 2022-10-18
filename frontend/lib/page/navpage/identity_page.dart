@@ -1,8 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:frontend/constants.dart';
-// import 'package:frontend/page/scanpage/edit_food_page.dart';
+import 'package:frontend/main.dart';
+
+int id = 0;
 
 class IdentityPage extends StatefulWidget {
   const IdentityPage({Key? key}) : super(key: key);
@@ -12,10 +15,30 @@ class IdentityPage extends StatefulWidget {
 }
 
 class _IdentityPageState extends State<IdentityPage> {
+  Future<void> _showNotification() async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails('your channel id', 'your channel name',
+            channelDescription: 'your channel description',
+            importance: Importance.max,
+            priority: Priority.high,
+            ticker: 'ticker');
+    const NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+    await flutterLocalNotificationsPlugin.show(
+        id++, 'plain title', 'plain body', notificationDetails,
+        payload: 'item x');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await _showNotification();
+        },
+        child: const Icon(Icons.notification_add_rounded),
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
         child: Column(
