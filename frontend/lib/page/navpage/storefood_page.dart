@@ -80,7 +80,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             //* 即期食品卡片
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +109,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
                     buildCard1(card_item: foods[index]),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
             //* 全部食品卡片
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
