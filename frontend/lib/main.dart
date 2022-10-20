@@ -36,28 +36,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   AndroidInitializationSettings androidSettings =
-      AndroidInitializationSettings("app_icon");
+      AndroidInitializationSettings("@mipmap/ic_launcher");
 
-  final DarwinInitializationSettings initializationSettingsDarwin =
-      DarwinInitializationSettings(
-    requestAlertPermission: false,
-    requestBadgePermission: false,
-    requestSoundPermission: false,
-    onDidReceiveLocalNotification:
-        (int id, String? title, String? body, String? payload) async {
-      didReceiveLocalNotificationStream.add(
-        ReceivedNotification(
-          id: id,
-          title: title,
-          body: body,
-          payload: payload,
-        ),
-      );
-    },
+  DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestCriticalPermission: true,
+    requestSoundPermission: true,
   );
 
-  InitializationSettings initializationSettings = InitializationSettings(
-      android: androidSettings, iOS: initializationSettingsDarwin);
+  InitializationSettings initializationSettings =
+      InitializationSettings(android: androidSettings, iOS: iosSettings);
 
   bool? initialized = await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
