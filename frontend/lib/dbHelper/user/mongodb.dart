@@ -21,6 +21,17 @@ class MongoDatabase {
     return arrData;
   }
 
+  //* Delete Data
+  static delete(UserMongoDbModel data) async {
+    await userCollection.remove(where.id(data.id));
+  }
+
+  //* Query Data
+  static Future<List<Map<String, dynamic>>> getQueryData() async {
+    final data = await userCollection.find(where.eq('title', 'apple')).toList();
+    return data;
+  }
+
   //* Update Data
   static Future<void> update(UserMongoDbModel data) async {
     var result = await userCollection.findOne({"_id": data.id});

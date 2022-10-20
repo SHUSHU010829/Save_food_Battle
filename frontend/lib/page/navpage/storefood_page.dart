@@ -7,6 +7,7 @@ import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
 import 'package:frontend/models/data/storefood/carditem1_data.dart';
 import 'package:frontend/models/storefood_carditem1.dart';
 import 'package:frontend/page/storefood/instant_food_page.dart';
+import 'package:frontend/page/storefood/search_food_page.dart';
 import 'package:frontend/widgets/all_food_card.dart';
 
 class StorefoodPage extends StatefulWidget {
@@ -65,17 +66,45 @@ class _StorefoodPageState extends State<StorefoodPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    AnimSearchBar(
-                      width: 210,
-                      textController: textController,
-                      helpText: 'Search...',
-                      onSuffixTap: () {
-                        setState(() {
-                          textController.clear();
+                    // AnimSearchBar(
+                    //   width: 210,
+                    //   textController: textController,
+                    //   helpText: 'Search...',
+                    //   onSuffixTap: () {
+                    //     setState(() {
+                    //       textController.clear();
+                    //     });
+                    //   },
+                    // ),
+                    Container(child: _dropDown()),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return SearchFoodPage();
+                                    },
+                                    settings: RouteSettings(arguments: null)))
+                            .then((value) {
+                          setState(() {});
                         });
                       },
-                    ),
-                    Container(child: _dropDown()),
+                      child: Icon(
+                        Icons.search_rounded,
+                        color: primaryColor6,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(12),
+                        primary: secondary1,
+                        // borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(
+                          color: primaryColor6,
+                          width: 2,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -131,12 +160,6 @@ class _StorefoodPageState extends State<StorefoodPage> {
                   //* 添加食物
                   OutlinedButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const InsertFoodPage(),
-                      //   ),
-                      // );
                       Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -186,12 +209,12 @@ class _StorefoodPageState extends State<StorefoodPage> {
           width: 2,
           style: BorderStyle.solid,
         ),
-        borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
         child: SizedBox(
-          width: 80.0,
+          width: 230.0,
           child: DropdownButton(
             isExpanded: true,
             value: dropdownValue,

@@ -1,84 +1,122 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
-import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
-class AllfoodCardWidget extends StatefulWidget {
-  const AllfoodCardWidget({Key? key}) : super(key: key);
+class SearchFoodPage extends StatefulWidget {
+  const SearchFoodPage({Key? key}) : super(key: key);
 
   @override
-  State<AllfoodCardWidget> createState() => _AllfoodCardWidgetState();
+  State<SearchFoodPage> createState() => _SearchFoodPageState();
 }
 
-class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
-  DateTime dateNow = DateTime.now();
-  DateTime deadline = DateTime.parse("2022-10-11 00:00:00");
-  String result = 'No Result yet';
-  var dayList = [];
+class _SearchFoodPageState extends State<SearchFoodPage> {
+  var titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: FutureBuilder(
-          future: MongoDatabase.getData(),
-          builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              if (snapshot.hasData) {
-                var totalData = snapshot.data.length;
-                // print("Total Data: " + totalData.toString());
-                dayList.clear();
-                for (int i = 0; i < totalData; i++) {
-                  var mongodata = UserMongoDbModel.fromJson(snapshot.data[i]);
-                  // print('${mongodata.year}-${mongodata.month}-${mongodata.day}');
-                  deadline = DateTime.parse(
-                      "${mongodata.year}-${mongodata.month}-${mongodata.day} 00:00:00");
-                  int days = deadline.difference(dateNow).inDays;
-                  if (days == 0) {
-                    result = '今天過期!';
-                  } else if (days < 0) {
-                    result = '已經過期 ${-days} 天';
-                  } else {
-                    result = '還有 $days 天過期';
-                  }
-                  dayList.add(result);
-                }
-                // print(dayList);
-                // 有效期限的計算
-                return ListView.separated(
-                  itemCount: snapshot.data.length,
-                  separatorBuilder: (context, _) => const SizedBox(width: 12),
-                  itemBuilder: (context, index) => displayCard(
-                      UserMongoDbModel.fromJson(snapshot.data[index]),
-                      dayList[index]),
-                );
-              } else {
-                return const Center(
-                  child: Text("倉庫是空的喔！"),
-                );
-              }
-            }
-          },
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        backgroundColor: secondary3,
+        bottomOpacity: 0.0,
+        elevation: 0.0,
+        centerTitle: true,
+        title: const Text(
+          "搜尋你的食材",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            fontFamily: chineseFontfamily,
+            color: secondary2,
+          ),
         ),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: titleController,
+                  // onChanged: (){},
+                  style: const TextStyle(color: secondary3),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: secondary5,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: "Eg. Apple",
+                    hintStyle: const TextStyle(
+                      color: secondary2,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: englishFontfamily,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search_rounded,
+                      color: Colors.brown[900],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Text(
+            "--------------------------------------",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              fontFamily: chineseFontfamily,
+              color: secondary3,
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          SizedBox(
+            height: 200,
+            child: FutureBuilder(
+              future: MongoDatabase.getQueryData(),
+              builder: (context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return displayData(
+                          UserMongoDbModel.fromJson(snapshot.data[index]),
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('沒有這樣食物喔！'),
+                    );
+                  }
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  //* 全部食物卡片區
-  Widget displayCard(UserMongoDbModel data, dayList) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
+  Widget displayData(UserMongoDbModel data) => Padding(
+        padding: const EdgeInsets.only(
+          top: 12.0,
+        ),
         child: Container(
           height: 80,
-          padding: const EdgeInsets.only(left: 32, right: 24, bottom: 16),
+          padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -98,26 +136,9 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
             ),
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    print(data.id);
-                    MongoDatabase.delete(data);
-                    setState(() {});
-                  },
-                  icon: const Icon(Icons.delete_rounded),
-                ),
                 const SizedBox(
-                  width: 16,
+                  width: 24,
                 ),
-                //* 圓形進度條
-                // CircularProgressIndicator(
-                //   backgroundColor: Colors.grey[200],
-                //   valueColor: const AlwaysStoppedAnimation(secondary4),
-                //   value: double.parse(data.used) / 100,
-                // ),
-                // const SizedBox(
-                //   width: 24,
-                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Row(
@@ -142,32 +163,6 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                                 ),
                                 const SizedBox(
                                   width: 8,
-                                ),
-                                //* 有效期限：月日
-                                Container(
-                                  alignment: Alignment.center, // 內裝元件置中對齊
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: secondary5,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0,
-                                        right: 10.0,
-                                        top: 1.0,
-                                        bottom: 1.0),
-                                    child: Center(
-                                      child: Text(
-                                        dayList,
-                                        style: const TextStyle(
-                                          color: textColor,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: englishFontfamily,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                                 ),
                               ],
                             ),
@@ -200,6 +195,35 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                                     ),
                                   ),
                                 ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                //* 有效日期
+                                Container(
+                                  alignment: Alignment.center, // 內裝元件置中對齊
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: secondary5,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                        right: 10.0,
+                                        top: 1.0,
+                                        bottom: 1.0),
+                                    child: Center(
+                                      child: Text(
+                                        "# ${data.place}",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: textColor,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: englishFontfamily,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ],
@@ -207,21 +231,6 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                       ),
                     ],
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return const InsertFoodPage();
-                                },
-                                settings: RouteSettings(arguments: data)))
-                        .then((value) {
-                      setState(() {});
-                    });
-                  },
-                  icon: const Icon(Icons.edit),
                 ),
               ],
             ),
