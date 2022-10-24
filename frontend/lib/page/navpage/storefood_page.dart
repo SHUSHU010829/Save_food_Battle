@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, avoid_print, unnecessary_string_interpolations, prefer_const_constructors
 
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
@@ -43,7 +42,6 @@ class _StorefoodPageState extends State<StorefoodPage> {
       body: Center(
         child: Column(
           children: [
-            //* 搜尋調與切換儲存地點
             Container(
               height: 136,
               decoration: const BoxDecoration(
@@ -62,49 +60,48 @@ class _StorefoodPageState extends State<StorefoodPage> {
               child: Padding(
                 padding:
                     const EdgeInsets.only(left: 24.0, right: 24.0, top: 32.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  //* 搜尋調與切換儲存地點
                   children: [
-                    // AnimSearchBar(
-                    //   width: 210,
-                    //   textController: textController,
-                    //   helpText: 'Search...',
-                    //   onSuffixTap: () {
-                    //     setState(() {
-                    //       textController.clear();
-                    //     });
-                    //   },
-                    // ),
-                    Container(child: _dropDown()),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return SearchFoodPage();
-                                    },
-                                    settings: RouteSettings(arguments: null)))
-                            .then((value) {
-                          setState(() {});
-                        });
-                      },
-                      child: Icon(
-                        Icons.search_rounded,
-                        color: primaryColor6,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(12),
-                        primary: secondary1,
-                        // borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(
-                          color: primaryColor6,
-                          width: 2,
-                        ),
-                      ),
-                    )
+                    SizedBox(
+                      height: 32,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(child: _dropDown()),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                          return SearchFoodPage();
+                                        },
+                                        settings:
+                                            RouteSettings(arguments: null)))
+                                .then((value) {
+                              setState(() {});
+                            });
+                          },
+                          child: Icon(
+                            Icons.search_rounded,
+                            color: primaryColor6,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            shape: CircleBorder(),
+                            padding: EdgeInsets.all(12),
+                            primary: secondary1,
+                            // borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(
+                              color: primaryColor6,
+                              width: 2,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -214,7 +211,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
         child: SizedBox(
-          width: 230.0,
+          width: 260.0,
           child: DropdownButton(
             isExpanded: true,
             value: dropdownValue,

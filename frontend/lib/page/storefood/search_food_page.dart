@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class SearchFoodPage extends StatefulWidget {
   const SearchFoodPage({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class SearchFoodPage extends StatefulWidget {
 
 class _SearchFoodPageState extends State<SearchFoodPage> {
   var titleController = TextEditingController();
-
+  var keyWord = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,79 +32,87 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: titleController,
-                  // onChanged: (){},
-                  style: const TextStyle(color: secondary3),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: secondary5,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Eg. Apple",
-                    hintStyle: const TextStyle(
-                      color: secondary2,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: englishFontfamily,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.search_rounded,
-                      color: Colors.brown[900],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: titleController,
+                    maxLines: null,
+                    textInputAction: TextInputAction.done,
+                    onChanged: (text) {
+                      setState(() {
+                        keyWord = text;
+                      });
+                    },
+                    style: const TextStyle(color: secondary3),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: secondary5,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: "Eg. Apple",
+                      hintStyle: const TextStyle(
+                        color: secondary2,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: englishFontfamily,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search_rounded,
+                        color: Colors.brown[900],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Text(
-            "--------------------------------------",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              fontFamily: chineseFontfamily,
-              color: secondary3,
+            const Text(
+              "--------------------------------------",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontFamily: chineseFontfamily,
+                color: secondary3,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          SizedBox(
-            height: 200,
-            child: FutureBuilder(
-              future: MongoDatabase.getQueryData(),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return displayData(
-                          UserMongoDbModel.fromJson(snapshot.data[index]),
-                        );
-                      },
+            const SizedBox(
+              height: 16,
+            ),
+            SizedBox(
+              height: 550,
+              child: FutureBuilder(
+                future: MongoDatabase.getQueryData(keyWord),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
                   } else {
-                    return const Center(
-                      child: Text('沒有這樣食物喔！'),
-                    );
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return displayData(
+                            UserMongoDbModel.fromJson(snapshot.data[index]),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('沒有這樣食物喔！'),
+                      );
+                    }
                   }
-                }
-              },
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

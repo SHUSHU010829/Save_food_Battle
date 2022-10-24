@@ -27,8 +27,9 @@ class MongoDatabase {
   }
 
   //* Query Data
-  static Future<List<Map<String, dynamic>>> getQueryData() async {
-    final data = await userCollection.find(where.eq('title', 'apple')).toList();
+  static Future<List<Map<String, dynamic>>> getQueryData(String word) async {
+    //TODO 更改成 full-text search
+    final data = await userCollection.find({'title': word}).toList();
     return data;
   }
 
