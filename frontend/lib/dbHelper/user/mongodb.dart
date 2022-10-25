@@ -29,7 +29,7 @@ class MongoDatabase {
     result['month'] = data.month;
     result['day'] = data.day;
     result['count'] = data.count;
-    result['unit'] = data.unit;
+    // result['unit'] = data.unit;
     result['place'] = data.place;
     result['storeMethod'] = data.storeMethod;
     result['used'] = data.used;

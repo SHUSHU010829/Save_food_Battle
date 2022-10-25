@@ -20,7 +20,7 @@ class UserMongoDbModel {
     required this.month,
     required this.day,
     required this.count,
-    required this.unit,
+    // required this.unit,
     required this.place,
     required this.storeMethod,
     required this.used,
@@ -32,7 +32,7 @@ class UserMongoDbModel {
   String month;
   String day;
   String count;
-  String unit;
+  // String unit;
   String place;
   String storeMethod;
   String used;
@@ -45,7 +45,7 @@ class UserMongoDbModel {
         month: json["month"],
         day: json["day"],
         count: json["count"],
-        unit: json["unit"],
+        // unit: json["unit"],
         place: json["place"],
         storeMethod: json["storeMethod"],
         used: json["used"],
@@ -58,7 +58,7 @@ class UserMongoDbModel {
         "month": month,
         "day": day,
         "count": count,
-        "unit": unit,
+        // "unit": unit,
         "place": place,
         "storeMethod": storeMethod,
         "used": used,

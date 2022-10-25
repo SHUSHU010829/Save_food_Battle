@@ -1,8 +1,8 @@
 // ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable
 
-import 'dart:math';
-import 'package:faker/faker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
@@ -23,12 +23,15 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
   var monthController = TextEditingController();
   var dayController = TextEditingController();
   var countController = TextEditingController();
-  var unitController = TextEditingController();
+  // var unitController = TextEditingController();
   var splaceController = TextEditingController();
   var smethodController = TextEditingController();
   var usedController = TextEditingController();
 
   var _checkInsertUpdate = "Insert";
+
+  DateTime _dateTime = DateTime.now();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +39,8 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
         ModalRoute.of(context)!.settings.arguments as UserMongoDbModel?;
     if (data != null) {
       titleController.text = data.title;
-      yearController.text = data.year;
-      monthController.text = data.month;
-      dayController.text = data.day;
       countController.text = data.count;
-      unitController.text = data.unit;
+      // unitController.text = data.unit;
       splaceController.text = data.place;
       smethodController.text = data.storeMethod;
       usedController.text = data.used;
@@ -53,142 +53,358 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
         backgroundColor: primaryColor3,
         bottomOpacity: 0.0,
         elevation: 0.0,
+        centerTitle: true,
+        title: Text(
+          _checkInsertUpdate,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            fontFamily: chineseFontfamily,
+            color: secondary2,
+          ),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Text(
-                    _checkInsertUpdate,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: chineseFontfamily,
-                      color: textColor,
+      body: SingleChildScrollView(
+        child: Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      // Food Title
+                      const SizedBox(height: 10),
+                      // 商品名
+                      TextFormField(
+                        controller: titleController,
+                        maxLines: null,
+                        textInputAction: TextInputAction.done,
+                        decoration: const InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary6),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary6),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.title_rounded,
+                            color: secondary6,
+                          ),
+                          hintText: "食物品項名",
+                          hintStyle: TextStyle(
+                            color: secondary3,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: chineseFontfamily,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Empty!";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      // 日期選擇
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                const SizedBox(width: 11),
+                                const Icon(
+                                  Icons.schedule_rounded,
+                                  color: secondary6,
+                                ),
+                                const SizedBox(width: 10),
+                                const Text(
+                                  "有效日期",
+                                  style: TextStyle(
+                                    color: secondary3,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: chineseFontfamily,
+                                  ),
+                                ),
+                                const SizedBox(width: 20),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    primary: secondary6,
+                                  ),
+                                  onPressed: () async {
+                                    DateTime? _newDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: _dateTime,
+                                      firstDate: DateTime(DateTime.now().year),
+                                      lastDate:
+                                          DateTime(DateTime.now().year + 10),
+                                      builder: (context, child) {
+                                        return Theme(
+                                          data: Theme.of(context).copyWith(
+                                            colorScheme: const ColorScheme(
+                                              // uses the brightness of the user (Light or Dark)
+                                              brightness: Brightness.light,
+                                              primary: primaryColor7,
+                                              onPrimary: primaryColor1,
+                                              secondary: secondary1,
+                                              onSecondary: secondary1,
+                                              error: secondary6,
+                                              onError: secondary1,
+                                              background: primaryColor1,
+                                              onBackground: primaryColor1,
+                                              surface: secondary1,
+                                              onSurface: secondary4,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                primary: secondary6,
+                                              ),
+                                            ),
+                                          ),
+                                          child: child!,
+                                        );
+                                      },
+                                    );
+                                    if (_newDate != null) {
+                                      setState(() {
+                                        _dateTime = _newDate;
+                                      });
+                                    }
+                                  },
+                                  child: Text(
+                                    '${_dateTime.year}-${_dateTime.month}-${_dateTime.day}',
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: countController,
+                        maxLines: null,
+                        keyboardType:
+                            defaultTargetPlatform == TargetPlatform.iOS
+                                ? const TextInputType.numberWithOptions(
+                                    decimal: true, signed: true)
+                                : TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: const InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary6),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary6),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.numbers_rounded,
+                            color: secondary6,
+                          ),
+                          hintText: "數量",
+                          hintStyle: TextStyle(
+                            color: secondary3,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: chineseFontfamily,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Empty!";
+                          } else if (int.parse(value) <= 0) {
+                            return "Error Range! Pleace input more than 0";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      // const SizedBox(height: 10),
+                      // TextField(
+                      //   controller: unitController,
+                      //   decoration: const InputDecoration(labelText: "單位"),
+                      // ),
+                      const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: splaceController,
+                              maxLines: null,
+                              textInputAction: TextInputAction.done,
+                              decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: secondary6),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: secondary6),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.kitchen_rounded,
+                                  color: secondary6,
+                                ),
+                                hintText: "收納地點",
+                                hintStyle: TextStyle(
+                                  color: secondary3,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: chineseFontfamily,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Empty!";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              controller: smethodController,
+                              maxLines: null,
+                              textInputAction: TextInputAction.done,
+                              decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: secondary6),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: secondary6),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.device_thermostat_rounded,
+                                  color: secondary6,
+                                ),
+                                hintText: "收藏方式",
+                                hintStyle: TextStyle(
+                                  color: secondary3,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: chineseFontfamily,
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Empty!";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 30),
+                      TextFormField(
+                        controller: usedController,
+                        keyboardType:
+                            defaultTargetPlatform == TargetPlatform.iOS
+                                ? const TextInputType.numberWithOptions(
+                                    decimal: true, signed: true)
+                                : TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        decoration: const InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary6),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary6),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.percent_rounded,
+                            color: secondary6,
+                          ),
+                          hintText: "已使用百分比(0-100)",
+                          hintStyle: TextStyle(
+                            color: secondary3,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: chineseFontfamily,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Empty!";
+                          } else if (int.parse(value) > 100 ||
+                              int.parse(value) < 0) {
+                            return "Error Range! Pleace input 0 - 100";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 90,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // ignore: todo
+                    //TODO 在確認資料後跳出視窗詢問繼續輸入或是返回
+                    ElevatedButton(
+                      onPressed: () {
+                        final isValidForm = formKey.currentState!.validate();
+                        if (isValidForm) {
+                          if (_checkInsertUpdate == "Update") {
+                            _updateData(
+                                data?.id,
+                                titleController.text,
+                                _dateTime.year.toString(),
+                                _dateTime.month.toString(),
+                                _dateTime.day.toString(),
+                                countController.text,
+                                // unitController.text,
+                                splaceController.text,
+                                smethodController.text,
+                                usedController.text);
+                          } else {
+                            _insertData(
+                                titleController.text,
+                                _dateTime.year.toString(),
+                                _dateTime.month.toString(),
+                                _dateTime.day.toString(),
+                                countController.text,
+                                // unitController.text,
+                                splaceController.text,
+                                smethodController.text,
+                                usedController.text);
+                          }
+                        }
+                      },
+                      child: Text(_checkInsertUpdate),
+                      style: ElevatedButton.styleFrom(
+                        primary: secondary6,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 10),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          color: secondary3,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: chineseFontfamily,
+                        ),
+                      ),
                     ),
-                  ),
-                  TextField(
-                    controller: titleController,
-                    decoration: const InputDecoration(labelText: "Title"),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: yearController,
-                          decoration: const InputDecoration(labelText: "year"),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: monthController,
-                          decoration: const InputDecoration(labelText: "month"),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: dayController,
-                          decoration: const InputDecoration(labelText: "day"),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: countController,
-                    decoration: const InputDecoration(labelText: "數量"),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: unitController,
-                    decoration: const InputDecoration(labelText: "單位"),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: splaceController,
-                          decoration: const InputDecoration(labelText: "收納地點"),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: smethodController,
-                          decoration: const InputDecoration(labelText: "收藏方式"),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: usedController,
-                    decoration: const InputDecoration(labelText: "已使用(0-100)"),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 90,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // crossAxisAlignment: CrossAxisAlignment.spaceBetween,
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    _fakeData();
-                  },
-                  child: const Text("隨機資料"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_checkInsertUpdate == "Update") {
-                      _updateData(
-                          data?.id,
-                          titleController.text,
-                          yearController.text,
-                          monthController.text,
-                          dayController.text,
-                          countController.text,
-                          unitController.text,
-                          splaceController.text,
-                          smethodController.text,
-                          usedController.text);
-                    } else {
-                      _insertData(
-                          titleController.text,
-                          yearController.text,
-                          monthController.text,
-                          dayController.text,
-                          countController.text,
-                          unitController.text,
-                          splaceController.text,
-                          smethodController.text,
-                          usedController.text);
-                    }
-                  },
-                  child: Text(_checkInsertUpdate),
-                ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
@@ -201,7 +417,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       String month,
       String day,
       String count,
-      String unit,
+      // String unit,
       String place,
       String storeMethod,
       String used) async {
@@ -212,12 +428,20 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
         month: month,
         day: day,
         count: count,
-        unit: unit,
+        // unit: unit,
         place: place,
         storeMethod: storeMethod,
         used: used);
     var result = await MongoDatabase.update(updateDate)
         .whenComplete(() => Navigator.pop(context));
+    ScaffoldMessenger.of(context).showSnackBar(
+      // SnackBar(
+      //   content: Text("Inserted ID" + _id.$oid),
+      // ),
+      const SnackBar(
+        content: Text("更新成功！"),
+      ),
+    );
   }
 
   Future<void> _insertData(
@@ -226,7 +450,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
     String month,
     String day,
     String count,
-    String unit,
+    // String unit,
     String place,
     String storeMethod,
     String used,
@@ -239,15 +463,19 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       month: month,
       day: day,
       count: count,
-      unit: unit,
+      // unit: unit,
       place: place,
       storeMethod: storeMethod,
       used: used,
     );
-    var result = await MongoDatabase.insert(data);
+    var result = await MongoDatabase.insert(data)
+        .whenComplete(() => Navigator.pop(context));
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text("Inserted ID" + _id.$oid),
+      // SnackBar(
+      //   content: Text("Inserted ID" + _id.$oid),
+      // ),
+      const SnackBar(
+        content: Text("匯入成功！"),
       ),
     );
     _clearAll();
@@ -259,24 +487,9 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
     monthController.text = "";
     dayController.text = "";
     countController.text = "";
-    unitController.text = "";
+    // unitController.text = "";
     splaceController.text = "";
     smethodController.text = "";
     usedController.text = "";
-  }
-
-  void _fakeData() {
-    final fakerFa = Faker(provider: FakerDataProvider());
-    setState(() {
-      titleController.text = fakerFa.lorem.word();
-      yearController.text = Random().nextInt(22).toString();
-      monthController.text = Random().nextInt(12).toString();
-      dayController.text = Random().nextInt(31).toString();
-      countController.text = Random().nextInt(10).toString();
-      unitController.text = fakerFa.lorem.word();
-      splaceController.text = fakerFa.lorem.word();
-      smethodController.text = fakerFa.lorem.word();
-      usedController.text = Random().nextInt(100).toString();
-    });
   }
 }
