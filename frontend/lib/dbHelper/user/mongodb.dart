@@ -7,6 +7,7 @@ import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
+  //* 串資料庫
   static var db, userCollection;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
@@ -15,9 +16,22 @@ class MongoDatabase {
     userCollection = db.collection(USER_COLLECTION);
   }
 
-  //* Display Data
+  //* 日期紀錄
+  DateTime dateNow = DateTime.now();
+  DateTime deadline = DateTime.parse("2022-10-11 00:00:00");
+
+  //* Display Data : 全部食物卡
   static Future<List<Map<String, dynamic>>> getData() async {
-    final arrData = await userCollection.find().toList();
+    final arrData = await userCollection.find(where.sortBy('title')).toList();
+    return arrData;
+  }
+
+  //* Display Data : 首頁食物通知
+  static Future<List<Map<String, dynamic>>> getAlertData() async {
+    final arrData = await userCollection
+        .find(where.sortBy('year'))
+        .find(where.sortBy('month'))
+        .find(where.sortBy('day')).toList();
     return arrData;
   }
 
@@ -28,6 +42,7 @@ class MongoDatabase {
 
   //* Query Data
   static Future<List<Map<String, dynamic>>> getQueryData(String word) async {
+    // ignore: todo
     //TODO 更改成 full-text search
     final data = await userCollection.find({'title': word}).toList();
     return data;
