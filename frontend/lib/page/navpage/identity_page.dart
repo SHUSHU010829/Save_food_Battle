@@ -33,12 +33,12 @@ class _IdentityPageState extends State<IdentityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await _showNotification();
-        },
-        child: const Icon(Icons.notification_add_rounded),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     await _showNotification();
+      //   },
+      //   child: const Icon(Icons.notification_add_rounded),
+      // ),
       body: Container(
         padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
         child: Column(

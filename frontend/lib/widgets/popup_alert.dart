@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widgets/alret_foodcard.dart';
 import '../constants.dart';
 
 class PopupAlert extends StatefulWidget {
@@ -66,15 +67,12 @@ class _PopupAlertState extends State<PopupAlert> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      
                     ],
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const AlertFoodCard(),
                 ],
               ),
             ),
