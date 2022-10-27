@@ -36,7 +36,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   AndroidInitializationSettings androidSettings =
-      AndroidInitializationSettings("@mipmap/ic_launcher");
+      const AndroidInitializationSettings("@mipmap/ic_launcher");
 
   DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
     requestAlertPermission: true,

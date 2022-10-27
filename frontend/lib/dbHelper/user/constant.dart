@@ -7,3 +7,5 @@ const MONGO_CONN_URL =
     "mongodb+srv://Shuyuan:i9BKDWbme46i3uXe@cluster0.sqyla.mongodb.net/user?retryWrites=true&w=majority"; //MondoDB URL
 
 const USER_COLLECTION = "allStore"; //Collection Name
+
+const TOBUY_COLLECTION = "toBuyList"; 

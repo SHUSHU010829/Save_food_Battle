@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/models/tobuy_model.dart';
 import 'package:frontend/page/homepage/tobuy_page.dart';
+import 'package:frontend/page/homepage/wallet_page.dart';
 import 'package:frontend/widgets/popup_alert.dart';
 import 'package:frontend/widgets/wallet_widget.dart';
 
@@ -17,7 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<TobuyModel> tobuys = [];
   TextEditingController tobuyController = TextEditingController(text: "");
-
 
   get mainAxisAlignment => null;
 
@@ -81,12 +81,25 @@ class _HomePageState extends State<HomePage> {
             //* 錢包區塊
             InkWell(
               child: const WalletWidget(),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const TobuyPage(),
-                ),
-              ),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true, // 允许 bottomSheet 高度自定义
+                  backgroundColor: backgroundColor,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      // height: 600,
+                      child: Center(
+                        child: Column(
+                          children: const [
+                            WalletPage(),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
             const SizedBox(
               height: 24,

@@ -44,7 +44,6 @@ class WalletWidget extends StatelessWidget {
             height: 16,
           ),
           Row(
-            //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -115,38 +114,38 @@ class WalletWidget extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () => {},
-              child: const Text(
-                "  See More  ",
-                style: TextStyle(
-                  fontFamily: englishFontfamily,
-                  fontSize: 12,
-                  height: 1.0,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                  const EdgeInsets.all(12),
-                ),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  textColor,
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  primaryColor2,
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.centerRight,
+          //   child: TextButton(
+          //     onPressed: () => {},
+          //     child: const Text(
+          //       "  See More  ",
+          //       style: TextStyle(
+          //         fontFamily: englishFontfamily,
+          //         fontSize: 12,
+          //         height: 1.0,
+          //         fontWeight: FontWeight.w500,
+          //       ),
+          //     ),
+          //     style: ButtonStyle(
+          //       padding: MaterialStateProperty.all<EdgeInsets>(
+          //         const EdgeInsets.all(12),
+          //       ),
+          //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          //       foregroundColor: MaterialStateProperty.all<Color>(
+          //         textColor,
+          //       ),
+          //       backgroundColor: MaterialStateProperty.all<Color>(
+          //         primaryColor2,
+          //       ),
+          //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          //         RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(16),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
