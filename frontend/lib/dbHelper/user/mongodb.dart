@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:frontend/dbHelper/user/constant.dart';
+import 'package:frontend/models/data/tobuy/tobuy_model.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
@@ -18,7 +19,7 @@ class MongoDatabase {
   }
 
   //* 新增購物清單食材
-    static Future<String> toBuyInsert(UserMongoDbModel data) async {
+    static Future<String> toBuyInsert(TobuyModel data) async {
     try {
       var result = await tobuyCollection.insert(data.toJson());
       if (result.isSuccess()) {

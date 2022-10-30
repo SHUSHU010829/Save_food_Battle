@@ -173,6 +173,33 @@ class _WalletPageState extends State<WalletPage> {
                   endIndent: 0.0,
                   thickness: 3,
                 ),
+                // ignore: todo
+                //TODO:未結清卡片
+                Container(
+                  padding: const EdgeInsets.only(
+                      left: 16, right: 16, top: 12, bottom: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: primaryColor4,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: const Color.fromRGBO(250, 249, 246, 1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "待開發：）",
+                        style: TextStyle(
+                          fontFamily: chineseFontfamily,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

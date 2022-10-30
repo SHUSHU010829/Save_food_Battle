@@ -6,6 +6,7 @@ import 'package:frontend/models/tobuy_model.dart';
 import 'package:frontend/page/homepage/tobuy_page.dart';
 import 'package:frontend/page/homepage/wallet_page.dart';
 import 'package:frontend/widgets/popup_alert.dart';
+import 'package:frontend/widgets/tobuy_widget.dart';
 import 'package:frontend/widgets/wallet_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -107,37 +108,38 @@ class _HomePageState extends State<HomePage> {
             //* 購物清單
             // ignore: todo
             //TODO: 將清單併入首頁
-            Center(
-              child: OutlinedButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text("Shopping List"),
-                    SizedBox(width: 10),
-                    Icon(Icons.add_shopping_cart_rounded)
-                  ],
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TobuyPage(),
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  side: const BorderSide(width: 3.0, color: textColor2),
-                  padding: const EdgeInsets.all(20.0),
-                  fixedSize: const Size(300, 80),
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: englishSpecialFontfamily,
-                  ),
-                  onPrimary: primaryColor9,
-                  shadowColor: primaryColor1,
-                  shape: const StadiumBorder(),
-                ),
-              ),
-            ),
+            const TobuyWidget(),
+            // Center(
+            //   child: OutlinedButton(
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: const [
+            //         Text("Shopping List"),
+            //         SizedBox(width: 10),
+            //         Icon(Icons.add_shopping_cart_rounded)
+            //       ],
+            //     ),
+            //     onPressed: () => Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const TobuyPage(),
+            //       ),
+            //     ),
+            //     style: ElevatedButton.styleFrom(
+            //       side: const BorderSide(width: 3.0, color: textColor2),
+            //       padding: const EdgeInsets.all(20.0),
+            //       fixedSize: const Size(300, 80),
+            //       textStyle: const TextStyle(
+            //         fontSize: 20,
+            //         fontWeight: FontWeight.w700,
+            //         fontFamily: englishSpecialFontfamily,
+            //       ),
+            //       onPrimary: primaryColor9,
+            //       shadowColor: primaryColor1,
+            //       shape: const StadiumBorder(),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
