@@ -16,6 +16,7 @@ class TobuyWidget extends StatefulWidget {
 class _TobuyWidgetState extends State<TobuyWidget> {
   var titleController = new TextEditingController();
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,10 +38,10 @@ class _TobuyWidgetState extends State<TobuyWidget> {
         color: const Color.fromRGBO(250, 249, 246, 1),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          //* Bar + 新增按鈕
           Row(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
@@ -118,6 +119,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
                           if (isValidForm) {
                             _insertData(titleController.text);
                           }
+                          setState(() {});
                         },
                         style: ElevatedButton.styleFrom(
                           primary: secondary6,
@@ -140,6 +142,37 @@ class _TobuyWidgetState extends State<TobuyWidget> {
           ),
           const SizedBox(
             height: 16,
+          ),
+          //* Display
+          MediaQuery.removePadding(
+            //消除頂部空白
+            context: context,
+            removeTop: true,
+            child: FutureBuilder(
+              future: MongoDatabase.getTobuyData(),
+              builder: (context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    // var totalData = snapshot.data.length;
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) => displayCard(
+                        TobuyModel.fromJson(snapshot.data[index]),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("倉庫是空的喔！"),
+                    );
+                  }
+                }
+              },
+            ),
           ),
         ],
       ),
@@ -165,4 +198,57 @@ class _TobuyWidgetState extends State<TobuyWidget> {
   void _clearAll() {
     titleController.text = "";
   }
+
+  Widget displayCard(TobuyModel data) => GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        child: Container(
+          height: 60,
+          padding: const EdgeInsets.only(left: 4, right: 4, bottom: 12),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: primaryColor9,
+                width: 2,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              color: secondary2,
+              boxShadow: const [
+                BoxShadow(
+                  color: primaryColor2,
+                  offset: Offset(6.0, 6.0), //陰影x軸偏移量
+                  blurRadius: 5, //陰影模糊程度
+                  spreadRadius: 0, //陰影擴散程度
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                //TODO TodoList 刪除動畫
+                IconButton(
+                  onPressed: () {
+                    print(data.id);
+                    MongoDatabase.deleteTobuy(data);
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.delete_rounded),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Text(
+                  data.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: englishFontfamily,
+                  ),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 }

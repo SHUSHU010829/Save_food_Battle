@@ -19,7 +19,7 @@ class MongoDatabase {
   }
 
   //* 新增購物清單食材
-    static Future<String> toBuyInsert(TobuyModel data) async {
+  static Future<String> toBuyInsert(TobuyModel data) async {
     try {
       var result = await tobuyCollection.insert(data.toJson());
       if (result.isSuccess()) {
@@ -33,6 +33,26 @@ class MongoDatabase {
     }
   }
 
+  //* Display Data : Tobuy
+  static Future<List<Map<String, dynamic>>> getTobuyData() async {
+    final arrData = await tobuyCollection.find(where.sortBy('title')).toList();
+    return arrData;
+  }
+
+  //* Delete Data : Tobuy
+  static deleteTobuy(TobuyModel data) async {
+    await tobuyCollection.remove(where.id(data.id));
+  }
+
+  //* Display Data : 首頁食物通知
+  static Future<List<Map<String, dynamic>>> getAlertData() async {
+    final arrData = await userCollection
+        .find(where.sortBy('year'))
+        .find(where.sortBy('month'))
+        .find(where.sortBy('day'))
+        .toList();
+    return arrData;
+  }
 
   //* 日期紀錄
   DateTime dateNow = DateTime.now();
@@ -41,15 +61,6 @@ class MongoDatabase {
   //* Display Data : 全部食物卡
   static Future<List<Map<String, dynamic>>> getData() async {
     final arrData = await userCollection.find(where.sortBy('title')).toList();
-    return arrData;
-  }
-
-  //* Display Data : 首頁食物通知
-  static Future<List<Map<String, dynamic>>> getAlertData() async {
-    final arrData = await userCollection
-        .find(where.sortBy('year'))
-        .find(where.sortBy('month'))
-        .find(where.sortBy('day')).toList();
     return arrData;
   }
 
