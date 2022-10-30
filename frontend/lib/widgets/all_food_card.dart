@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
+import 'package:frontend/models/data/tobuy/tobuy_model.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class AllfoodCardWidget extends StatefulWidget {
   const AllfoodCardWidget({Key? key}) : super(key: key);
@@ -105,11 +107,76 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {
-                    print(data.id);
-                    MongoDatabase.delete(data);
-                    setState(() {});
-                  },
+                  onPressed: () => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      content: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 130,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              '刪掉的食物要幫您加入購物清單內嗎？',
+                              style: TextStyle(
+                                fontFamily: chineseFontfamily,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                // _insertData(data.title);
+                                MongoDatabase.delete(data);
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: secondary3,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 10),
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: chineseFontfamily,
+                                ),
+                              ),
+                              child: const Text('Nope'),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                _insertData(data.title);
+                                MongoDatabase.delete(data);
+                                setState(() {});
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: secondary6,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 10),
+                                textStyle: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: chineseFontfamily,
+                                ),
+                              ),
+                              child: const Text('Yes!'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   icon: const Icon(Icons.delete_rounded),
                 ),
                 const SizedBox(
@@ -136,19 +203,17 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 2),
+                            Text(
+                              data.title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: englishFontfamily,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
                             Row(
                               children: [
-                                Text(
-                                  data.title,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: englishFontfamily,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
                                 //* 有效期限：月日
                                 Container(
                                   alignment: Alignment.center, // 內裝元件置中對齊
@@ -175,11 +240,9 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
+                                const SizedBox(
+                                  width: 4,
+                                ),
                                 //* 存放地點
                                 Container(
                                   alignment: Alignment.center, // 內裝元件置中對齊
@@ -234,4 +297,19 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
           ),
         ),
       );
+
+  Future<void> _insertData(String title) async {
+    var _id = M.ObjectId();
+    final data = TobuyModel(
+      id: _id,
+      title: title,
+    );
+    var result = await MongoDatabase.toBuyInsert(data)
+        .whenComplete(() => Navigator.pop(context));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("匯入成功！"),
+      ),
+    );
+  }
 }
