@@ -107,32 +107,12 @@ class _StorefoodPageState extends State<StorefoodPage> {
                 ),
               ),
             ),
-            // const SizedBox(height: 20),
-            // //* 即期食品卡片
-            // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: const [
-            //     SizedBox(width: 30),
-            //     Text(
-            //       "即期食品",
-            //       style: TextStyle(
-            //         fontSize: 22,
-            //         fontWeight: FontWeight.w700,
-            //         fontFamily: chineseFontfamily,
-            //         color: textColor,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            // const SizedBox(height: 16),
-            // InstantCardWidget(),
             const SizedBox(height: 12),
             //* 全部食品卡片
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               //* 標頭＋按鈕
               child: Row(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(

@@ -144,39 +144,58 @@ class _TobuyWidgetState extends State<TobuyWidget> {
             height: 16,
           ),
           //* Display
-          MediaQuery.removePadding(
-            //消除頂部空白
-            context: context,
-            removeTop: true,
-            child: FutureBuilder(
-              future: MongoDatabase.getTobuyData(),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  if (snapshot.hasData) {
-                    // var totalData = snapshot.data.length;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) => displayCard(
-                        TobuyModel.fromJson(snapshot.data[index]),
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text("倉庫是空的喔！"),
-                    );
-                  }
-                }
-              },
+          // ignore: todo
+          //TODO: 卡片滑動時沒辦法停在底部
+          SizedBox(
+            height: 300, // Some height
+            child: SingleChildScrollView(
+              child: RefreshIndicator(
+                onRefresh: _handleRefresh,
+                child: MediaQuery.removePadding(
+                  //消除頂部空白
+                  context: context,
+                  removeTop: true,
+                  child: FutureBuilder(
+                    future: MongoDatabase.getTobuyData(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        if (snapshot.hasData) {
+                          // var totalData = snapshot.data.length;
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            separatorBuilder: (context, _) =>
+                                const SizedBox(width: 12),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) => displayCard(
+                              TobuyModel.fromJson(snapshot.data[index]),
+                            ),
+                          );
+                        } else {
+                          return const Center(
+                            child: Text("倉庫是空的喔！"),
+                          );
+                        }
+                      }
+                    },
+                  ),
+                ),
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _handleRefresh() async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    setState(() {});
   }
 
   Future<void> _insertData(String title) async {

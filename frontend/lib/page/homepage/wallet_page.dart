@@ -38,7 +38,7 @@ class _WalletPageState extends State<WalletPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                )
+                ),
               ],
             ),
           ),

@@ -3,19 +3,21 @@
 import 'dart:developer';
 
 import 'package:frontend/dbHelper/user/constant.dart';
+import 'package:frontend/models/alertFood_model.dart';
 import 'package:frontend/models/data/tobuy/tobuy_model.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
   //* 串資料庫
-  static var db, userCollection, tobuyCollection;
+  static var db, userCollection, tobuyCollection, alertCollection;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
     await db.open();
     inspect(db);
     userCollection = db.collection(USER_COLLECTION);
     tobuyCollection = db.collection(TOBUY_COLLECTION);
+    alertCollection = db.collection(ALERT_COLLECTION);
   }
 
   //* 新增購物清單食材
@@ -44,14 +46,15 @@ class MongoDatabase {
     await tobuyCollection.remove(where.id(data.id));
   }
 
-  //* Display Data : 首頁食物通知
+  //* Display Data : Alert
   static Future<List<Map<String, dynamic>>> getAlertData() async {
-    final arrData = await userCollection
-        .find(where.sortBy('year'))
-        .find(where.sortBy('month'))
-        .find(where.sortBy('day'))
-        .toList();
+    final arrData = await alertCollection.find(where.sortBy('title')).toList();
     return arrData;
+  }
+
+  //* Delete Data : Alert
+  static deleteAlert(AlertFoodModel data) async {
+    await alertCollection.remove(where.id(data.id));
   }
 
   //* 日期紀錄

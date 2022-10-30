@@ -8,4 +8,6 @@ const MONGO_CONN_URL =
 
 const USER_COLLECTION = "allStore"; //Collection Name
 
-const TOBUY_COLLECTION = "toBuyList"; 
+const TOBUY_COLLECTION = "toBuyList";
+
+const ALERT_COLLECTION = "alertFood";
