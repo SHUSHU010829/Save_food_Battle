@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/page/login_page.dart';
 import 'package:frontend/size_config.dart';
 import 'package:frontend/page/openScreen/onboarding_contents.dart';
 import '../navpage/main_page.dart';
@@ -114,9 +115,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const MainPage()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginPage(),
+                                ),
+                              );
                             },
                             child: const Text(
                               "START",

@@ -175,29 +175,113 @@ class _WalletPageState extends State<WalletPage> {
                 ),
                 // ignore: todo
                 //TODO:未結清卡片
-                Container(
-                  padding: const EdgeInsets.only(
-                      left: 16, right: 16, top: 12, bottom: 12),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: primaryColor4,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: const Color.fromRGBO(250, 249, 246, 1),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        "待開發：）",
-                        style: TextStyle(
-                          fontFamily: chineseFontfamily,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
+                SizedBox(
+                  height: 160,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: primaryColor4,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: const Color.fromRGBO(250, 249, 246, 1),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                child: Row(
+                                  children: const [
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      "待開發：）",
+                                      style: TextStyle(
+                                        fontFamily: chineseFontfamily,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //* 完成服款按鈕
+                              Container(
+                                width: 45,
+                                height: 90,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: primaryColor5,
+                                    width: 2,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(6.0),
+                                    bottomRight: Radius.circular(6.0),
+                                  ),
+                                  color: primaryColor5,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text(
+                                      "完",
+                                      style: TextStyle(
+                                        fontFamily: chineseFontfamily,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: secondary2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Text(
+                                      "成",
+                                      style: TextStyle(
+                                        fontFamily: chineseFontfamily,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: secondary2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Text(
+                                      "付",
+                                      style: TextStyle(
+                                        fontFamily: chineseFontfamily,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: secondary2,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Text(
+                                      "款",
+                                      style: TextStyle(
+                                        fontFamily: chineseFontfamily,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: secondary2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
