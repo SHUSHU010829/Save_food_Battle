@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
 import 'package:frontend/models/data/storefood/carditem1_data.dart';
-import 'package:frontend/models/storefood_carditem1.dart';
 import 'package:frontend/page/storefood/instant_food_page.dart';
 import 'package:frontend/page/storefood/search_food_page.dart';
 import 'package:frontend/widgets/all_food_card.dart';

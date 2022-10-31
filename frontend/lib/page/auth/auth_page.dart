@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/navpage/main_page.dart';
 import 'package:frontend/size_config.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_button/sign_button.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class AuthPage extends StatefulWidget {
+  const AuthPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AuthPage> createState() => _AuthPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double width = SizeConfig.screenW!;
-    double height = SizeConfig.screenH!;
-    double blockH = SizeConfig.blockH!;
-    double blockV = SizeConfig.blockV!;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -58,8 +53,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 70,
               ),
+              //* Google 登入按鈕
               SignInButton(
-                imagePosition: ImagePosition.left, // left or right
+                imagePosition: ImagePosition.left,
                 buttonType: ButtonType.google,
                 buttonSize: ButtonSize.medium,
                 onPressed: () {
