@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -18,7 +19,9 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  final user = FirebaseAuth.instance.currentUser!;
   double width = 200, height = 200;
+
   @override
   Widget build(BuildContext context) {
     RendererBinding.instance.setSemanticsEnabled(true);
@@ -141,11 +144,13 @@ class _SettingPageState extends State<SettingPage> {
             buildNotificationOptionRow("群組通知", false),
             buildNotificationOptionRow("即期食物食用提醒", true),
             const SizedBox(
-              height: 48,
+              height: 30,
             ),
             Center(
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                },
                 child: const Text(
                   "Sign Out",
                   style: TextStyle(

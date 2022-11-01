@@ -5,6 +5,7 @@ import 'package:frontend/constants.dart';
 import 'package:frontend/page/auth/auth_page.dart';
 import 'package:frontend/size_config.dart';
 import 'package:frontend/page/openScreen/onboarding_contents.dart';
+import '../../check_login_page.dart';
 import '../navpage/main_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -114,10 +115,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
+                              // 進入畫面
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const AuthPage(),
+                                  builder: (context) => const CheckLoginPage(),
                                 ),
                               );
                             },

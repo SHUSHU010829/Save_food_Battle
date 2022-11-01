@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/homepage/wallet_page.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController tobuyController = TextEditingController(text: "");
+  final user = FirebaseAuth.instance.currentUser!;
 
   get mainAxisAlignment => null;
 
@@ -49,21 +51,21 @@ class _HomePageState extends State<HomePage> {
                         width: 16,
                       ),
                       const Text(
-                        "Hi,",
+                        "Hi, ",
                         style: TextStyle(
                           color: primaryColor9,
                           fontFamily: englishFontfamily,
-                          fontSize: 22,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const Text(
-                        " User",
-                        style: TextStyle(
+                      Text(
+                        user.email!,
+                        style: const TextStyle(
                           color: primaryColor9,
                           fontFamily: englishFontfamily,
                           fontWeight: FontWeight.w800,
-                          fontSize: 22,
+                          fontSize: 16,
                         ),
                       ),
                     ],

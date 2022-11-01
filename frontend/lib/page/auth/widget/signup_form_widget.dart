@@ -18,7 +18,14 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -30,10 +37,19 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
           children: [
             TextFormField(
               keyboardType: TextInputType.text,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_rounded),
-                labelText: "UserName",
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.person_outline_rounded),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: secondary3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "UserName",
+                fillColor: Colors.grey[200],
+                filled: true,
               ),
               controller: _nameController,
               validator: (value) {
@@ -48,10 +64,19 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
             ),
             TextFormField(
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.email_outlined),
-                labelText: "Email",
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.email_outlined),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: secondary3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "Email",
+                fillColor: Colors.grey[200],
+                filled: true,
               ),
               controller: _emailController,
               validator: (value) {
@@ -70,14 +95,23 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
             TextFormField(
               keyboardType: TextInputType.text,
               obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint_rounded),
-                labelText: "Password ",
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.remove_red_eye_rounded),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.fingerprint_rounded),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: secondary3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "Password",
+                fillColor: Colors.grey[200],
+                filled: true,
+                // suffixIcon: IconButton(
+                //   onPressed: null,
+                //   icon: Icon(Icons.remove_red_eye_rounded),
+                // ),
               ),
               controller: _passwordController,
               validator: (value) {

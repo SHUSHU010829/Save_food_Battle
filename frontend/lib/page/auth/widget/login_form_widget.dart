@@ -20,6 +20,20 @@ class _LoginFormState extends State<LoginForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  Future signin() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -31,10 +45,19 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             TextFormField(
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_rounded),
-                labelText: "Email",
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.person_outline_rounded),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: secondary3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "Email",
+                fillColor: Colors.grey[200],
+                filled: true,
               ),
               controller: _emailController,
               validator: (value) {
@@ -52,15 +75,24 @@ class _LoginFormState extends State<LoginForm> {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint_rounded),
-                labelText: "Password ",
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.remove_red_eye_rounded),
+              obscureText: true, 
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.fingerprint_rounded),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: secondary3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "Password",
+                fillColor: Colors.grey[200],
+                filled: true,
+                // suffixIcon: IconButton(
+                //   onPressed: null,
+                //   icon: Icon(Icons.remove_red_eye_rounded),
+                // ),
               ),
               controller: _passwordController,
               validator: (value) {
@@ -86,7 +118,7 @@ class _LoginFormState extends State<LoginForm> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: signin,
                 child: const Text(
                   "LOG IN",
                   style: TextStyle(
