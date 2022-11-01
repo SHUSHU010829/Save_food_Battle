@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
@@ -30,10 +32,14 @@ class ReceivedNotification {
 }
 
 void main() async {
+  // add this, and it should be the first line in main method
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   Bloc.observer = FoodDetailObserver();
   await MongoDatabase.connect();
-
-  WidgetsFlutterBinding.ensureInitialized();
 
   AndroidInitializationSettings androidSettings =
       const AndroidInitializationSettings("@mipmap/ic_launcher");

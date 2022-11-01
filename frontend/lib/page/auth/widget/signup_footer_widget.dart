@@ -1,12 +1,29 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/auth/login_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignupFooterWidget extends StatelessWidget {
   const SignupFooterWidget({
     Key? key,
   }) : super(key: key);
+
+  _signinWithGoogle() async {
+    try {
+      final googleSignIn = GoogleSignIn();
+      final user = await googleSignIn.signIn();
+      if (user != null) {
+        print('User Name ' + user.displayName.toString());
+      } else {
+        print('Sign in failed.');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +52,7 @@ class SignupFooterWidget extends StatelessWidget {
               side: const BorderSide(width: 1, color: Colors.black),
             ),
             icon: const FaIcon(FontAwesomeIcons.google, color: secondary3),
-            onPressed: () {},
+            onPressed: _signinWithGoogle,
           ),
         ),
         const SizedBox(

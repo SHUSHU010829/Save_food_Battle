@@ -32,7 +32,7 @@ class _AuthPageState extends State<AuthPage> {
                 height: SizeConfig.blockV! * 30,
               ),
               const SizedBox(
-                height: 150,
+                height: 130,
               ),
               const Text(
                 "食物拯救大作戰",
@@ -80,7 +80,7 @@ class _AuthPageState extends State<AuthPage> {
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 15),
-                        side: const BorderSide(width: 3, color: secondary3),
+                        side: const BorderSide(width: 2, color: secondary3),
                       ),
                     ),
                   ),

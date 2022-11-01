@@ -1,12 +1,38 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/auth/signup_page.dart';
+import 'package:frontend/page/navpage/main_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginFooterWidget extends StatelessWidget {
   const LoginFooterWidget({
     Key? key,
   }) : super(key: key);
+
+  _signinWithGoogle() async {
+    try {
+      final googleSignIn = GoogleSignIn();
+      final user = await googleSignIn.signIn();
+      if (user != null) {
+        print('User Name ' + user.displayName.toString());
+        // if (user != null) {
+        //   Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const MainPage(),
+        //     ),
+        //   );
+        // }
+      } else {
+        print('Sign in failed.');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +61,7 @@ class LoginFooterWidget extends StatelessWidget {
               side: const BorderSide(width: 1, color: Colors.black),
             ),
             icon: const FaIcon(FontAwesomeIcons.google, color: secondary3),
-            onPressed: () {},
+            onPressed: _signinWithGoogle,
           ),
         ),
         const SizedBox(
