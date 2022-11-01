@@ -32,3 +32,4 @@ npm start
 icon:  
   Food icons created by FBJan - Flaticon
   Battle icons created by Royyan Wijaya - Flaticon
+  0.0
