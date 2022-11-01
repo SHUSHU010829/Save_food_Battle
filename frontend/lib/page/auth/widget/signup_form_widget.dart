@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_final_fields
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 
@@ -18,11 +19,31 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _comfirmPasswordController = TextEditingController();
+
+  Future signUp() async {
+    if (passwordComfirm()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    }
+  }
+
+  bool passwordComfirm() {
+    if (_passwordController.text.trim() ==
+        _comfirmPasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _comfirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -122,12 +143,44 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
               },
             ),
             const SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.fingerprint_rounded),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: secondary3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                hintText: "Comfirm Password",
+                fillColor: Colors.grey[200],
+                filled: true,
+                // suffixIcon: IconButton(
+                //   onPressed: null,
+                //   icon: Icon(Icons.remove_red_eye_rounded),
+                // ),
+              ),
+              controller: _comfirmPasswordController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Please enter password";
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: signUp,
                 child: const Text(
                   "SIGN UP",
                   style: TextStyle(

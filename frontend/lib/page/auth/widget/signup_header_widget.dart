@@ -14,7 +14,7 @@ class SignupHeaderWidget extends StatelessWidget {
       children: [
         Image.asset(
           "assets/images/signup.png",
-          height: SizeConfig.blockV! * 25,
+          height: SizeConfig.blockV! * 20,
         ),
         const Text(
           "First time see you.",
