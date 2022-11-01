@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/size_config.dart';
 
-class LoginHeaderWidget extends StatelessWidget {
-  const LoginHeaderWidget({
+class SignupHeaderWidget extends StatelessWidget {
+  const SignupHeaderWidget({
     Key? key,
   }) : super(key: key);
 
@@ -13,11 +13,11 @@ class LoginHeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Image.asset(
-          "assets/images/login.png",
+          "assets/images/signup.png",
           height: SizeConfig.blockV! * 25,
         ),
         const Text(
-          "Welcome Back,",
+          "First time see you.",
           style: TextStyle(
             fontFamily: englishFontfamily,
             fontSize: 24,
@@ -28,7 +28,7 @@ class LoginHeaderWidget extends StatelessWidget {
           height: 2,
         ),
         const Text(
-          "Login and enjoy!",
+          "Signup and enjoy!",
           style: TextStyle(
             fontFamily: englishFontfamily,
             fontSize: 16,

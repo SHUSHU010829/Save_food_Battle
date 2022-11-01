@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants.dart';
-import 'package:frontend/page/auth/signup_page.dart';
+import 'package:frontend/page/auth/login_page.dart';
 
-class LoginFooterWidget extends StatelessWidget {
-  const LoginFooterWidget({
+class SignupFooterWidget extends StatelessWidget {
+  const SignupFooterWidget({
     Key? key,
   }) : super(key: key);
 
@@ -46,13 +46,13 @@ class LoginFooterWidget extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const SignupPage(),
+                builder: (context) => const LoginPage(),
               ),
             );
           },
           child: const Text.rich(
             TextSpan(
-              text: 'Don\'t have an Account?',
+              text: 'Already have an Account?',
               style: TextStyle(
                 fontFamily: englishFontfamily,
                 fontWeight: FontWeight.w600,
@@ -60,7 +60,7 @@ class LoginFooterWidget extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: '  Sign up',
+                  text: '  Log in',
                   style: TextStyle(
                     color: secondary4,
                     fontFamily: englishFontfamily,

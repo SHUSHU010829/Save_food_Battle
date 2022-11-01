@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/auth/login_page.dart';
+import 'package:frontend/page/auth/signup_page.dart';
 import 'package:frontend/page/navpage/main_page.dart';
 import 'package:frontend/size_config.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:provider/provider.dart';
-import 'package:sign_button/sign_button.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -18,7 +15,6 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
@@ -93,7 +89,14 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupPage(),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "SIGN UP",
                         style: TextStyle(

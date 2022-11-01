@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/page/auth/signup_footer_widget.dart';
+import 'package:frontend/page/auth/signup_form_widget.dart';
+import 'package:frontend/page/auth/signup_header_widget.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -19,7 +23,11 @@ class _SignupPageState extends State<SignupPage> {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [],
+              children: const [
+                SignupHeaderWidget(),
+                SignupFormWidget(),
+                SignupFooterWidget(),
+              ],
             ),
           ),
         ),
