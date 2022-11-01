@@ -41,7 +41,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
 
   Future addUserDetails(String name, String email) async {
     await FirebaseFirestore.instance.collection('users').add({
-      'user name': name,
+      'userName': name,
       'email': email,
     });
   }

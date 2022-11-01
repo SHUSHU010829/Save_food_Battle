@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/page/auth/auth_page.dart';
-import 'package:frontend/page/auth/login_page.dart';
 import 'package:frontend/page/navpage/main_page.dart';
 
 class CheckLoginPage extends StatelessWidget {
