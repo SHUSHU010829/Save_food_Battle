@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupFormWidget extends StatefulWidget {
   const SignupFormWidget({
@@ -22,12 +23,27 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
   TextEditingController _comfirmPasswordController = TextEditingController();
 
   Future signUp() async {
+    // authenicate user
     if (passwordComfirm()) {
+      // create user
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
+      // add user details
+      addUserDetails(
+        _nameController.text.trim(),
+        _emailController.text.trim(),
+      );
     }
+  }
+
+  Future addUserDetails(String name, String email) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'user name': name,
+      'email': email,
+    });
   }
 
   bool passwordComfirm() {
@@ -41,6 +57,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _comfirmPasswordController.dispose();
