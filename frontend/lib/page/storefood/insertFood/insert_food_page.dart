@@ -374,27 +374,29 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                       }
                       if (_checkInsertUpdate == "Update") {
                         _updateData(
-                            data?.id,
-                            titleController.text,
-                            _dateTime.year.toString(),
-                            m,
-                            d,
-                            countController.text,
-                            // unitController.text,
-                            splaceController.text,
-                            smethodController.text,
-                            usedController.text);
+                          data?.id,
+                          titleController.text.trim(),
+                          _dateTime.year.toString(),
+                          m,
+                          d,
+                          countController.text.trim(),
+                          // unitController.text,
+                          splaceController.text.trim(),
+                          smethodController.text.trim(),
+                          usedController.text.trim(),
+                        );
                       } else {
                         _insertData(
-                            titleController.text,
-                            _dateTime.year.toString(),
-                            m,
-                            d,
-                            countController.text,
-                            // unitController.text,
-                            splaceController.text,
-                            smethodController.text,
-                            usedController.text);
+                          titleController.text.trim(),
+                          _dateTime.year.toString(),
+                          m,
+                          d,
+                          countController.text.trim(),
+                          // unitController.text,
+                          splaceController.text.trim(),
+                          smethodController.text.trim(),
+                          usedController.text.trim(),
+                        );
                       }
                     }
                   },

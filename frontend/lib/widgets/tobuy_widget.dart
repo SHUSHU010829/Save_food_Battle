@@ -117,7 +117,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
                         onPressed: () {
                           final isValidForm = formKey.currentState!.validate();
                           if (isValidForm) {
-                            _insertData(titleController.text);
+                            _insertData(titleController.text.trim());
                           }
                           setState(() {});
                         },
