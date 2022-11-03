@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_print, prefer_final_fields
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/page/auth/widget/forget_password_page.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -21,10 +21,23 @@ class _LoginFormState extends State<LoginForm> {
   final _passwordController = TextEditingController();
 
   Future signin() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } catch (e) {
+      _emailController.text = '';
+      _passwordController.text = '';
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text('Please input correct email or password.'),
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -43,6 +56,7 @@ class _LoginFormState extends State<LoginForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //* email Textfield
             TextFormField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
@@ -73,9 +87,10 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(
               height: 10,
             ),
+            //* password Textfield
             TextFormField(
               keyboardType: TextInputType.text,
-              obscureText: true, 
+              obscureText: true,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.fingerprint_rounded),
                 enabledBorder: OutlineInputBorder(
@@ -105,12 +120,29 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(
               height: 10,
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {},
-                child: const Text('Forget Password?'),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const ForgetPasswordPage();
+                        },
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Forget Password?',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 10,
