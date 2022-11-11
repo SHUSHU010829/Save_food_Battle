@@ -1,3 +1,6 @@
+## BUG
+Lost connection to device.
+
 # 畢業專題
 
 ## 食物拯救計畫

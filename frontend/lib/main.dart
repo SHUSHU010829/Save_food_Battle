@@ -10,7 +10,10 @@ import 'package:frontend/page/navpage/main_page.dart'; // ignore: unused_import
 import 'package:frontend/page/storefood/foodDetail/food_detail_observer.dart';
 import 'page/openScreen/onboarding_screen.dart'; // ignore: unused_import
 import 'package:bloc/bloc.dart'; // ignore: unused_import
+import 'package:camera/camera.dart';
+import 'package:get/get.dart';
 
+List<CameraDescription>? cameras;
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
@@ -34,13 +37,15 @@ class ReceivedNotification {
 void main() async {
   // add this, and it should be the first line in main method
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = FoodDetailObserver();
   await MongoDatabase.connect();
-
+  cameras = await availableCameras();
   AndroidInitializationSettings androidSettings =
       const AndroidInitializationSettings("@mipmap/ic_launcher");
 
@@ -68,7 +73,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Food_Battle_App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

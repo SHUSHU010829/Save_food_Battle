@@ -1,0 +1,16 @@
+0 big bottled drinks
+1 Boxed drinks
+2 bottled drinks
+3 apple
+4 banana
+5 kiwi
+6 lemon
+7 orange
+8 capsicum
+9 carrot
+10 cauliflower
+11 corn
+12 cucumber
+13 eggplant
+14 tomato
+15 watermelon
