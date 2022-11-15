@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/page/settingpage/user_setting_page.dart';
 // import 'package:frontend/models/article_model.dart';
 // import 'package:frontend/network/network_enums.dart';
 // import 'package:frontend/network/network_helper.dart';
@@ -54,7 +55,7 @@ class _SettingPageState extends State<SettingPage> {
                       height: 4,
                     ),
                     Text(
-                      "還沒開發完：）",
+                      "努力開發中：）",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -105,11 +106,43 @@ class _SettingPageState extends State<SettingPage> {
             const SizedBox(
               height: 8,
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const UserSettingPage();
+                      },
+                    ),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      "用戶設定",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: chineseFontfamily,
+                        color: textColor,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             buildAccountoptionRow(context, "新增群組"),
             buildAccountoptionRow(context, "成員編輯"),
             buildAccountoptionRow(context, "群組編輯"),
             buildAccountoptionRow(context, "外觀設定"),
-            buildAccountoptionRow(context, "系統設定"),
             const SizedBox(
               height: 32,
             ),
@@ -167,71 +200,12 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
-      // body: FutureBuilder(
-      //   future: getData(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.done &&
-      //         snapshot.hasData) {
-      //       // final json = snapshot.data;
-      //       final List<Article> articles = snapshot.data as List<Article>;
-      //       return ListView.builder(
-      //         itemBuilder: (context, index) {
-      //           return Semantics(
-      //               label: 'Article widget Title ${articles[index].title}',
-      //               child: ArticleWidget(article: articles[index]));
-      //         },
-      //         itemCount: articles.length,
-      //       );
-      //     } else if (snapshot.hasError) {
-      //       return Center(
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           children: const [
-      //             Icon(
-      //               Icons.error_outline,
-      //               color: Colors.red,
-      //               size: 25,
-      //             ),
-      //             SizedBox(
-      //               height: 10,
-      //             ),
-      //             Text('Something Went Wrong')
-      //           ],
-      //         ),
-      //       );
-      //     }
-      //     return const Center(
-      //       child: CircularProgressIndicator(),
-      //     );
-      //   },
-      // ),
     );
   }
-
-  //* API 串接
-  // Future<List<Article>?> getData() async {
-  //   final response = await NetworkService.sendRequest(
-  //       requestType: RequestType.get,
-  //       url: StaticValues.apiUrl,
-  //       queryParam: QP.apiQP(
-  //           apiKey: StaticValues.apiKey, country: StaticValues.apiCountry));
-  //   debugPrint('Response ${response?.statusCode}');
-  //   return await NetworkHelper.filterResponse(
-  //       callBack: _listOfArticlesFromJson,
-  //       response: response,
-  //       parameterName: CallBackParameterName.articles,
-  //       onFailureCallBackWithMessage: (errorType, msg) {
-  //         debugPrint('Error type-$errorType - Message $msg');
-  //         return null;
-  //       });
-  // }
-  // List<Article> _listOfArticlesFromJson(json) => (json as List)
-  //     .map((e) => Article.fromJson(e as Map<String, dynamic>))
-  //     .toList();
 
   //* 設定
   Row buildNotificationOptionRow(String title, bool isActive) {

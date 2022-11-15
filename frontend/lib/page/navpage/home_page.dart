@@ -21,6 +21,26 @@ class _HomePageState extends State<HomePage> {
 
   get mainAxisAlignment => null;
 
+  Future getUserName() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final name = user.displayName;
+        return name;
+      }
+    } catch (e) {
+      print(e);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            content: Text("發生一些錯誤，請重新登入帳號或是洽詢開發人員。"),
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +48,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Container(
           padding:
-              const EdgeInsets.only(left: 32, right: 32, top: 56, bottom: 32),
+              const EdgeInsets.only(left: 32, right: 32, top: 60, bottom: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -60,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Text(
-                        user.email!,
+                        FirebaseAuth.instance.currentUser!.displayName ??
+                            'User',
                         style: const TextStyle(
                           color: primaryColor9,
                           fontFamily: englishFontfamily,
