@@ -1,5 +1,6 @@
 // ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable, avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,8 @@ class InsertFoodPage extends StatefulWidget {
 
 class _InsertFoodPageState extends State<InsertFoodPage> {
   get mainAxisAlignment => null;
-
+  final user = FirebaseAuth.instance.currentUser!;
+  
   var titleController = TextEditingController();
   var yearController = TextEditingController();
   var monthController = TextEditingController();
@@ -434,6 +436,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       String used) async {
     final updateDate = UserMongoDbModel(
         id: id,
+        uid: user.uid,
         title: title,
         year: year,
         month: month,
@@ -469,6 +472,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
     var _id = M.ObjectId(); // store Unique id inside our variable
     final data = UserMongoDbModel(
       id: _id,
+      uid: user.uid,
       title: title,
       year: year,
       month: month,

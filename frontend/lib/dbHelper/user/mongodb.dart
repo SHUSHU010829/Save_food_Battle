@@ -69,9 +69,14 @@ class MongoDatabase {
   DateTime deadline = DateTime.parse("2022-10-11 00:00:00");
 
   //* Display Data : 全部食物卡
-  static Future<List<Map<String, dynamic>>> getData() async {
-    final arrData = await userCollection.find(where.sortBy('title')).toList();
-    return arrData;
+  Future<List<Map<String, dynamic>>?> getData() async {
+    try {
+      final arrData = await userCollection.find({'uid': user.uid}).toList();
+      return arrData;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 
   //* Delete Data : 全部食物卡

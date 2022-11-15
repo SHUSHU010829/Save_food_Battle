@@ -14,6 +14,7 @@ String userMongoDbModelToJson(UserMongoDbModel data) =>
 class UserMongoDbModel {
   UserMongoDbModel({
     required this.id,
+    required this.uid,
     required this.title,
     required this.year,
     required this.month,
@@ -26,6 +27,7 @@ class UserMongoDbModel {
   });
 
   ObjectId id;
+  String uid;
   String title;
   String year;
   String month;
@@ -39,6 +41,7 @@ class UserMongoDbModel {
   factory UserMongoDbModel.fromJson(Map<String, dynamic> json) =>
       UserMongoDbModel(
         id: json["_id"],
+        uid: json["uid"],
         title: json["title"],
         year: json["year"],
         month: json["month"],
@@ -52,6 +55,7 @@ class UserMongoDbModel {
 
   Map<String, dynamic> toJson() => {
         "_id": id,
+        "uid": uid,
         "title": title,
         "year": year,
         "month": month,

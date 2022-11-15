@@ -31,7 +31,7 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
         context: context,
         removeTop: true,
         child: FutureBuilder(
-          future: MongoDatabase.getData(),
+          future: MongoDatabase().getData(),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
