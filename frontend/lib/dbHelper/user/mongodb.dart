@@ -85,11 +85,21 @@ class MongoDatabase {
   }
 
   //* Query Data : 全部食物卡
-  static Future<List<Map<String, dynamic>>> getQueryData(String word) async {
+  Future<List<Map<String, dynamic>>?> getQueryData(String word) async {
     // ignore: todo
     //TODO 更改成 full-text search
-    final data = await userCollection.find({'title': word}).toList();
-    return data;
+    try {
+      var data = await userCollection.find({'uid': user.uid}).toList();
+      if (word != '') {
+        data = await userCollection
+            .find(where.eq('uid', user.uid).eq('title', word))
+            .toList();
+      }
+      return data;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 
   //* Update Data : 全部食物卡

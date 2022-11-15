@@ -86,7 +86,7 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
             SizedBox(
               height: 550,
               child: FutureBuilder(
-                future: MongoDatabase.getQueryData(keyWord),
+                future: MongoDatabase().getQueryData(keyWord),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -94,17 +94,23 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                     );
                   } else {
                     if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          return displayData(
-                            UserMongoDbModel.fromJson(snapshot.data[index]),
-                          );
-                        },
-                      );
+                      if (snapshot.data.length == 0) {
+                        return const Center(
+                          child: Text('沒有這樣食物喔！'),
+                        );
+                      } else {
+                        return ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index) {
+                            return displayData(
+                              UserMongoDbModel.fromJson(snapshot.data[index]),
+                            );
+                          },
+                        );
+                      }
                     } else {
                       return const Center(
-                        child: Text('沒有這樣食物喔！'),
+                        child: Text('錯誤！'),
                       );
                     }
                   }
