@@ -13,19 +13,23 @@ String welcomeToJson(TobuyModel data) => json.encode(data.toJson());
 class TobuyModel {
   TobuyModel({
     required this.id,
+    required this.uid,
     required this.title,
   });
 
   ObjectId id;
+  String uid;
   String title;
 
   factory TobuyModel.fromJson(Map<String, dynamic> json) => TobuyModel(
         id: json["_id"],
+        uid: json["uid"],
         title: json["title"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
+        "uid": uid,
         "title": title,
       };
 }

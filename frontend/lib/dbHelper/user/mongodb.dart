@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/dbHelper/user/constant.dart';
 import 'package:frontend/models/alertFood_model.dart';
 import 'package:frontend/models/data/tobuy/tobuy_model.dart';
@@ -11,6 +12,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 class MongoDatabase {
   //* 串資料庫
   static var db, userCollection, tobuyCollection, alertCollection;
+  var user = FirebaseAuth.instance.currentUser!;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
     await db.open();
@@ -36,9 +38,14 @@ class MongoDatabase {
   }
 
   //* Display Data : Tobuy
-  static Future<List<Map<String, dynamic>>> getTobuyData() async {
-    final arrData = await tobuyCollection.find(where.sortBy('title')).toList();
-    return arrData;
+  Future<List<Map<String, dynamic>>?> getTobuyData() async {
+    try {
+      final arrData = await tobuyCollection.find({'uid': user.uid}).toList();
+      return arrData;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 
   //* Delete Data : Tobuy

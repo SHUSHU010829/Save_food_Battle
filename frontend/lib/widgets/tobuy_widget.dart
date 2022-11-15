@@ -1,6 +1,7 @@
+// ignore_for_file: unused_local_variable, avoid_print
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/data/tobuy/tobuy_model.dart';
@@ -14,8 +15,9 @@ class TobuyWidget extends StatefulWidget {
 }
 
 class _TobuyWidgetState extends State<TobuyWidget> {
-  var titleController = new TextEditingController();
+  var titleController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +158,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
                   context: context,
                   removeTop: true,
                   child: FutureBuilder(
-                    future: MongoDatabase.getTobuyData(),
+                    future: MongoDatabase().getTobuyData(),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
@@ -198,10 +200,13 @@ class _TobuyWidgetState extends State<TobuyWidget> {
     setState(() {});
   }
 
+  //輸入數值
   Future<void> _insertData(String title) async {
+    // print(user.uid);
     var _id = M.ObjectId();
     final data = TobuyModel(
       id: _id,
+      uid: user!.uid.toString(),
       title: title,
     );
     var result = await MongoDatabase.toBuyInsert(data)
@@ -214,10 +219,12 @@ class _TobuyWidgetState extends State<TobuyWidget> {
     _clearAll();
   }
 
+  //清空數值
   void _clearAll() {
     titleController.text = "";
   }
 
+  // 顯示卡片
   Widget displayCard(TobuyModel data) => GestureDetector(
         behavior: HitTestBehavior.translucent,
         child: Container(
@@ -242,6 +249,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
             ),
             child: Row(
               children: [
+                // ignore: todo
                 //TODO TodoList 刪除動畫
                 IconButton(
                   onPressed: () {

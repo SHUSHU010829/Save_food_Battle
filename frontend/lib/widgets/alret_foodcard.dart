@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
@@ -15,6 +16,8 @@ class AlertFoodCard extends StatefulWidget {
 }
 
 class _AlertFoodCardState extends State<AlertFoodCard> {
+  final user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -122,6 +125,7 @@ class _AlertFoodCardState extends State<AlertFoodCard> {
     var _id = M.ObjectId();
     final data = TobuyModel(
       id: _id,
+      uid: user!.uid.toString(),
       title: title,
     );
     var result = await MongoDatabase.toBuyInsert(data)
