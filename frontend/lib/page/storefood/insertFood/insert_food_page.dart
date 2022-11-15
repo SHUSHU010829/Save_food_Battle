@@ -1,6 +1,7 @@
 // ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,8 @@ class InsertFoodPage extends StatefulWidget {
 class _InsertFoodPageState extends State<InsertFoodPage> {
   get mainAxisAlignment => null;
   final user = FirebaseAuth.instance.currentUser!;
-  
+  double _value = 100;
+
   var titleController = TextEditingController();
   var yearController = TextEditingController();
   var monthController = TextEditingController();
@@ -45,14 +47,15 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       // unitController.text = data.unit;
       splaceController.text = data.place;
       smethodController.text = data.storeMethod;
-      usedController.text = data.used;
+      print(data.used);
+      // _value = double.parse(data.used);
       _checkInsertUpdate = "Update";
     }
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: primaryColor3,
+        backgroundColor: secondary3,
         bottomOpacity: 0.0,
         elevation: 0.0,
         centerTitle: true,
@@ -80,7 +83,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 15),
                       // 商品名
                       TextFormField(
                         controller: titleController,
@@ -309,109 +312,141 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 80),
                       // 已使用百分比
-                      TextFormField(
-                        controller: usedController,
-                        keyboardType:
-                            defaultTargetPlatform == TargetPlatform.iOS
-                                ? const TextInputType.numberWithOptions(
-                                    decimal: true, signed: true)
-                                : TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: const InputDecoration(
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondary6),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondary6),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.percent_rounded,
-                            color: secondary6,
-                          ),
-                          hintText: "已使用百分比(0-100)",
-                          hintStyle: TextStyle(
-                            color: secondary3,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: chineseFontfamily,
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Empty!";
-                          } else if (int.parse(value) > 100 ||
-                              int.parse(value) < 0) {
-                            return "Error Range! Pleace input 0 - 100";
-                          } else {
-                            return null;
-                          }
+                      Text(
+                        '食材份量: $_value',
+                        style: const TextStyle(color: textColor2),
+                      ),
+                      StatefulBuilder(
+                        builder: (context, state) {
+                          return Slider(
+                            min: 0,
+                            max: 100,
+                            activeColor: secondary4,
+                            inactiveColor: primaryColor1,
+                            thumbColor: secondary3,
+                            divisions: 100,
+                            value: _value.toDouble(),
+                            onChanged: (double value) {
+                              // _value = value;
+                              state(() {});
+                              setState(() {
+                                _value = value;
+                              });
+                            },
+                          );
                         },
                       ),
+                      // TextFormField(
+                      //   controller: usedController,
+                      //   keyboardType:
+                      //       defaultTargetPlatform == TargetPlatform.iOS
+                      //           ? const TextInputType.numberWithOptions(
+                      //               decimal: true, signed: true)
+                      //           : TextInputType.number,
+                      //   inputFormatters: [
+                      //     FilteringTextInputFormatter.digitsOnly
+                      //   ],
+                      //   decoration: const InputDecoration(
+                      //     focusedBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(color: secondary6),
+                      //     ),
+                      //     enabledBorder: UnderlineInputBorder(
+                      //       borderSide: BorderSide(color: secondary6),
+                      //     ),
+                      //     prefixIcon: Icon(
+                      //       Icons.percent_rounded,
+                      //       color: secondary6,
+                      //     ),
+                      //     hintText: "已使用百分比(0-100)",
+                      //     hintStyle: TextStyle(
+                      //       color: secondary3,
+                      //       fontWeight: FontWeight.w700,
+                      //       fontFamily: chineseFontfamily,
+                      //     ),
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) {
+                      //       return "Empty!";
+                      //     } else if (int.parse(value) > 100 ||
+                      //         int.parse(value) < 0) {
+                      //       return "Error Range! Pleace input 0 - 100";
+                      //     } else {
+                      //       return null;
+                      //     }
+                      //   },
+                      // ),
                     ],
                   ),
                 ),
                 const SizedBox(
-                  height: 90,
+                  height: 50,
                 ),
                 // 送出按鈕
                 // ignore: todo
                 //TODO 在確認資料後跳出視窗詢問繼續輸入或是返回
-                ElevatedButton(
-                  onPressed: () {
-                    final isValidForm = formKey.currentState!.validate();
-                    String d, m;
-                    if (isValidForm) {
-                      if (_dateTime.day < 10 && _dateTime.day > 0) {
-                        d = '0${_dateTime.day}';
-                      } else {
-                        d = '${_dateTime.day}';
-                      }
-                      if (_dateTime.month < 10 && _dateTime.month > 0) {
-                        m = '0${_dateTime.month}';
-                      } else {
-                        m = '${_dateTime.month}';
-                      }
-                      if (_checkInsertUpdate == "Update") {
-                        _updateData(
-                          data?.id,
-                          titleController.text.trim(),
-                          _dateTime.year.toString(),
-                          m,
-                          d,
-                          countController.text.trim(),
-                          // unitController.text,
-                          splaceController.text.trim(),
-                          smethodController.text.trim(),
-                          usedController.text.trim(),
-                        );
-                      } else {
-                        _insertData(
-                          titleController.text.trim(),
-                          _dateTime.year.toString(),
-                          m,
-                          d,
-                          countController.text.trim(),
-                          // unitController.text,
-                          splaceController.text.trim(),
-                          smethodController.text.trim(),
-                          usedController.text.trim(),
-                        );
-                      }
-                    }
-                  },
-                  child: Text(_checkInsertUpdate),
-                  style: ElevatedButton.styleFrom(
-                    primary: secondary6,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 10),
-                    textStyle: const TextStyle(
-                      fontSize: 16,
-                      color: secondary3,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: chineseFontfamily,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final isValidForm = formKey.currentState!.validate();
+                        String d, m;
+                        if (isValidForm) {
+                          if (_dateTime.day < 10 && _dateTime.day > 0) {
+                            d = '0${_dateTime.day}';
+                          } else {
+                            d = '${_dateTime.day}';
+                          }
+                          if (_dateTime.month < 10 && _dateTime.month > 0) {
+                            m = '0${_dateTime.month}';
+                          } else {
+                            m = '${_dateTime.month}';
+                          }
+                          if (_checkInsertUpdate == "Update") {
+                            _updateData(
+                              data?.id,
+                              titleController.text.trim(),
+                              _dateTime.year.toString(),
+                              m,
+                              d,
+                              countController.text.trim(),
+                              // unitController.text,
+                              splaceController.text.trim(),
+                              smethodController.text.trim(),
+                              // usedController.text.trim(),
+                              _value.toString(),
+                            );
+                          } else {
+                            _insertData(
+                              titleController.text.trim(),
+                              _dateTime.year.toString(),
+                              m,
+                              d,
+                              countController.text.trim(),
+                              // unitController.text,
+                              splaceController.text.trim(),
+                              smethodController.text.trim(),
+                              // usedController.text.trim(),
+                              _value.toString(),
+                            );
+                          }
+                        }
+                      },
+                      child: Text(_checkInsertUpdate),
+                      style: ElevatedButton.styleFrom(
+                        primary: secondary6,
+                        // padding: const EdgeInsets.symmetric(
+                        //     horizontal: 50, vertical: 10),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          color: secondary3,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: chineseFontfamily,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -505,6 +540,6 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
     // unitController.text = "";
     splaceController.text = "";
     smethodController.text = "";
-    usedController.text = "";
+    _value = 100;
   }
 }

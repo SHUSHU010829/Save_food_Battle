@@ -205,13 +205,38 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 2),
-                            Text(
-                              data.title,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: englishFontfamily,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  data.title,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: englishFontfamily,
+                                  ),
+                                ),
+                                //used
+                                Container(
+                                  alignment: Alignment.center, // 內裝元件置中對齊
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                        right: 10.0,
+                                        top: 1.0,
+                                        bottom: 2.0),
+                                    child: Center(
+                                      child: Text(
+                                        "${data.used}%",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: englishFontfamily,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 4),
                             Row(
