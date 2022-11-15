@@ -4,15 +4,15 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/page/navpage/main_page.dart'; // ignore: unused_import
 import 'package:frontend/page/storefood/foodDetail/food_detail_observer.dart';
 import 'page/openScreen/onboarding_screen.dart'; // ignore: unused_import
 import 'package:bloc/bloc.dart'; // ignore: unused_import
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+//     FlutterLocalNotificationsPlugin();
 
 final StreamController<ReceivedNotification> didReceiveLocalNotificationStream =
     StreamController<ReceivedNotification>.broadcast();
@@ -41,23 +41,23 @@ void main() async {
   Bloc.observer = FoodDetailObserver();
   await MongoDatabase.connect();
 
-  AndroidInitializationSettings androidSettings =
-      const AndroidInitializationSettings("@mipmap/ic_launcher");
+  // AndroidInitializationSettings androidSettings =
+  //     const AndroidInitializationSettings("@mipmap/ic_launcher");
 
-  DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
-    requestAlertPermission: true,
-    requestBadgePermission: true,
-    requestCriticalPermission: true,
-    requestSoundPermission: true,
-  );
+  // DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
+  //   requestAlertPermission: true,
+  //   requestBadgePermission: true,
+  //   requestCriticalPermission: true,
+  //   requestSoundPermission: true,
+  // );
 
-  InitializationSettings initializationSettings =
-      InitializationSettings(android: androidSettings, iOS: iosSettings);
+  // InitializationSettings initializationSettings =
+  //     InitializationSettings(android: androidSettings, iOS: iosSettings);
 
-  bool? initialized = await flutterLocalNotificationsPlugin.initialize(
-    initializationSettings,
-  );
-  log("Notifications: $initialized");
+  // bool? initialized = await flutterLocalNotificationsPlugin.initialize(
+  //   initializationSettings,
+  // );
+  // log("Notifications: $initialized");
 
   runApp(const MyApp());
 }

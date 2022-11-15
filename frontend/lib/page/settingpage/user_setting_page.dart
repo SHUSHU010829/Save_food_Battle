@@ -1,6 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
+import 'package:frontend/page/auth/login_page.dart';
+import 'package:frontend/page/navpage/home_page.dart';
 
 class UserSettingPage extends StatefulWidget {
   const UserSettingPage({Key? key}) : super(key: key);
@@ -10,6 +14,8 @@ class UserSettingPage extends StatefulWidget {
 }
 
 class _UserSettingPageState extends State<UserSettingPage> {
+  var displayName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,13 +52,29 @@ class _UserSettingPageState extends State<UserSettingPage> {
                 fontSize: 16,
               ),
             ),
-            //* 信箱
-            //* 密碼
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                controller: displayName,
+                decoration: InputDecoration(
+                  hintText:
+                      FirebaseAuth.instance.currentUser!.displayName ?? 'User',
+                ),
+              ),
+            ),
             //* 確認送出按鈕
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    FirebaseAuth.instance.currentUser!
+                        .updateDisplayName(displayName.text.trim());
+                    Navigator.pop(context);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
                 child: const Text(
                   "確認送出",
                   style: TextStyle(
