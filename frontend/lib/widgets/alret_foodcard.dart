@@ -27,7 +27,7 @@ class _AlertFoodCardState extends State<AlertFoodCard> {
           context: context,
           removeTop: true,
           child: FutureBuilder(
-            future: MongoDatabase.getAlertData(),
+            future: MongoDatabase().getAlertData(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

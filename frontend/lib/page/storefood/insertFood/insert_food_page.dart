@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
+import 'package:frontend/models/alertFood_model.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
@@ -327,12 +328,12 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                             inactiveColor: primaryColor1,
                             thumbColor: secondary3,
                             divisions: 100,
-                            value: _value.toDouble(),
-                            onChanged: (double value) {
+                            value: double.parse(_value.toStringAsFixed(1)),
+                            onChanged: (value) {
                               // _value = value;
                               state(() {});
                               setState(() {
-                                _value = value;
+                                _value = double.parse(value.toStringAsFixed(1));
                               });
                             },
                           );
@@ -417,7 +418,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                               splaceController.text.trim(),
                               smethodController.text.trim(),
                               // usedController.text.trim(),
-                              _value.toString(),
+                              _value.toString().trim(),
                             );
                           } else {
                             _insertData(
@@ -430,7 +431,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
                               splaceController.text.trim(),
                               smethodController.text.trim(),
                               // usedController.text.trim(),
-                              _value.toString(),
+                              _value.toString().trim(),
                             );
                           }
                         }
@@ -470,23 +471,32 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       String storeMethod,
       String used) async {
     final updateDate = UserMongoDbModel(
-        id: id,
-        uid: user.uid,
-        title: title,
-        year: year,
-        month: month,
-        day: day,
-        count: count,
-        // unit: unit,
-        place: place,
-        storeMethod: storeMethod,
-        used: used);
+      id: id,
+      uid: user.uid,
+      title: title,
+      year: year,
+      month: month,
+      day: day,
+      count: count,
+      // unit: unit,
+      place: place,
+      storeMethod: storeMethod,
+      used: used,
+    );
+
     var result = await MongoDatabase.update(updateDate)
         .whenComplete(() => Navigator.pop(context));
+
+    if (double.parse(used) < 10) {
+      var _id = M.ObjectId();
+      final data = AlertFoodModel(
+        id: _id,
+        uid: user.uid.toString(),
+        title: title,
+      );
+      await MongoDatabase.alertInsert(data);
+    }
     ScaffoldMessenger.of(context).showSnackBar(
-      // SnackBar(
-      //   content: Text("Inserted ID" + _id.$oid),
-      // ),
       const SnackBar(
         content: Text("更新成功！"),
       ),
@@ -540,6 +550,6 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
     // unitController.text = "";
     splaceController.text = "";
     smethodController.text = "";
-    _value = 100;
+    _value = 0;
   }
 }

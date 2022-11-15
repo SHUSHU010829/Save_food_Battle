@@ -22,7 +22,7 @@ class MongoDatabase {
     alertCollection = db.collection(ALERT_COLLECTION);
   }
 
-  //* 新增購物清單食材
+  //* Insert Data : Tobuy
   static Future<String> toBuyInsert(TobuyModel data) async {
     try {
       var result = await tobuyCollection.insert(data.toJson());
@@ -53,10 +53,30 @@ class MongoDatabase {
     await tobuyCollection.remove(where.id(data.id));
   }
 
+  //* Insert Data : Alert
+  static Future<String> alertInsert(AlertFoodModel data) async {
+    try {
+      var result = await alertCollection.insert(data.toJson());
+      if (result.isSuccess()) {
+        return "Data Inserted";
+      } else {
+        return "Something wrong while inserting data.";
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+
   //* Display Data : Alert
-  static Future<List<Map<String, dynamic>>> getAlertData() async {
-    final arrData = await alertCollection.find(where.sortBy('title')).toList();
-    return arrData;
+  Future<List<Map<String, dynamic>>?> getAlertData() async {
+    try {
+      final arrData = await alertCollection.find({'uid': user.uid}).toList();
+      return arrData;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 
   //* Delete Data : Alert

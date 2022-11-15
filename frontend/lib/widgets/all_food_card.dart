@@ -22,7 +22,7 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
   String result = 'No Result yet';
   var dayList = [];
   var check = [];
-  final user = FirebaseAuth.instance.currentUser;
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -329,7 +329,7 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
     var _id = M.ObjectId();
     final data = TobuyModel(
       id: _id,
-      uid: user!.uid.toString(),
+      uid: user.uid.toString(),
       title: title,
     );
     var result = await MongoDatabase.toBuyInsert(data)
