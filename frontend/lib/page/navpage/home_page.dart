@@ -45,90 +45,88 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        child: Container(
-          padding:
-              const EdgeInsets.only(left: 32, right: 32, top: 60, bottom: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //* 首頁 Bar
-                  Row(
-                    children: [
-                      Container(
-                        width: 45,
-                        height: 45,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/頭像.png'),
-                          ),
+      body: Container(
+        padding:
+            const EdgeInsets.only(left: 32, right: 32, top: 60, bottom: 32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //* 首頁 Bar
+                Row(
+                  children: [
+                    Container(
+                      width: 45,
+                      height: 45,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/頭像.png'),
                         ),
                       ),
-                      const SizedBox(
-                        width: 8,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text(
+                      "Hi, ",
+                      style: TextStyle(
+                        color: primaryColor9,
+                        fontFamily: englishFontfamily,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
-                      const Text(
-                        "Hi, ",
-                        style: TextStyle(
-                          color: primaryColor9,
-                          fontFamily: englishFontfamily,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                    ),
+                    Text(
+                      FirebaseAuth.instance.currentUser!.displayName ??
+                          'User',
+                      style: const TextStyle(
+                        color: primaryColor9,
+                        fontFamily: englishFontfamily,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+                //* 提醒彈跳視窗
+                // ignore: todo
+                //TODO 尚未完成
+                const PopupAlert(),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            //* 錢包區塊
+            InkWell(
+              child: const WalletWidget(),
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true, // 允许 bottomSheet 高度自定义
+                  backgroundColor: backgroundColor,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      // height: 600,
+                      child: Center(
+                        child: Column(
+                          children: const [
+                            WalletPage(),
+                          ],
                         ),
                       ),
-                      Text(
-                        FirebaseAuth.instance.currentUser!.displayName ??
-                            'User',
-                        style: const TextStyle(
-                          color: primaryColor9,
-                          fontFamily: englishFontfamily,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  //* 提醒彈跳視窗
-                  // ignore: todo
-                  //TODO 尚未完成
-                  const PopupAlert(),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              //* 錢包區塊
-              InkWell(
-                child: const WalletWidget(),
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true, // 允许 bottomSheet 高度自定义
-                    backgroundColor: backgroundColor,
-                    builder: (BuildContext context) {
-                      return SizedBox(
-                        // height: 600,
-                        child: Center(
-                          child: Column(
-                            children: const [
-                              WalletPage(),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              const TobuyWidget(),
-            ],
-          ),
+                    );
+                  },
+                );
+              },
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            const TobuyWidget(),
+          ],
         ),
       ),
     );

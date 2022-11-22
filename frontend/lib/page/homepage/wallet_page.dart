@@ -178,7 +178,7 @@ class _WalletPageState extends State<WalletPage> {
                 SizedBox(
                   height: 160,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 4, right: 4),
                     child: Column(
                       children: [
                         Container(
@@ -193,22 +193,91 @@ class _WalletPageState extends State<WalletPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
-                                child: Row(
-                                  children: const [
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      "待開發：）",
-                                      style: TextStyle(
-                                        fontFamily: chineseFontfamily,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
+                              const SizedBox(
+                                width: 0,
+                              ),
+                              Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.account_circle_rounded,
+                                        color: secondary5,
+                                        size: 28,
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        "室友一",
+                                        style: TextStyle(
+                                          fontFamily: chineseFontfamily,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_right_alt_rounded,
+                                        color: secondary6,
+                                        size: 32,
+                                      ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Icon(
+                                        Icons.account_circle_rounded,
+                                        color: secondary5,
+                                        size: 28,
+                                      ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        "User B",
+                                        style: TextStyle(
+                                          fontFamily: chineseFontfamily,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  Row(
+                                    children: const [
+                                      Text(
+                                        "\$ ",
+                                        style: TextStyle(
+                                          fontFamily: englishFontfamily,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        "20,600",
+                                        style: TextStyle(
+                                          fontFamily: englishFontfamily,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                ],
                               ),
                               //* 完成服款按鈕
                               Container(

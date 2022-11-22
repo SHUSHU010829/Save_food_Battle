@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, avoid_print
+// ignore_for_file: unused_local_variable, avoid_print, library_prefixes
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -205,8 +205,8 @@ class _TobuyWidgetState extends State<TobuyWidget> {
     // print(user.uid);
     var _id = M.ObjectId();
     final data = TobuyModel(
-      id: _id,
       uid: user!.uid.toString(),
+      id: _id, 
       title: title,
     );
     var result = await MongoDatabase.toBuyInsert(data)
