@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
-import 'package:frontend/widgets/stepper_widget.dart';
+import 'package:frontend/page/scanpage/stepper_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 // import 'package:frontend/page/scanpage/edit_food_page.dart';

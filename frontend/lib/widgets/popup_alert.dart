@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/alret_foodcard.dart';
+import 'package:frontend/page/homepage/alret_foodcard.dart';
 import '../constants.dart';
 
 class PopupAlert extends StatefulWidget {

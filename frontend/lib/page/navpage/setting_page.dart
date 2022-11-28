@@ -58,7 +58,7 @@ class _SettingPageState extends State<SettingPage> {
                       "努力開發中：）",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                         fontFamily: chineseFontfamily,
                         color: secondary4,
                       ),
@@ -177,7 +177,7 @@ class _SettingPageState extends State<SettingPage> {
             buildNotificationOptionRow("群組通知", false),
             buildNotificationOptionRow("即期食物食用提醒", true),
             const SizedBox(
-              height: 30,
+              height: 28,
             ),
             Center(
               child: OutlinedButton(
@@ -243,55 +243,62 @@ class _SettingPageState extends State<SettingPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: chineseFontfamily,
-                  color: textColor,
-                ),
-              ),
+              // title: Text(
+              //   title,
+              //   style: const TextStyle(
+              //     fontSize: 16,
+              //     fontWeight: FontWeight.w700,
+              //     fontFamily: chineseFontfamily,
+              //     color: textColor,
+              //   ),
+              // ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: const [
                   Text(
-                    "Option 1",
+                    "開發中 ⸜(๑˙ᵕ ˙๑)⸝ ",
                     style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontFamily: englishFontfamily,
+                      fontWeight: FontWeight.w800,
+                      fontFamily: chineseFontfamily,
                     ),
                   ),
-                  Text(
-                    "Option 2",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontFamily: englishFontfamily,
-                    ),
-                  ),
-                  Text(
-                    "Option 3",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontFamily: englishFontfamily,
-                    ),
-                  ),
+                  // Text(
+                  //   "Option 1",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w500,
+                  //     fontFamily: englishFontfamily,
+                  //   ),
+                  // ),
+                  // Text(
+                  //   "Option 2",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w500,
+                  //     fontFamily: englishFontfamily,
+                  //   ),
+                  // ),
+                  // Text(
+                  //   "Option 3",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w500,
+                  //     fontFamily: englishFontfamily,
+                  //   ),
+                  // ),
                 ],
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    "Close",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontFamily: englishFontfamily,
-                    ),
-                  ),
-                ),
-              ],
+              // actions: [
+              // TextButton(
+              //   onPressed: () {
+              //     Navigator.of(context).pop();
+              //   },
+              //   child: const Text(
+              //     "Close",
+              //     style: TextStyle(
+              //       fontWeight: FontWeight.w500,
+              //       fontFamily: englishFontfamily,
+              //     ),
+              //   ),
+              // ),
+              // ],
             );
           },
         );

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/homepage/wallet_page.dart';
 import 'package:frontend/widgets/popup_alert.dart';
-import 'package:frontend/widgets/tobuy_widget.dart';
-import 'package:frontend/widgets/wallet_widget.dart';
+import 'package:frontend/page/homepage/tobuy_widget.dart';
+import 'package:frontend/page/homepage/wallet_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

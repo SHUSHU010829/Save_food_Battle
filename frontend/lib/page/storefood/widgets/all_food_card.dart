@@ -6,8 +6,7 @@ import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/data/tobuy/tobuy_model.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
-import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
-import 'package:frontend/page/scanpage/insert/insert_page.dart';
+import 'package:frontend/page/storefood/insert_page.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class AllfoodCardWidget extends StatefulWidget {
