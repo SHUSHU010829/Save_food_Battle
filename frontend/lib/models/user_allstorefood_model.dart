@@ -22,7 +22,8 @@ class UserMongoDbModel {
     required this.count,
     // required this.unit,
     required this.place,
-    required this.storeMethod,
+    required this.foodType,
+    // required this.type,
     required this.used,
   });
 
@@ -35,7 +36,8 @@ class UserMongoDbModel {
   String count;
   // String unit;
   String place;
-  String storeMethod;
+  String foodType;
+  // String type;
   String used;
 
   factory UserMongoDbModel.fromJson(Map<String, dynamic> json) =>
@@ -49,7 +51,8 @@ class UserMongoDbModel {
         count: json["count"],
         // unit: json["unit"],
         place: json["place"],
-        storeMethod: json["storeMethod"],
+        foodType: json["foodType"],
+        // type: json["type"],
         used: json["used"],
       );
 
@@ -63,7 +66,8 @@ class UserMongoDbModel {
         "count": count,
         // "unit": unit,
         "place": place,
-        "storeMethod": storeMethod,
+        "foodType": foodType,
+        // "type": type,
         "used": used,
       };
 }

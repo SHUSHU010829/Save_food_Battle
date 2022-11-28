@@ -132,7 +132,8 @@ class MongoDatabase {
     result['count'] = data.count;
     // result['unit'] = data.unit;
     result['place'] = data.place;
-    result['storeMethod'] = data.storeMethod;
+    result['foodType'] = data.foodType;
+    // result['type'] = data.type;
     result['used'] = data.used;
     var response = await userCollection.save(result);
     inspect(response);

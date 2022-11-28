@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
+import 'package:frontend/page/scanpage/insert/insert_page.dart';
 import 'package:frontend/page/storefood/search_food_page.dart';
 import 'package:frontend/widgets/all_food_card.dart';
 
@@ -14,7 +15,7 @@ class StorefoodPage extends StatefulWidget {
 }
 
 class _StorefoodPageState extends State<StorefoodPage> {
-  List<String> items = ['All', 'Place1', 'Place2', 'Place3', 'Place4'];
+  List<String> items = ['All', '冷藏', '冷凍', '櫃子'];
   String? dropdownValue = 'All';
   TextEditingController textController = TextEditingController();
 
@@ -124,13 +125,15 @@ class _StorefoodPageState extends State<StorefoodPage> {
                   OutlinedButton(
                     onPressed: () {
                       Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return InsertFoodPage();
-                                  },
-                                  settings: RouteSettings(arguments: null)))
-                          .then((value) {
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            // return InsertFoodPage();
+                            return InsertPage();
+                          },
+                          settings: RouteSettings(arguments: null),
+                        ),
+                      ).then((value) {
                         setState(() {});
                       });
                     },

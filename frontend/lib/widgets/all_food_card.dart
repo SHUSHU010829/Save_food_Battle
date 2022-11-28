@@ -7,6 +7,7 @@ import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/data/tobuy/tobuy_model.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:frontend/page/storefood/insertFood/insert_food_page.dart';
+import 'package:frontend/page/scanpage/insert/insert_page.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class AllfoodCardWidget extends StatefulWidget {
@@ -40,6 +41,7 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
             } else {
               if (snapshot.hasData) {
                 var totalData = snapshot.data.length;
+                // print(snapshot.data);
                 // print("Total Data: " + totalData.toString());
                 dayList.clear();
                 check.clear();
@@ -285,7 +287,7 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                                         bottom: 2.0),
                                     child: Center(
                                       child: Text(
-                                        "# ${data.place}",
+                                        "#${data.place}",
                                         style: const TextStyle(
                                           fontSize: 14,
                                           color: backgroundColor,
@@ -310,7 +312,8 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) {
-                                  return const InsertFoodPage();
+                                  // return const InsertFoodPage();
+                                  return const InsertPage();
                                 },
                                 settings: RouteSettings(arguments: data)))
                         .then((value) {

@@ -1,7 +1,6 @@
 // ignore_for_file: library_prefixes, unnecessary_null_comparison, unused_local_variable, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +46,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       countController.text = data.count;
       // unitController.text = data.unit;
       splaceController.text = data.place;
-      smethodController.text = data.storeMethod;
+      smethodController.text = data.foodType;
       print(data.used);
       // _value = double.parse(data.used);
       _checkInsertUpdate = "Update";
@@ -468,6 +467,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       String count,
       // String unit,
       String place,
+      // String type,
       String storeMethod,
       String used) async {
     final updateDate = UserMongoDbModel(
@@ -480,7 +480,8 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       count: count,
       // unit: unit,
       place: place,
-      storeMethod: storeMethod,
+      // type: type,
+      foodType: storeMethod,
       used: used,
     );
 
@@ -511,6 +512,7 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
     String count,
     // String unit,
     String place,
+    // String type,
     String storeMethod,
     String used,
   ) async {
@@ -525,7 +527,8 @@ class _InsertFoodPageState extends State<InsertFoodPage> {
       count: count,
       // unit: unit,
       place: place,
-      storeMethod: storeMethod,
+      // type: type,
+      foodType: storeMethod,
       used: used,
     );
     var result = await MongoDatabase.insert(data)
