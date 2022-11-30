@@ -42,7 +42,9 @@ class _InsertPageState extends State<InsertPage> {
       _checkInsertUpdate = "Update";
       titleController.text = data.title;
       countController.text = data.count;
-      splaceController.text = data.place;
+      // splaceController.text = data.place;
+      foodType = data.foodType;
+      storePlace = data.place;
     }
 
     return Scaffold(
@@ -430,6 +432,7 @@ class _InsertPageState extends State<InsertPage> {
   }
 
   //* 收納地點
+  //TODO: 收納地點更新時無法修改
   Widget placeCard() {
     return ListView(
       scrollDirection: Axis.horizontal,
@@ -485,7 +488,7 @@ class _InsertPageState extends State<InsertPage> {
             child: ClipPath(
               child: Container(
                 padding: const EdgeInsets.all(16),
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                   color: storePlace == '冷藏' ? primaryColor2 : secondary2,
                   border: const Border(
                     left: BorderSide(color: primaryColor7, width: 5),
