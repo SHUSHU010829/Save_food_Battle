@@ -11,3 +11,5 @@ const USER_COLLECTION = "allStore"; //Collection Name
 const TOBUY_COLLECTION = "toBuyList";
 
 const ALERT_COLLECTION = "alertFood";
+
+const SCANDATA_COLLECTION = "scanQRtest";

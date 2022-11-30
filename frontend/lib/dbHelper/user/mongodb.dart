@@ -6,12 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/dbHelper/user/constant.dart';
 import 'package:frontend/models/alertFood_model.dart';
 import 'package:frontend/models/data/tobuy/tobuy_model.dart';
+import 'package:frontend/models/scanQRmodel.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
   //* 串資料庫
-  static var db, userCollection, tobuyCollection, alertCollection;
+  static var db, userCollection, tobuyCollection, alertCollection,scandataCollection;
   var user = FirebaseAuth.instance.currentUser!;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
@@ -20,6 +21,7 @@ class MongoDatabase {
     userCollection = db.collection(USER_COLLECTION);
     tobuyCollection = db.collection(TOBUY_COLLECTION);
     alertCollection = db.collection(ALERT_COLLECTION);
+    scandataCollection = db.collection(SCANDATA_COLLECTION);
   }
 
   //* Insert Data : Tobuy
@@ -143,6 +145,20 @@ class MongoDatabase {
   static Future<String> insert(UserMongoDbModel data) async {
     try {
       var result = await userCollection.insert(data.toJson());
+      if (result.isSuccess()) {
+        return "Data Inserted";
+      } else {
+        return "Something wrong while inserting data.";
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+  //* Insert data : QRscan
+  static Future<String> insertscan(Goods data) async{
+    try {
+      var result = await scandataCollection.insert(data.toJson());
       if (result.isSuccess()) {
         return "Data Inserted";
       } else {
