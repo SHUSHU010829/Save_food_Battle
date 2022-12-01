@@ -1,17 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/scanQRmodel.dart';
-import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:frontend/page/scanpage/edit_food_page.dart';
 import 'package:frontend/page/scanpage/stepper_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
-
 
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
@@ -27,10 +24,10 @@ class _ScanPageState extends State<ScanPage> {
     setState(() => showScan = !showScan);
   }
 
-  Barcode? result;            //QR掃描存結果
-  String datainfo ="";        
-  int twoQRcheck = 0;
-  QRViewController? controller;   //控制器 不要刪
+  Barcode? result; //QR掃描存結果
+  String datainfo = "";
+  int twoQRcheck = 0; //步驟偵測
+  QRViewController? controller; //控制器 不要刪
   final GlobalKey qrkey = GlobalKey(debugLabel: 'QR');
 
   // In order to get hot reload to work we need to pause the camera if the platform
@@ -112,11 +109,12 @@ class _ScanPageState extends State<ScanPage> {
                 height: 200,
                 color: Colors.green[300],
                 child: QRView(
-                    key: qrkey,
-                    onQRViewCreated: _onQRViewCreated,
-                    onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
-                  ),
-                  /*child: InkWell(
+                  key: qrkey,
+                  onQRViewCreated: _onQRViewCreated,
+                  onPermissionSet: (ctrl, p) =>
+                      _onPermissionSet(context, ctrl, p),
+                ),
+                /*child: InkWell(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -160,7 +158,17 @@ class _ScanPageState extends State<ScanPage> {
                         width: 40,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                // return InsertFoodPage();
+                                return const EditFoodPage();
+                              },
+                            ),
+                          );
+                        },
                         child: const Icon(Icons.edit),
                         style: ButtonStyle(
                           shape:
@@ -188,9 +196,9 @@ class _ScanPageState extends State<ScanPage> {
           ],
         ),
       ),
-      
     );
   }
+
   //-------------------------QRcode掃瞄功能區
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
@@ -202,6 +210,7 @@ class _ScanPageState extends State<ScanPage> {
       });
     });
   }
+
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
@@ -210,33 +219,37 @@ class _ScanPageState extends State<ScanPage> {
       );
     }
   }
+
   @override
   void dispose() {
     controller?.dispose();
     super.dispose();
   }
+
   //*解碼訊息
-  void qrdecode(String? qrdata){
-    if(datainfo != qrdata){
+  void qrdecode(String? qrdata) {
+    if (datainfo != qrdata) {
       twoQRcheck++;
-      datainfo  = datainfo + qrdata!;  
+      datainfo = datainfo + qrdata!;
     }
-    if(twoQRcheck == 2){
+    if (twoQRcheck == 2) {
       datainfo = datainfo.substring(95);
-      if(datainfo.contains("**")){
+      if (datainfo.contains("**")) {
         datainfo = datainfo + datainfo.substring(2);
         var goodinfo = datainfo.split(":");
-        for(int cargosort = 0;cargosort < goodinfo.length;cargosort += 3){
-          insert_data(goodinfo[cargosort],goodinfo[cargosort+1],goodinfo[cargosort+2]);
+        for (int cargosort = 0; cargosort < goodinfo.length; cargosort += 3) {
+          insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
+              goodinfo[cargosort + 2]);
         }
       }
       twoQRcheck = 0;
       datainfo = "";
     }
   }
-  void insert_data(String n,String co,String cs) async {
+
+  void insert_data(String n, String co, String cs) async {
     var _id = M.ObjectId();
-    final data = Goods(id: _id,name: n,count: co,cost: cs);
+    final data = Goods(id: _id, name: n, count: co, cost: cs);
     var result = await MongoDatabase.insertscan(data);
   }
 }
@@ -246,6 +259,5 @@ QRCODE掃描要有介面計數 要掃描兩個QR
 掃描區開大一點，不然很難對焦
 沒跑動android模擬器到android/app/src/build.gradle修改line 31 49 50
 只有動功能區域其他沒動
-
 
 ********************************************/
