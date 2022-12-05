@@ -108,6 +108,55 @@ class _ScanPageState extends State<ScanPage> {
             const SizedBox(
               height: 16,
             ),
+            //* 步驟提示文字
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.lightbulb,
+                        color: secondary5,
+                        size: 32,
+                      ),
+                      if (twoQRcheck == 0) ...[
+                        const Text(
+                          "先掃描左邊的 QR Code",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: chineseFontfamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ] else if (twoQRcheck == 1) ...[
+                        const Text(
+                          "先掃描右邊的 QR Code",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: chineseFontfamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ] else ...[
+                        const Text(
+                          "按下完成按鈕進入下一頁！",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: chineseFontfamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]
+                    ],
+                  ),
+                ),
+              ],
+            ),
             Column(
               children: [
                 if (twoQRcheck < 2) ...[
@@ -183,55 +232,10 @@ class _ScanPageState extends State<ScanPage> {
                 );
               },
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            header(),
           ],
         ),
       ),
     );
-  }
-
-  //-------------------------步驟提示文字
-  Widget header() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.lightbulb,
-                color: secondary5,
-                size: 32,
-              ),
-              Text(
-                headerText(),
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontFamily: chineseFontfamily,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  String headerText() {
-    switch (twoQRcheck) {
-      case 1:
-        return '先掃描右邊的 QR Code';
-      case 2:
-        return '完成！';
-      default:
-        return '先掃描左邊的 QR Code';
-    }
   }
 
   //-------------------------QRcode掃瞄功能區
