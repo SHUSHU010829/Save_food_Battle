@@ -31,7 +31,7 @@ class _UserSettingPageState extends State<UserSettingPage> {
             ),
             //* BAR
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 64, right: 20),
+              padding: const EdgeInsets.only(left: 18, top: 56, right: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
