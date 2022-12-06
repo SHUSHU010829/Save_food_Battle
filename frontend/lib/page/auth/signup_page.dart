@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants.dart';
@@ -19,15 +20,18 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  _signinWithGoogle() async {
+
+  Future signInWithGoogle() async {
     try {
-      final googleSignIn = GoogleSignIn();
-      final user = await googleSignIn.signIn();
-      if (user != null) {
-        print('User Name ' + user.displayName.toString());
-      } else {
-        print('Sign in failed.');
-      }
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn(scopes: <String>["email"]).signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
       print(e.toString());
     }
@@ -73,7 +77,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         icon: const FaIcon(FontAwesomeIcons.google,
                             color: secondary3),
-                        onPressed: _signinWithGoogle,
+                        onPressed: signInWithGoogle,
                       ),
                     ),
                     const SizedBox(

@@ -1,12 +1,10 @@
 // ignore_for_file: avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/auth/widget/login_form_widget.dart';
 import 'package:frontend/page/auth/widget/login_header_widget.dart';
-import 'package:frontend/size_config.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -23,23 +21,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  _signinWithGoogle() async {
+  Future signInWithGoogle() async {
     try {
-      final googleSignIn = GoogleSignIn();
-      final user = await googleSignIn.signIn();
-      if (user != null) {
-        print('User Name ' + user.displayName.toString());
-        // if (user != null) {
-        //   Navigator.pushReplacement(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => const MainPage(),
-        //     ),
-        //   );
-        // }
-      } else {
-        print('Sign in failed.');
-      }
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn(scopes: <String>["email"]).signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
       print(e.toString());
     }
@@ -85,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         icon: const FaIcon(FontAwesomeIcons.google,
                             color: secondary3),
-                        onPressed: _signinWithGoogle,
+                        onPressed: signInWithGoogle,
                       ),
                     ),
                     const SizedBox(

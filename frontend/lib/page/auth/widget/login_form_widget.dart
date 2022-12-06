@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/page/auth/widget/forget_password_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -73,6 +74,7 @@ class _LoginFormState extends State<LoginForm> {
                 fillColor: Colors.grey[200],
                 filled: true,
               ),
+              cursorColor: primaryColor2,
               controller: _emailController,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -109,6 +111,7 @@ class _LoginFormState extends State<LoginForm> {
                 //   icon: Icon(Icons.remove_red_eye_rounded),
                 // ),
               ),
+              cursorColor: primaryColor2,
               controller: _passwordController,
               validator: (value) {
                 if (value!.isEmpty) {

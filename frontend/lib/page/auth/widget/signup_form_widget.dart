@@ -89,6 +89,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 fillColor: Colors.grey[200],
                 filled: true,
               ),
+              cursorColor: primaryColor2,
               controller: _nameController,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -116,6 +117,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 fillColor: Colors.grey[200],
                 filled: true,
               ),
+              cursorColor: primaryColor2,
               controller: _emailController,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -151,6 +153,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 //   icon: Icon(Icons.remove_red_eye_rounded),
                 // ),
               ),
+              cursorColor: primaryColor2,
               controller: _passwordController,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -183,6 +186,7 @@ class _SignupFormWidgetState extends State<SignupFormWidget> {
                 //   icon: Icon(Icons.remove_red_eye_rounded),
                 // ),
               ),
+              cursorColor: primaryColor2,
               controller: _comfirmPasswordController,
               validator: (value) {
                 if (value!.isEmpty) {
