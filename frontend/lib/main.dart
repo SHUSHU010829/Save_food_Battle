@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:frontend/theme/constants.dart';
-import 'package:frontend/theme/size_config.dart';
+import 'package:frontend/splash_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -12,7 +11,6 @@ import 'package:frontend/page/navpage/main_page.dart'; // ignore: unused_import
 import 'package:frontend/page/storefood/foodDetail/food_detail_observer.dart';
 import 'page/openScreen/onboarding_screen.dart'; // ignore: unused_import
 import 'package:bloc/bloc.dart'; // ignore: unused_import
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 //     FlutterLocalNotificationsPlugin();
 
@@ -41,28 +39,25 @@ void main() async {
   );
 
   Bloc.observer = FoodDetailObserver();
+
   await MongoDatabase.connect();
+  runApp(const MyApp());
 
   // ------------------------ 本地通知設定
   // AndroidInitializationSettings androidSettings =
   //     const AndroidInitializationSettings("@mipmap/ic_launcher");
-
   // DarwinInitializationSettings iosSettings = const DarwinInitializationSettings(
   //   requestAlertPermission: true,
   //   requestBadgePermission: true,
   //   requestCriticalPermission: true,
   //   requestSoundPermission: true,
   // );
-
   // InitializationSettings initializationSettings =
   //     InitializationSettings(android: androidSettings, iOS: iosSettings);
-
   // bool? initialized = await flutterLocalNotificationsPlugin.initialize(
   //   initializationSettings,
   // );
   // log("Notifications: $initialized");
-
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -77,35 +72,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'GenJyuuGothic',
       ),
-      home: const OnboardingScreen(),
+      home: const SplashScreen(),
     );
-    // return FutureBuilder(
-    //   future: Future.delayed(const Duration(seconds: 3)),
-    //   builder: (context, AsyncSnapshot snapshot) {
-    //     // Loading
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return MaterialApp(
-    //         title: 'Food_Battle_App',
-    //         debugShowCheckedModeBanner: false,
-    //         theme: ThemeData(
-    //           fontFamily: 'GenJyuuGothic',
-    //         ),
-    //         home: const SplashPage(),
-    //       );
-    //     }
-    //     // Main
-    //     else {
-    //       FlutterNativeSplash.remove();
-    //       return MaterialApp(
-    //         title: 'Food_Battle_App',
-    //         debugShowCheckedModeBanner: false,
-    //         theme: ThemeData(
-    //           fontFamily: 'GenJyuuGothic',
-    //         ),
-    //         home: const OnboardingScreen(),
-    //       );
-    //     }
-    //   },
-    // );
   }
 }
+
