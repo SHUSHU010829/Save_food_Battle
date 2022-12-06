@@ -108,7 +108,7 @@ class _ScanPageState extends State<ScanPage> {
             const SizedBox(
               height: 16,
             ),
-            //* 步驟提示文字1
+            //* 步驟提示文字
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -273,16 +273,13 @@ class _ScanPageState extends State<ScanPage> {
     }
     if (twoQRcheck == 2) {
       datainfo = datainfo.substring(95);
-      if (datainfo.contains("**")) {
-        datainfo = datainfo + datainfo.substring(2);
-        var goodinfo = datainfo.split(":");
-        for (int cargosort = 0; cargosort < goodinfo.length; cargosort += 3) {
-          insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
-              goodinfo[cargosort + 2]);
-        }
-      }
-      twoQRcheck = 0;
-      datainfo = "";
+      var goodinfo = datainfo.split(":");
+      for (int cargosort = 0; cargosort < goodinfo.length; cargosort += 3) {
+        if(goodinfo[cargosort].contains("**") == 1)
+          goodinfo[cargosort] = goodinfo[cargosort].substring(2);
+        insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
+            goodinfo[cargosort + 2]);
+      }  
     }
   }
 
@@ -290,5 +287,7 @@ class _ScanPageState extends State<ScanPage> {
     var _id = M.ObjectId();
     final data = Goods(id: _id, name: n, count: co, cost: cs);
     var result = await MongoDatabase.insertscan(data);
+    twoQRcheck = 0;
+    datainfo = "";
   }
 }
