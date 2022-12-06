@@ -71,34 +71,42 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Future.delayed(const Duration(seconds: 3)),
-      builder: (context, AsyncSnapshot snapshot) {
-        // Loading
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
-            title: 'Food_Battle_App',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              fontFamily: 'GenJyuuGothic',
-            ),
-            home: const SplashPage(),
-          );
-        }
-
-        // Main
-        else {
-          return MaterialApp(
-            title: 'Food_Battle_App',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              fontFamily: 'GenJyuuGothic',
-            ),
-            home: const OnboardingScreen(),
-          );
-        }
-      },
+    return MaterialApp(
+      title: 'Food_Battle_App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'GenJyuuGothic',
+      ),
+      home: const OnboardingScreen(),
     );
+    // return FutureBuilder(
+    //   future: Future.delayed(const Duration(seconds: 3)),
+    //   builder: (context, AsyncSnapshot snapshot) {
+    //     // Loading
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return MaterialApp(
+    //         title: 'Food_Battle_App',
+    //         debugShowCheckedModeBanner: false,
+    //         theme: ThemeData(
+    //           fontFamily: 'GenJyuuGothic',
+    //         ),
+    //         home: const SplashPage(),
+    //       );
+    //     }
+    //     // Main
+    //     else {
+    //       FlutterNativeSplash.remove();
+    //       return MaterialApp(
+    //         title: 'Food_Battle_App',
+    //         debugShowCheckedModeBanner: false,
+    //         theme: ThemeData(
+    //           fontFamily: 'GenJyuuGothic',
+    //         ),
+    //         home: const OnboardingScreen(),
+    //       );
+    //     }
+    //   },
+    // );
   }
 }
 
