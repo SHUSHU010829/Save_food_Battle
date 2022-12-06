@@ -108,7 +108,7 @@ class _ScanPageState extends State<ScanPage> {
             const SizedBox(
               height: 16,
             ),
-            //* 步驟提示文字
+            //* 步驟提示文字1
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
