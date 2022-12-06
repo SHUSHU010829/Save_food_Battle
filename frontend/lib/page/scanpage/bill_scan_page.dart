@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import '../../size_config.dart';
+import '../../theme/size_config.dart';
 
 class BillScan extends StatefulWidget {
   //const BillScan({Key? key}) : super(key: key);

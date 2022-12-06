@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/page/homepage/alret_foodcard.dart';
-import '../constants.dart';
+import '../theme/constants.dart';
 
 class PopupAlert extends StatefulWidget {
   const PopupAlert({Key? key}) : super(key: key);

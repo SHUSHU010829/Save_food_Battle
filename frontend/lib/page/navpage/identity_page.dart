@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/main.dart';
 
 int id = 0;

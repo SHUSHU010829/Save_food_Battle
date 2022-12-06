@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 
 class WalletWidget extends StatelessWidget {
   const WalletWidget({Key? key}) : super(key: key);

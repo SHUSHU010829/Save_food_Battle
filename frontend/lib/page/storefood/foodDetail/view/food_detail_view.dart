@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 
 /// {@template counter_view}
 /// A [StatelessWidget] which reacts to the provided

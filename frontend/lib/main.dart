@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:frontend/constants.dart';
-import 'package:frontend/size_config.dart';
+import 'package:frontend/theme/constants.dart';
+import 'package:frontend/theme/size_config.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -107,40 +107,5 @@ class MyApp extends StatelessWidget {
     //     }
     //   },
     // );
-  }
-}
-
-// SplashPage
-class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              "assets/icons/app_icon.png",
-              height: SizeConfig.blockV! * 23,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              "拯救食物大作戰",
-              style: TextStyle(
-                color: primaryColor7,
-                fontFamily: chineseFontfamily,
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

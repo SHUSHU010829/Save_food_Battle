@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/scanpage/stepper_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';

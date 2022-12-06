@@ -1,9 +1,9 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/auth/auth_page.dart';
-import 'package:frontend/size_config.dart';
+import 'package:frontend/theme/size_config.dart';
 import 'package:frontend/page/openScreen/onboarding_contents.dart';
 import '../../check_login_page.dart';
 import '../navpage/main_page.dart';

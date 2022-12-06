@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, avoid_print, unnecessary_string_interpolations, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/storefood/insert_page.dart';
 import 'package:frontend/page/storefood/search_food_page.dart';
 import 'package:frontend/page/storefood/widgets/all_food_card.dart';

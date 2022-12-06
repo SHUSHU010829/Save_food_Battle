@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
-import 'package:frontend/size_config.dart';
+import 'package:frontend/theme/constants.dart';
+import 'package:frontend/theme/size_config.dart';
 
 class SignupHeaderWidget extends StatelessWidget {
   const SignupHeaderWidget({

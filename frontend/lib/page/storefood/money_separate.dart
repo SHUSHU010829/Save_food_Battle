@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 
 class MoneySeparatePage extends StatefulWidget {
   const MoneySeparatePage({Key? key}) : super(key: key);

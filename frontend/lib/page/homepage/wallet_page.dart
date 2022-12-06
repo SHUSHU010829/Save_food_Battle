@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/homepage/wallet_widget.dart';
 
 class WalletPage extends StatefulWidget {

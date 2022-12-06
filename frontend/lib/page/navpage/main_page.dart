@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/navpage/home_page.dart';
 import 'package:frontend/page/navpage/identity_page.dart';
 import 'package:frontend/page/navpage/scan_page.dart';

@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/auth/widget/login_form_widget.dart';
 import 'package:frontend/page/auth/widget/login_header_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/constants.dart';
+import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/auth/widget/signup_form_widget.dart';
 import 'package:frontend/page/auth/widget/signup_header_widget.dart';
 import 'package:google_sign_in/google_sign_in.dart';
