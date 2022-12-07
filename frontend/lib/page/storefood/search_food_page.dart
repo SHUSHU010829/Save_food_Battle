@@ -13,7 +13,6 @@ class SearchFoodPage extends StatefulWidget {
 class _SearchFoodPageState extends State<SearchFoodPage> {
   var titleController = TextEditingController();
   var keyWord = '';
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

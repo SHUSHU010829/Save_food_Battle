@@ -1,12 +1,24 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore: slash_for_doc_comments
+/********************************************
 
+QRCODE掃描要有介面計數 要掃描兩個QR
+掃描區開大一點，不然很難對焦
+沒跑動android模擬器到android/app/src/build.gradle修改line 31 49 50
+只有動功能區域其他沒動
+
+********************************************/
+
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/theme/constants.dart';
-import 'package:frontend/page/scanpage/stepper_widget.dart';
+import 'package:frontend/dbHelper/user/mongodb.dart';
+import 'package:frontend/models/scanQRmodel.dart';
+import 'package:frontend/page/scanpage/edit_food_page.dart';
+import 'package:progress_stepper/progress_stepper.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-// import 'package:frontend/page/scanpage/edit_food_page.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
@@ -22,8 +34,10 @@ class _ScanPageState extends State<ScanPage> {
     setState(() => showScan = !showScan);
   }
 
-  Barcode? result;
-  QRViewController? controller;
+  Barcode? result; // QR掃描存結果
+  String datainfo = "";
+  int twoQRcheck = 0; //步驟偵測
+  QRViewController? controller; // 控制器 不要刪
   final GlobalKey qrkey = GlobalKey(debugLabel: 'QR');
 
   // In order to get hot reload to work we need to pause the camera if the platform
@@ -47,35 +61,20 @@ class _ScanPageState extends State<ScanPage> {
         child: Column(
           children: [
             const SizedBox(
-              height: 40,
+              height: 24,
             ),
             //* BAR
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "Scan",
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: englishFontfamily,
-                        color: textColor,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      "發票/食物掃描",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: chineseFontfamily,
-                        color: textColor,
-                      ),
-                    ),
-                  ],
+                const Text(
+                  "Scan",
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: englishFontfamily,
+                    color: textColor,
+                  ),
                 ),
                 ToggleSwitch(
                   minWidth: 64.0,
@@ -106,11 +105,189 @@ class _ScanPageState extends State<ScanPage> {
                 ),
               ],
             ),
-            //* Qr Scanner
-            const Expanded(child: StepperWidget()),
+            const SizedBox(
+              height: 16,
+            ),
+            //* 步驟提示文字
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.lightbulb,
+                        color: secondary5,
+                        size: 32,
+                      ),
+                      if (twoQRcheck == 0) ...[
+                        const Text(
+                          "先掃描左邊的 QR Code",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: chineseFontfamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ] else if (twoQRcheck == 1) ...[
+                        const Text(
+                          "先掃描右邊的 QR Code",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: chineseFontfamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ] else ...[
+                        const Text(
+                          "按下完成按鈕進入下一頁！",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: chineseFontfamily,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                if (twoQRcheck < 2) ...[
+                  //* Qr Scanner
+                  Container(
+                    width: double.infinity,
+                    height: 400,
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      width: 200,
+                      height: 200,
+                      child: QRView(
+                        key: qrkey,
+                        onQRViewCreated: _onQRViewCreated,
+                        onPermissionSet: (ctrl, p) =>
+                            _onPermissionSet(context, ctrl, p),
+                      ),
+                    ),
+                  ),
+                ] else ...[
+                  //* 確認按鈕
+                  Container(
+                    width: double.infinity,
+                    height: 400,
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const EditFoodPage();
+                              },
+                            ),
+                          );
+                        },
+                        child: const CircleAvatar(
+                          backgroundColor: primaryColor7,
+                          radius: 100,
+                          child: Text(
+                            '掃描完成！',
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                          ), //Text
+                        ),
+                      ), //CircleAvatar
+                    ),
+                  ),
+                ],
+              ],
+            ),
+            ProgressStepper(
+              width: 200,
+              height: 25,
+              color: secondary6,
+              progressColor: primaryColor5,
+              stepCount: 3,
+              builder: (index) {
+                double widthOfStep = 200 / 3;
+                if (index == twoQRcheck + 1) {
+                  return ProgressStepWithChevron(
+                    width: widthOfStep,
+                    defaultColor: secondary6,
+                    progressColor: primaryColor5,
+                    wasCompleted: true,
+                  );
+                }
+                return ProgressStepWithChevron(
+                  width: widthOfStep,
+                  defaultColor: secondary6,
+                  progressColor: primaryColor5,
+                  wasCompleted: false,
+                );
+              },
+            ),
           ],
         ),
       ),
     );
+  }
+
+  //-------------------------QRcode掃瞄功能區
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    var resultcheck;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        result = scanData;
+        qrdecode(result!.code);
+      });
+    });
+  }
+
+  void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
+    log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
+    if (!p) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('no Permission')),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  //*解碼訊息
+  void qrdecode(String? qrdata) {
+    if (datainfo != qrdata) {
+      twoQRcheck++;
+      datainfo = datainfo + qrdata!;
+    }
+    if (twoQRcheck == 2) {
+      datainfo = datainfo.substring(95);
+      var goodinfo = datainfo.split(":");
+      for (int cargosort = 0; cargosort < goodinfo.length; cargosort += 3) {
+        if(goodinfo[cargosort].contains("**") == 1)
+          goodinfo[cargosort] = goodinfo[cargosort].substring(2);
+        insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
+            goodinfo[cargosort + 2]);
+      }  
+    }
+  }
+
+  void insert_data(String n, String co, String cs) async {
+    var _id = M.ObjectId();
+    final data = Goods(id: _id, name: n, count: co, cost: cs);
+    var result = await MongoDatabase.insertscan(data);
+    twoQRcheck = 0;
+    datainfo = "";
   }
 }
