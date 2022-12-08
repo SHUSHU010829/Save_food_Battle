@@ -2,20 +2,6 @@
 
 ## 食物拯救計畫
 
-### Backend
-
-食物拯救計畫後端。
-
-#### Getting Started
-
-```bash
-npm install
-
-npm start
-```
-
-### frontend
-
 食物拯救計畫前端介面
 
 #### 使用工具
