@@ -28,62 +28,67 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: MediaQuery.removePadding(
-        context: context,
-        removeTop: true,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-          child: FutureBuilder(
-            future: MongoDatabase().getData(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                if (snapshot.hasData) {
-                  var totalData = snapshot.data.length;
-                  if (totalData == 0) {
-                    return const Center(
-                      child: Text("目前倉庫沒任何食物喔！"),
-                    );
-                  }
-                  dayList.clear();
-                  check.clear();
-                  for (int i = 0; i < totalData; i++) {
-                    var mongodata = UserMongoDbModel.fromJson(snapshot.data[i]);
-                    deadline = DateTime.parse(
-                        "${mongodata.year}-${mongodata.month}-${mongodata.day} 00:00:00");
-                    int days = deadline.difference(dateNow).inDays;
-                    if (days == 0) {
-                      result = '今天過期!';
-                      check.add(0);
-                    } else if (days < 0) {
-                      result = '已經過期 ${-days} 天';
-                      check.add(-1);
-                    } else {
-                      result = '還有 $days 天過期';
-                      check.add(1);
-                    }
-                    dayList.add(result);
-                  }
-                  // 有效期限的計算
-                  return ListView.separated(
-                    itemCount: snapshot.data.length,
-                    separatorBuilder: (context, _) => const SizedBox(height: 8),
-                    itemBuilder: (context, index) => displayCard(
-                      UserMongoDbModel.fromJson(snapshot.data[index]),
-                      dayList[index],
-                      check[index],
-                    ),
+      child: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+            child: FutureBuilder(
+              future: MongoDatabase().getData(),
+              builder: (context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
                 } else {
-                  return const Center(
-                    child: Text("重整連接資料庫！"),
-                  );
+                  if (snapshot.hasData) {
+                    var totalData = snapshot.data.length;
+                    if (totalData == 0) {
+                      return const Center(
+                        child: Text("目前倉庫沒任何食物喔！"),
+                      );
+                    }
+                    dayList.clear();
+                    check.clear();
+                    for (int i = 0; i < totalData; i++) {
+                      var mongodata =
+                          UserMongoDbModel.fromJson(snapshot.data[i]);
+                      deadline = DateTime.parse(
+                          "${mongodata.year}-${mongodata.month}-${mongodata.day} 00:00:00");
+                      int days = deadline.difference(dateNow).inDays;
+                      if (days == 0) {
+                        result = '今天過期!';
+                        check.add(0);
+                      } else if (days < 0) {
+                        result = '已經過期 ${-days} 天';
+                        check.add(-1);
+                      } else {
+                        result = '還有 $days 天過期';
+                        check.add(1);
+                      }
+                      dayList.add(result);
+                    }
+                    // 有效期限的計算
+                    return ListView.separated(
+                      itemCount: snapshot.data.length,
+                      separatorBuilder: (context, _) =>
+                          const SizedBox(height: 8),
+                      itemBuilder: (context, index) => displayCard(
+                        UserMongoDbModel.fromJson(snapshot.data[index]),
+                        dayList[index],
+                        check[index],
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("重整連接資料庫！"),
+                    );
+                  }
                 }
-              }
-            },
+              },
+            ),
           ),
         ),
       ),
@@ -330,6 +335,13 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
           ),
         ),
       );
+
+  Future<void> _handleRefresh() async {
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    setState(() {});
+  }
 
   Future<void> _insertData(String title) async {
     var _id = M.ObjectId();
