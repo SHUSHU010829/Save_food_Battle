@@ -125,7 +125,7 @@ class _ScanPageState extends State<ScanPage> {
                         const Text(
                           "先掃描左邊的 QR Code",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: textColor2,
                             fontSize: 18,
                             fontFamily: chineseFontfamily,
                             fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class _ScanPageState extends State<ScanPage> {
                         const Text(
                           "先掃描右邊的 QR Code",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: textColor2,
                             fontSize: 18,
                             fontFamily: chineseFontfamily,
                             fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ class _ScanPageState extends State<ScanPage> {
                         const Text(
                           "按下完成按鈕進入下一頁！",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: textColor2,
                             fontSize: 18,
                             fontFamily: chineseFontfamily,
                             fontWeight: FontWeight.bold,
@@ -275,17 +275,17 @@ class _ScanPageState extends State<ScanPage> {
       datainfo = datainfo.substring(95);
       var goodinfo = datainfo.split(":");
       for (int cargosort = 0; cargosort < goodinfo.length; cargosort += 3) {
-        if(goodinfo[cargosort].contains("**") == 1)
+        if (goodinfo[cargosort].contains("**") == 1)
           goodinfo[cargosort] = goodinfo[cargosort].substring(2);
         insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
             goodinfo[cargosort + 2]);
-      }  
+      }
     }
   }
 
   void insert_data(String n, String co, String cs) async {
     var _id = M.ObjectId();
-    final data = Goods(id: _id, name: n, count: co, cost: cs);
+    final data = ScanQrModel(id: _id, name: n, count: co, cost: cs);
     var result = await MongoDatabase.insertscan(data);
     twoQRcheck = 0;
     datainfo = "";

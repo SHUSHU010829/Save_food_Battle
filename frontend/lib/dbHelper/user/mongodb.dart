@@ -12,7 +12,11 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
   //* 串資料庫
-  static var db, userCollection, tobuyCollection, alertCollection,scandataCollection;
+  static var db,
+      userCollection,
+      tobuyCollection,
+      alertCollection,
+      scandataCollection;
   var user = FirebaseAuth.instance.currentUser!;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
@@ -155,8 +159,9 @@ class MongoDatabase {
       return e.toString();
     }
   }
+
   //* Insert data : QRscan
-  static Future<String> insertscan(Goods data) async{
+  static Future<String> insertscan(ScanQrModel data) async {
     try {
       var result = await scandataCollection.insert(data.toJson());
       if (result.isSuccess()) {
@@ -168,5 +173,21 @@ class MongoDatabase {
       print(e.toString());
       return e.toString();
     }
+  }
+
+  //* Delete Data : QRscan
+  static deleteQRData(ScanQrModel data) async {
+    await scandataCollection.remove(where.id(data.id));
+  }
+
+  //* Display Data : QRscan
+  Future<List<Map<String, dynamic>>?> qrScanData() async {
+    try {
+      final arrData = await scandataCollection.find().toList();
+      return arrData;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 }
