@@ -149,7 +149,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
           // ignore: todo
           //TODO: 卡片滑動時沒辦法停在底部
           SizedBox(
-            height: 256, // Some height
+            height: 260, // Some height
             child: SingleChildScrollView(
               child: RefreshIndicator(
                 onRefresh: _handleRefresh,

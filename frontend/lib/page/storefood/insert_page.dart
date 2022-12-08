@@ -31,7 +31,7 @@ class _InsertPageState extends State<InsertPage> {
   var _checkInsertUpdate = "Insert";
   double _usedValue = 0;
   var oldDate = '';
-  String foodType = '';
+  String foodType = '肉類';
   String storePlace = '';
 
   var titleController = TextEditingController();
@@ -602,55 +602,57 @@ class _InsertPageState extends State<InsertPage> {
   //* 食物類別下落選單
   StatefulBuilder foodTypeDropdown() {
     return StatefulBuilder(
-      builder: (context, state) => Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: primaryColor6,
-              width: 2,
-              style: BorderStyle.solid,
+      builder: (context, state) => SizedBox(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: primaryColor6,
+                width: 2,
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-            child: DropdownButton(
-              isExpanded: true,
-              value: foodType,
-              icon: const Icon(
-                Icons.arrow_circle_down,
-                color: primaryColor8,
-                size: 24,
-              ),
-              elevation: 16,
-              style: const TextStyle(
-                color: primaryColor8,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                fontFamily: englishFontfamily,
-              ),
-              underline: Container(),
-              items: items.map<DropdownMenuItem<String>>(
-                (String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: const TextStyle(
-                        fontFamily: chineseFontfamily,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+              child: DropdownButton(
+                isExpanded: true,
+                value: foodType,
+                icon: const Icon(
+                  Icons.arrow_circle_down,
+                  color: primaryColor8,
+                  size: 24,
+                ),
+                elevation: 16,
+                style: const TextStyle(
+                  color: primaryColor8,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: englishFontfamily,
+                ),
+                underline: Container(),
+                items: items.map<DropdownMenuItem<String>>(
+                  (String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: const TextStyle(
+                          fontFamily: chineseFontfamily,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  },
+                ).toList(),
+                onChanged: (String? newValue) {
+                  state(() {
+                    foodType = newValue!;
+                  });
                 },
-              ).toList(),
-              onChanged: (String? newValue) {
-                state(() {
-                  foodType = newValue!;
-                });
-              },
+              ),
             ),
           ),
         ),
