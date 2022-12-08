@@ -27,6 +27,8 @@ class ScanPage extends StatefulWidget {
   State<ScanPage> createState() => _ScanPageState();
 }
 
+//BLAAAA?
+
 class _ScanPageState extends State<ScanPage> {
   // this part is switch botton
   bool showScan = true;
