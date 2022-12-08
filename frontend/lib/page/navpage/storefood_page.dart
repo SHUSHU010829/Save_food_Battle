@@ -5,6 +5,7 @@ import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/storefood/insert_page.dart';
 import 'package:frontend/page/storefood/search_food_page.dart';
 import 'package:frontend/page/storefood/widgets/all_food_card.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class StorefoodPage extends StatefulWidget {
   const StorefoodPage({Key? key}) : super(key: key);
@@ -19,7 +20,6 @@ class _StorefoodPageState extends State<StorefoodPage> {
   TextEditingController textController = TextEditingController();
 
   var titleController = TextEditingController();
-
   var yearController = TextEditingController();
   var monthController = TextEditingController();
   var dayController = TextEditingController();
@@ -30,8 +30,8 @@ class _StorefoodPageState extends State<StorefoodPage> {
   var usedController = TextEditingController();
 
   // get deadline => null;
-
   //  int var =int.parse(yearController.text);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,29 +40,18 @@ class _StorefoodPageState extends State<StorefoodPage> {
         child: Column(
           children: [
             Container(
-              height: 136,
+              height: 148,
               decoration: const BoxDecoration(
                 borderRadius:
                     BorderRadius.only(bottomLeft: Radius.circular(48)),
-                color: secondary1,
-                gradient: LinearGradient(
-                  colors: [
-                    (Color.fromRGBO(253, 241, 194, 1)),
-                    (Color.fromRGBO(253, 241, 194, 1)),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+                color: primaryColor2,
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 32.0),
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 64.0),
                 child: Column(
                   //* 搜尋調與切換儲存地點
                   children: [
-                    SizedBox(
-                      height: 32,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,15 +73,15 @@ class _StorefoodPageState extends State<StorefoodPage> {
                           },
                           child: Icon(
                             Icons.search_rounded,
-                            color: primaryColor6,
+                            color: primaryColor8,
                           ),
                           style: ElevatedButton.styleFrom(
                             shape: CircleBorder(),
                             padding: EdgeInsets.all(12),
-                            primary: secondary1,
+                            primary: primaryColor2,
                             // borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(
-                              color: primaryColor6,
+                              color: white1,
                               width: 2,
                             ),
                           ),
@@ -106,7 +95,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
             const SizedBox(height: 12),
             //* 全部食品卡片
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               //* 標頭＋按鈕
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,7 +159,7 @@ class _StorefoodPageState extends State<StorefoodPage> {
       decoration: BoxDecoration(
         //color: primaryColor1,
         border: Border.all(
-          color: primaryColor6,
+          color: white1,
           width: 2,
           style: BorderStyle.solid,
         ),
