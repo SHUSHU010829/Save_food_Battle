@@ -18,7 +18,7 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: secondary3,
+        backgroundColor: primaryColor3,
         bottomOpacity: 0.0,
         elevation: 0.0,
         centerTitle: true,
@@ -36,7 +36,7 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.only(top:24.0, bottom: 4.0, left: 24.0, right:24.0),
               child: Column(
                 children: [
                   TextFormField(
@@ -62,9 +62,9 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                         fontWeight: FontWeight.w600,
                         fontFamily: englishFontfamily,
                       ),
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.search_rounded,
-                        color: Colors.brown[900],
+                        color: secondary3,
                       ),
                     ),
                   ),
@@ -79,9 +79,6 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                 fontFamily: chineseFontfamily,
                 color: secondary3,
               ),
-            ),
-            const SizedBox(
-              height: 16,
             ),
             SizedBox(
               height: 550,
@@ -127,9 +124,8 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
         padding: const EdgeInsets.only(
           top: 12.0,
         ),
-        child: Container(
-          height: 80,
-          padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 28, right: 28),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -147,105 +143,83 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                 ),
               ],
             ),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 24,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 12.0, bottom: 12.0, right: 16.0, left: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //* title
+                  Row(
                     children: [
-                      SizedBox(
-                        width: 200,
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 2),
-                            Row(
-                              children: [
-                                Text(
-                                  data.title,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: englishFontfamily,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 6),
-                            Row(
-                              children: [
-                                //* 存放地點
-                                Container(
-                                  alignment: Alignment.center, // 內裝元件置中對齊
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: secondary6,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0,
-                                        right: 10.0,
-                                        top: 1.0,
-                                        bottom: 1.0),
-                                    child: Center(
-                                      child: Text(
-                                        "# ${data.place}",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          color: textColor,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: englishFontfamily,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                //* 有效日期
-                                Container(
-                                  alignment: Alignment.center, // 內裝元件置中對齊
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: secondary5,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0,
-                                        right: 10.0,
-                                        top: 1.0,
-                                        bottom: 1.0),
-                                    child: Center(
-                                      child: Text(
-                                        "# ${data.place}",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          color: textColor,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: englishFontfamily,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                      Text(
+                        data.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: chineseFontfamily,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    children: [
+                      //* 存放地點
+                      Container(
+                        alignment: Alignment.center, // 內裝元件置中對齊
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: secondary6,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10.0, top: 1.0, bottom: 1.0),
+                          child: Center(
+                            child: Text(
+                              "# ${data.place}",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: textColor,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: englishFontfamily,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      //* 有效日期
+                      Container(
+                        alignment: Alignment.center, // 內裝元件置中對齊
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: secondary5,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10.0, top: 2.0, bottom: 2.0),
+                          child: Center(
+                            child: Text(
+                              "# ${data.year}-${data.month}-${data.day}",
+                              style: const TextStyle(
+                                fontSize: 15,
+                                color: textColor,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: englishFontfamily,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
