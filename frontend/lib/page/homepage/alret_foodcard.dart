@@ -35,7 +35,12 @@ class _AlertFoodCardState extends State<AlertFoodCard> {
                 );
               } else {
                 if (snapshot.hasData) {
-                  // var totalData = snapshot.data.length;
+                  var totalData = snapshot.data.length;
+                  if (totalData == 0) {
+                    return const Center(
+                      child: Text("目前沒有任何食物！"),
+                    );
+                  }
                   return ListView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,

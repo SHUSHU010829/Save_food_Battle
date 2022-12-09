@@ -166,7 +166,12 @@ class _TobuyWidgetState extends State<TobuyWidget> {
                         );
                       } else {
                         if (snapshot.hasData) {
-                          // var totalData = snapshot.data.length;
+                          var totalData = snapshot.data.length;
+                          if (totalData == 0) {
+                            return const Center(
+                              child: Text("目前購物清單是空的！"),
+                            );
+                          }
                           return ListView.separated(
                             shrinkWrap: true,
                             separatorBuilder: (context, _) =>
@@ -178,7 +183,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
                           );
                         } else {
                           return const Center(
-                            child: Text("倉庫是空的喔！"),
+                            child: Text("重整連接資料庫！"),
                           );
                         }
                       }
@@ -206,7 +211,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
     var _id = M.ObjectId();
     final data = TobuyModel(
       uid: user!.uid.toString(),
-      id: _id, 
+      id: _id,
       title: title,
     );
     var result = await MongoDatabase.toBuyInsert(data)

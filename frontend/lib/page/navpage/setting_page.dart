@@ -173,11 +173,11 @@ class _SettingPageState extends State<SettingPage> {
             const SizedBox(
               height: 8,
             ),
-            buildNotificationOptionRow("購物通知", true),
+            buildNotificationOptionRow("購物通知", false),
             buildNotificationOptionRow("群組通知", false),
-            buildNotificationOptionRow("即期食物食用提醒", true),
+            buildNotificationOptionRow("即期食物食用提醒", false),
             const SizedBox(
-              height: 28,
+              height: 20,
             ),
             Center(
               child: OutlinedButton(
