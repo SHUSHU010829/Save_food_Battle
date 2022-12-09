@@ -163,7 +163,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: secondary3,
+                  primary: secondary4,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 ),

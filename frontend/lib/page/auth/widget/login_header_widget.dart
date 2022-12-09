@@ -22,6 +22,7 @@ class LoginHeaderWidget extends StatelessWidget {
             fontFamily: englishFontfamily,
             fontSize: 24,
             fontWeight: FontWeight.w700,
+            color: textColor,
           ),
         ),
         const SizedBox(
@@ -33,6 +34,7 @@ class LoginHeaderWidget extends StatelessWidget {
             fontFamily: englishFontfamily,
             fontSize: 16,
             fontWeight: FontWeight.w600,
+            color: textColor,
           ),
         ),
       ],
