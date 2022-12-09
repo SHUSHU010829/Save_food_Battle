@@ -232,15 +232,16 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                         const SizedBox(height: 2),
                         Row(
                           children: [
+                            //* title
                             Text(
                               data.title,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: englishFontfamily,
+                                fontFamily: chineseFontfamily,
                               ),
                             ),
-                            //used
+                            //* used
                             Container(
                               alignment: Alignment.center, // 內裝元件置中對齊
                               child: Padding(
