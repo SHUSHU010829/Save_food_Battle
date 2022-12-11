@@ -209,7 +209,7 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
               width: 2,
             ),
             color: check >= 0 ? secondary7 : secondary8,
-            borderRadius: const BorderRadius.all(Radius.circular(2.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
           ),
           child: Row(
             children: [

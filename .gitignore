@@ -450,6 +450,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# fvm
+.fvm/flutter_sdk
+
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
