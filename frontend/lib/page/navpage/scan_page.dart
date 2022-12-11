@@ -27,6 +27,8 @@ class ScanPage extends StatefulWidget {
   State<ScanPage> createState() => _ScanPageState();
 }
 
+//BLAAAA?
+
 class _ScanPageState extends State<ScanPage> {
   // this part is switch botton
   bool showScan = true;
@@ -275,7 +277,7 @@ class _ScanPageState extends State<ScanPage> {
       datainfo = datainfo.substring(95);
       var goodinfo = datainfo.split(":");
       for (int cargosort = 0; cargosort < goodinfo.length; cargosort += 3) {
-        if (goodinfo[cargosort].contains("**") == 1)
+        if (goodinfo[cargosort].contains("**"))
           goodinfo[cargosort] = goodinfo[cargosort].substring(2);
         insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
             goodinfo[cargosort + 2]);
