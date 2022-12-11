@@ -207,8 +207,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                             ),
                           ),
                           onPressed: () {
-                            // _insertData(data.title);
-                            // MongoDatabase.delete(data);
+                            MongoDatabase.deleteQRData(data);
                             setState(() {});
                             Navigator.pop(context);
                           },
@@ -285,7 +284,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 6),
+                            const SizedBox(height: 8),
                             Row(
                               children: [
                                 //* 份數
