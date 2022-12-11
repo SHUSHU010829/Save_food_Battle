@@ -1,10 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
-import 'package:frontend/constants.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/scanQRmodel.dart';
 import 'package:frontend/models/user_allstorefood_model.dart';
 import 'package:frontend/page/scanpage/food_detail_page.dart';
+import 'package:frontend/theme/constants.dart';
 
 class EditFoodPage extends StatefulWidget {
   const EditFoodPage({Key? key}) : super(key: key);
@@ -43,53 +44,13 @@ class _EditFoodPageState extends State<EditFoodPage> {
             const SizedBox(
               height: 16,
             ),
-            //* 搜尋 Bar
-            // TextFormField(
-            //   controller: titleController,
-            //   maxLines: null,
-            //   textInputAction: TextInputAction.done,
-            //   onChanged: (text) {
-            //     setState(() {
-            //       keyWord = text;
-            //     });
-            //   },
-            //   cursorColor: Colors.grey,
-            //   style: const TextStyle(color: secondary3),
-            //   decoration: InputDecoration(
-            //     filled: true,
-            //     fillColor: secondary5,
-            //     border: OutlineInputBorder(
-            //       borderRadius: BorderRadius.circular(8.0),
-            //       borderSide: BorderSide.none,
-            //     ),
-            //     hintText: ' Search',
-            //     hintStyle: const TextStyle(
-            //       color: secondary2,
-            //       fontSize: 20,
-            //       fontWeight: FontWeight.w500,
-            //       fontFamily: englishFontfamily,
-            //     ),
-            //     prefixIcon: Container(
-            //       padding: const EdgeInsets.all(16),
-            //       child: const Icon(
-            //         Icons.search_rounded,
-            //         size: 28,
-            //         color: secondary2,
-            //       ),
-            //       width: 16,
-            //     ),
-            //   ),
-            // ),
-            const SizedBox(
-              height: 8,
-            ),
             //* 提示文字
             Row(
               children: const [
                 Icon(
                   Icons.lightbulb,
                   color: secondary5,
-                  size: 32,
+                  size: 18,
                 ),
                 Text(
                   "針對特定食材編輯完再匯入！",
@@ -103,7 +64,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
               ],
             ),
             const SizedBox(
-              height: 8,
+              height: 16,
             ),
             //* 食物卡
             SizedBox(
@@ -141,199 +102,254 @@ class _EditFoodPageState extends State<EditFoodPage> {
               ),
             ),
             //* 底部兩顆按鈕
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "匯入倉庫",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: chineseFontfamily,
-                          color: Colors.white,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        elevation: 5,
-                        primary: primaryColor5,
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text(
-                        "重新掃描",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: chineseFontfamily,
-                          color: textColor,
-                        ),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+            //     child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       crossAxisAlignment: CrossAxisAlignment.center,
+            //       children: [
+            //         ElevatedButton(
+            //           onPressed: () {},
+            //           child: const Text(
+            //             "匯入倉庫",
+            //             style: TextStyle(
+            //               fontSize: 16,
+            //               fontWeight: FontWeight.w700,
+            //               fontFamily: chineseFontfamily,
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //           style: ElevatedButton.styleFrom(
+            //             elevation: 5,
+            //             primary: primaryColor5,
+            //             padding: const EdgeInsets.symmetric(horizontal: 40),
+            //             shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(16),
+            //             ),
+            //           ),
+            //         ),
+            //         const SizedBox(
+            //           width: 16,
+            //         ),
+            //         OutlinedButton(
+            //           onPressed: () {
+            //             Navigator.of(context).pop();
+            //           },
+            //           child: const Text(
+            //             "重新掃描",
+            //             style: TextStyle(
+            //               fontSize: 16,
+            //               fontWeight: FontWeight.w700,
+            //               fontFamily: chineseFontfamily,
+            //               color: textColor,
+            //             ),
+            //           ),
+            //           style: OutlinedButton.styleFrom(
+            //             padding: const EdgeInsets.symmetric(horizontal: 40),
+            //             shape: RoundedRectangleBorder(
+            //               borderRadius: BorderRadius.circular(16),
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
     );
   }
 
-  Widget displayData(ScanQrModel data) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) {
-              return const FoodDetailPage();
-            },
-            settings: RouteSettings(arguments: data),
-          ),
-        ).then((value) {
-          setState(() {});
-        }),
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 12.0,
-          ),
-          child: SizedBox(
-            height: 70,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: primaryColor9,
-                  width: 2,
-                ),
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                boxShadow: const [
-                  BoxShadow(
-                    color: primaryColor2,
-                    offset: Offset(6.0, 6.0), //陰影x軸偏移量
-                    blurRadius: 5, //陰影模糊程度
-                    spreadRadius: 0, //陰影擴散程度
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //* Name
-                              SizedBox(
-                                width: 180,
-                                child: Text(
-                                  data.name,
-                                  maxLines: 1,
-                                  softWrap: false,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: chineseFontfamily,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 6),
-                              Row(
-                                children: [
-                                  //* 份數
-                                  Container(
-                                    alignment: Alignment.center, // 內裝元件置中對齊
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      color: secondary5,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 10.0,
-                                        right: 10.0,
-                                        top: 1.0,
-                                        bottom: 1.0,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "# ${data.count}",
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            color: textColor,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: englishFontfamily,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  //* 存放地點
-                                  Container(
-                                    alignment: Alignment.center, // 內裝元件置中對齊
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      color: secondary6,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10.0,
-                                          right: 10.0,
-                                          top: 1.0,
-                                          bottom: 1.0),
-                                      child: Center(
-                                        child: Text(
-                                          "\$ ${data.cost}",
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            color: textColor,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: englishFontfamily,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+  Widget displayData(ScanQrModel data) => Padding(
+        padding: const EdgeInsets.only(top: 4, bottom: 4, left: 8, right: 8),
+        child: Slidable(
+          startActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: ((context) {
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      content: const Text(
+                        "確認刪除這項食物嗎？",
+                        style: TextStyle(
+                          fontFamily: chineseFontfamily,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(fontSize: 16, color: textColor2),
                           ),
+                          onPressed: () {
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                        ),
+                        TextButton(
+                          child: const Text(
+                            "確認刪除",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: textColor,
+                              fontFamily: chineseFontfamily,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          onPressed: () {
+                            // _insertData(data.title);
+                            // MongoDatabase.delete(data);
+                            setState(() {});
+                            Navigator.pop(context);
+                          },
+                        ),
+                        const SizedBox(
+                          width: 2,
                         ),
                       ],
                     ),
+                  );
+                }),
+                backgroundColor: const Color(0xffe86159),
+                icon: Icons.delete_rounded,
+                label: 'Delete',
+              ),
+            ],
+          ),
+          endActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              SlidableAction(
+                onPressed: ((context) {
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return const FoodDetailPage();
+                              },
+                              settings: RouteSettings(arguments: data)))
+                      .then((value) {
+                    setState(() {});
+                  });
+                }),
+                backgroundColor: white1,
+                icon: Icons.edit_rounded,
+                label: 'Edit',
+              ),
+            ],
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: primaryColor9,
+                width: 2,
+              ),
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 8.0, right: 8.0, top: 12, bottom: 12),
+              child: Row(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 200,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //* Name
+                            SizedBox(
+                              width: 180,
+                              child: Text(
+                                data.name,
+                                maxLines: 1,
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: chineseFontfamily,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
+                              children: [
+                                //* 份數
+                                Container(
+                                  alignment: Alignment.center, // 內裝元件置中對齊
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: secondary5,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 10.0,
+                                      right: 10.0,
+                                      top: 1.0,
+                                      bottom: 1.0,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "# ${data.count}",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: textColor,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: englishFontfamily,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                //* 存放地點
+                                Container(
+                                  alignment: Alignment.center, // 內裝元件置中對齊
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: secondary6,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                        right: 10.0,
+                                        top: 1.0,
+                                        bottom: 1.0),
+                                    child: Center(
+                                      child: Text(
+                                        "\$ ${data.cost}",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          color: textColor,
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: englishFontfamily,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
