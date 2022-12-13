@@ -4,10 +4,10 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/dbHelper/user/constant.dart';
-import 'package:frontend/models/alertFood_model.dart';
-import 'package:frontend/models/data/tobuy/tobuy_model.dart';
-import 'package:frontend/models/scanQRmodel.dart';
-import 'package:frontend/models/user_allstorefood_model.dart';
+import 'package:frontend/models/dbModel/alertFood_model.dart';
+import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/tobuy_model.dart';
+import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {

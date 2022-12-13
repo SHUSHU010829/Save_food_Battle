@@ -2,9 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/models/dbModel/tobuy_model.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/data/tobuy/tobuy_model.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 class TobuyWidget extends StatefulWidget {

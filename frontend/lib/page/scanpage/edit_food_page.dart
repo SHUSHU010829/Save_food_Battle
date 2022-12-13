@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/scanQRmodel.dart';
-import 'package:frontend/models/user_allstorefood_model.dart';
+import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 import 'package:frontend/page/scanpage/food_detail_page.dart';
 import 'package:frontend/theme/constants.dart';
 

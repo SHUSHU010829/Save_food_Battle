@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/alertFood_model.dart';
-import 'package:frontend/models/scanQRmodel.dart';
-import 'package:frontend/models/user_allstorefood_model.dart';
+import 'package:frontend/models/dbModel/alertFood_model.dart';
+import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 import 'package:frontend/page/storefood/money_separate.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 

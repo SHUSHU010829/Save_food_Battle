@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/user_allstorefood_model.dart';
+import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 
 class SearchFoodPage extends StatefulWidget {
   const SearchFoodPage({Key? key}) : super(key: key);

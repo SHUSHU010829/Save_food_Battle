@@ -17,7 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages = [
     const HomePage(),
-    const EditFoodPage(),
+    const ScanPage(),
     const IdentityPage(),
     const StorefoodPage(),
     const SettingPage(),
