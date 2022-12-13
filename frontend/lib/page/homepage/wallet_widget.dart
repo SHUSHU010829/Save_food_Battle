@@ -1,9 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/dbHelper/user/mongodb.dart';
+import 'package:frontend/models/dbModel/wallet_model.dart';
 import 'package:frontend/theme/constants.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 
-class WalletWidget extends StatelessWidget {
+class WalletWidget extends StatefulWidget {
   const WalletWidget({Key? key}) : super(key: key);
 
+  @override
+  State<WalletWidget> createState() => _WalletWidgetState();
+}
+
+class _WalletWidgetState extends State<WalletWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +38,7 @@ class WalletWidget extends StatelessWidget {
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: const[
               Text(
                 "WALLETS",
                 style: TextStyle(
@@ -47,8 +56,8 @@ class WalletWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "\$ ",
                     style: TextStyle(
                       fontFamily: englishFontfamily,
@@ -56,16 +65,40 @@ class WalletWidget extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    "20,600",
-                    style: TextStyle(
-                      fontFamily: englishFontfamily,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  FutureBuilder(
+                    future: MongoDatabase().getWalletData(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Text(
+                          "連接中",
+                          style: TextStyle(
+                              fontFamily: englishFontfamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: textColor2),
+                        );
+                      } else {
+                        if (snapshot.hasData) {
+                          return const Text(
+                            "Not yet activated",
+                            style: TextStyle(
+                              fontFamily: englishFontfamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                        } else {
+                          return const Text(
+                            "No Data Available",
+                            style: TextStyle(
+                              fontFamily: englishFontfamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                        }
+                      }
+                    },
                   ),
                 ],
               ),
@@ -111,41 +144,6 @@ class WalletWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 8,
-          ),
-          // Align(
-          //   alignment: Alignment.centerRight,
-          //   child: TextButton(
-          //     onPressed: () => {},
-          //     child: const Text(
-          //       "  See More  ",
-          //       style: TextStyle(
-          //         fontFamily: englishFontfamily,
-          //         fontSize: 12,
-          //         height: 1.0,
-          //         fontWeight: FontWeight.w500,
-          //       ),
-          //     ),
-          //     style: ButtonStyle(
-          //       padding: MaterialStateProperty.all<EdgeInsets>(
-          //         const EdgeInsets.all(12),
-          //       ),
-          //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          //       foregroundColor: MaterialStateProperty.all<Color>(
-          //         textColor,
-          //       ),
-          //       backgroundColor: MaterialStateProperty.all<Color>(
-          //         primaryColor2,
-          //       ),
-          //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          //         RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(16),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

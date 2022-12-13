@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:frontend/page/settingpage/wallet_setting_page.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/settingpage/user_setting_page.dart';
 // import 'package:frontend/models/article_model.dart';
@@ -139,7 +140,39 @@ class _SettingPageState extends State<SettingPage> {
                 ),
               ),
             ),
-            buildAccountoptionRow(context, "新增群組"),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const WalletSettingPage();
+                      },
+                    ),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      "錢包設定",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: chineseFontfamily,
+                        color: textColor,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             buildAccountoptionRow(context, "成員編輯"),
             buildAccountoptionRow(context, "群組編輯"),
             buildAccountoptionRow(context, "外觀設定"),

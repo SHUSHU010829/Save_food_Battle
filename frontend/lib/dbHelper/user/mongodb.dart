@@ -8,6 +8,7 @@ import 'package:frontend/models/dbModel/alertFood_model.dart';
 import 'package:frontend/models/dbModel/scanQRmodel.dart';
 import 'package:frontend/models/dbModel/tobuy_model.dart';
 import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
+import 'package:frontend/models/dbModel/wallet_model.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
@@ -16,6 +17,7 @@ class MongoDatabase {
       userCollection,
       tobuyCollection,
       alertCollection,
+      walletCollection,
       scandataCollection;
   var user = FirebaseAuth.instance.currentUser!;
   static connect() async {
@@ -26,6 +28,7 @@ class MongoDatabase {
     tobuyCollection = db.collection(TOBUY_COLLECTION);
     alertCollection = db.collection(ALERT_COLLECTION);
     scandataCollection = db.collection(SCANDATA_COLLECTION);
+    walletCollection = db.collection(WALLET_COLLECTION);
   }
 
   //* Insert Data : Tobuy
@@ -57,6 +60,32 @@ class MongoDatabase {
   //* Delete Data : Tobuy
   static deleteTobuy(TobuyModel data) async {
     await tobuyCollection.remove(where.id(data.id));
+  }
+
+  //* Insert Data : Wallet
+  static Future<String> walletInsert(WalletModel data) async {
+    try {
+      var result = await walletCollection.insert(data.toJson());
+      if (result.isSuccess()) {
+        return "Data Inserted";
+      } else {
+        return "Something wrong while inserting data.";
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+
+  //* Display Data : Wallet
+  Future<List<Map<String, dynamic>>?> getWalletData() async {
+    try {
+      final arrData = await walletCollection.find({'uid': user.uid}).toList();
+      return arrData;
+    } catch (e) {
+      print(e.toString());
+    }
+    return null;
   }
 
   //* Insert Data : Alert

@@ -13,3 +13,5 @@ const TOBUY_COLLECTION = "toBuyList";
 const ALERT_COLLECTION = "alertFood";
 
 const SCANDATA_COLLECTION = "scanQRtest";
+
+const WALLET_COLLECTION = "wallet";
