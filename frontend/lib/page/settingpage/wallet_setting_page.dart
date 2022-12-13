@@ -134,7 +134,7 @@ class _WalletSettingPageState extends State<WalletSettingPage> {
                             var totalData = snapshot.data.length;
                             if (totalData == 0) {
                               return const Center(
-                                child: Text("目前沒有任何食物！"),
+                                child: Text("目前尚未開通任何錢包"),
                               );
                             }
                             return ListView.builder(
@@ -146,7 +146,7 @@ class _WalletSettingPageState extends State<WalletSettingPage> {
                             );
                           } else {
                             return const Center(
-                              child: Text("倉庫是空的喔！"),
+                              child: Text("請重新連接"),
                             );
                           }
                         }

@@ -38,7 +38,7 @@ class _WalletWidgetState extends State<WalletWidget> {
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const[
+            children: const [
               Text(
                 "WALLETS",
                 style: TextStyle(
@@ -52,55 +52,62 @@ class _WalletWidgetState extends State<WalletWidget> {
           const SizedBox(
             height: 16,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Column(
             children: [
-              Row(
-                children: [
-                  const Text(
-                    "\$ ",
-                    style: TextStyle(
-                      fontFamily: englishFontfamily,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  FutureBuilder(
-                    future: MongoDatabase().getWalletData(),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Text(
-                          "連接中",
-                          style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                              color: textColor2),
-                        );
-                      } else {
-                        if (snapshot.hasData) {
-                          return const Text(
-                            "Not yet activated",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          );
-                        } else {
-                          return const Text(
-                            "No Data Available",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
+              MediaQuery.removePadding(
+                //消除頂部空白
+                context: context,
+                removeTop: true,
+                child: FutureBuilder(
+                  future: MongoDatabase().getWalletData(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text(
+                        "連接中",
+                        style: TextStyle(
+                          fontFamily: englishFontfamily,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: textColor2,
+                        ),
+                      );
+                    } else {
+                      if (snapshot.hasData) {
+                        var totalData = snapshot.data.length;
+                        if (totalData == 0) {
+                          return const Center(
+                            child: Text("目前尚未開通任何錢包",
+                              style: TextStyle(
+                                fontFamily: englishFontfamily,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: textColor2,
+                              ),
                             ),
                           );
                         }
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index) => displayCard(
+                            WalletModel.fromJson(snapshot.data[index]),
+                          ),
+                        );
+                      } else {
+                        return const Center(
+                          child: Text("請重新連接",
+                            style: TextStyle(
+                              fontFamily: englishFontfamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: textColor2,
+                            ),
+                          ),
+                        );
                       }
-                    },
-                  ),
-                ],
+                    }
+                  },
+                ),
               ),
             ],
           ),
@@ -125,19 +132,11 @@ class _WalletWidgetState extends State<WalletWidget> {
                     height: 8,
                   ),
                   Text(
-                    "\$",
+                    "\$ 0",
                     style: TextStyle(
                       fontFamily: englishFontfamily,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Text(
-                    "0",
-                    style: TextStyle(
-                      fontFamily: englishFontfamily,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
@@ -148,4 +147,20 @@ class _WalletWidgetState extends State<WalletWidget> {
       ),
     );
   }
+
+  Widget displayCard(WalletModel data) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //* title
+          Text(
+            "\$ ${data.pay}",
+            style: const TextStyle(
+              fontFamily: englishFontfamily,
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: textColor,
+            ),
+          ),
+        ],
+      );
 }

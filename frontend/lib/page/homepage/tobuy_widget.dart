@@ -246,7 +246,7 @@ class _TobuyWidgetState extends State<TobuyWidget> {
               boxShadow: const [
                 BoxShadow(
                   color: primaryColor2,
-                  offset: Offset(6.0, 6.0), //陰影x軸偏移量
+                  offset: Offset(3.0, 3.0),
                   blurRadius: 5, //陰影模糊程度
                   spreadRadius: 0, //陰影擴散程度
                 ),
