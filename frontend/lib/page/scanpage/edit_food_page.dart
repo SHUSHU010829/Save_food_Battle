@@ -68,7 +68,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
             ),
             //* 食物卡
             SizedBox(
-              height: 550,
+              height: 480,
               child: FutureBuilder(
                 future: MongoDatabase().qrScanData(),
                 builder: (context, AsyncSnapshot snapshot) {
@@ -101,62 +101,40 @@ class _EditFoodPageState extends State<EditFoodPage> {
                 },
               ),
             ),
-            //* 底部兩顆按鈕
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: [
-            //         ElevatedButton(
-            //           onPressed: () {},
-            //           child: const Text(
-            //             "匯入倉庫",
-            //             style: TextStyle(
-            //               fontSize: 16,
-            //               fontWeight: FontWeight.w700,
-            //               fontFamily: chineseFontfamily,
-            //               color: Colors.white,
-            //             ),
-            //           ),
-            //           style: ElevatedButton.styleFrom(
-            //             elevation: 5,
-            //             primary: primaryColor5,
-            //             padding: const EdgeInsets.symmetric(horizontal: 40),
-            //             shape: RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(16),
-            //             ),
-            //           ),
-            //         ),
-            //         const SizedBox(
-            //           width: 16,
-            //         ),
-            //         OutlinedButton(
-            //           onPressed: () {
-            //             Navigator.of(context).pop();
-            //           },
-            //           child: const Text(
-            //             "重新掃描",
-            //             style: TextStyle(
-            //               fontSize: 16,
-            //               fontWeight: FontWeight.w700,
-            //               fontFamily: chineseFontfamily,
-            //               color: textColor,
-            //             ),
-            //           ),
-            //           style: OutlinedButton.styleFrom(
-            //             padding: const EdgeInsets.symmetric(horizontal: 40),
-            //             shape: RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.circular(16),
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+            //* 底部按鈕
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        setState(() {});
+                        // Navigator.of(context).pop();
+                      },
+                      child: const Text(
+                        "重新掃描",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: chineseFontfamily,
+                          color: textColor,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -357,3 +335,4 @@ class _EditFoodPageState extends State<EditFoodPage> {
         ),
       );
 }
+// 

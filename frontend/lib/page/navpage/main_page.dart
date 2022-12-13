@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/page/scanpage/edit_food_page.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/page/navpage/home_page.dart';
 import 'package:frontend/page/navpage/identity_page.dart';
@@ -16,7 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   List pages = [
     const HomePage(),
-    const ScanPage(),
+    const EditFoodPage(),
     const IdentityPage(),
     const StorefoodPage(),
     const SettingPage(),

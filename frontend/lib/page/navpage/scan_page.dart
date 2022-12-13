@@ -36,7 +36,7 @@ class _ScanPageState extends State<ScanPage> {
 
   Barcode? result; // QR掃描存結果
   String datainfo = "";
-  int twoQRcheck = 0; //步驟偵測
+  int twoQRcheck = 0; //  步驟偵測
   QRViewController? controller; // 控制器 不要刪
   final GlobalKey qrkey = GlobalKey(debugLabel: 'QR');
 

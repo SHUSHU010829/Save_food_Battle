@@ -177,7 +177,13 @@ class MongoDatabase {
 
   //* Delete Data : QRscan
   static deleteQRData(ScanQrModel data) async {
+    print(data.id);
     await scandataCollection.remove(where.id(data.id));
+  }
+
+  //* Delete All Data in QRscan
+  static deletInsertQRData(id) async {
+    await scandataCollection.remove(where.id(id));
   }
 
   //* Display Data : QRscan

@@ -34,6 +34,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   var titleController = TextEditingController();
   var countController = TextEditingController();
   var splaceController = TextEditingController();
+  var id;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     if (data != null) {
       titleController.text = data.name;
       countController.text = data.count;
+      id = data.id;
       // storePlace = data.place;
       // foodType = data.foodType;
     }
@@ -292,6 +294,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                               m = '${_dateTime.month}';
                             }
                             _insertData(
+                              id,
                               titleController.text.trim(),
                               _dateTime.year.toString(),
                               m,
@@ -581,6 +584,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   }
 
   Future<void> _insertData(
+    id,
     String title,
     String year,
     String month,
@@ -603,7 +607,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       foodType: foodType,
       used: used,
     );
-    var result = await MongoDatabase.insert(data)
+    await MongoDatabase.insert(data);
+    await MongoDatabase.deletInsertQRData(id)
         .whenComplete(() => Navigator.pop(context));
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
