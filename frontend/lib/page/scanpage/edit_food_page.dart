@@ -68,7 +68,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
             ),
             //* 食物卡
             SizedBox(
-              height: 480,
+              height: 500,
               child: FutureBuilder(
                 future: MongoDatabase().qrScanData(),
                 builder: (context, AsyncSnapshot snapshot) {
@@ -105,15 +105,15 @@ class _EditFoodPageState extends State<EditFoodPage> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     OutlinedButton(
                       onPressed: () {
-                        setState(() {});
-                        // Navigator.of(context).pop();
+                        MongoDatabase().deleteAllQRData();
+                        Navigator.of(context).pop();
                       },
                       child: const Text(
                         "重新掃描",

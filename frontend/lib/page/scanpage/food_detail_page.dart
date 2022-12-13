@@ -7,6 +7,7 @@ import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/dbModel/alertFood_model.dart';
 import 'package:frontend/models/dbModel/scanQRmodel.dart';
 import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
+import 'package:frontend/models/dbModel/wallet_model.dart';
 import 'package:frontend/page/storefood/money_separate.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
@@ -26,7 +27,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
   DateTime _dateTime = DateTime.now();
 
-  List<String> items = ['肉類', '蛋', '豆', '魚', '水果'];
+  List<String> items = ['肉類', '蛋', '豆', '魚', '水果', '其他'];
 
   String foodType = '肉類';
   String storePlace = '';
@@ -35,6 +36,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   var countController = TextEditingController();
   var splaceController = TextEditingController();
   var id;
+  var cost = '';
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       titleController.text = data.name;
       countController.text = data.count;
       id = data.id;
+      cost = data.cost;
       // storePlace = data.place;
       // foodType = data.foodType;
     }
@@ -303,6 +306,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                               storePlace.toString().trim(),
                               foodType.trim(),
                               "100",
+                              cost,
                             );
                           }
                         },
@@ -593,6 +597,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     String place,
     String foodType,
     String used,
+    String cost,
   ) async {
     var _id = M.ObjectId(); // store Unique id inside our variable
     final data = UserMongoDbModel(

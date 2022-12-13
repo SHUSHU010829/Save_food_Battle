@@ -75,14 +75,12 @@ class _WalletWidgetState extends State<WalletWidget> {
                     if (snapshot.hasData) {
                       var totalData = snapshot.data.length;
                       if (totalData == 0) {
-                        return const Center(
-                          child: Text("目前尚未開通任何錢包",
-                            style: TextStyle(
-                              fontFamily: englishFontfamily,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                              color: textColor2,
-                            ),
+                        return const Text("目前尚未開通任何錢包",
+                          style: TextStyle(
+                            fontFamily: englishFontfamily,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            color: textColor2,
                           ),
                         );
                       }
@@ -94,14 +92,12 @@ class _WalletWidgetState extends State<WalletWidget> {
                         ),
                       );
                     } else {
-                      return const Center(
-                        child: Text("請重新連接",
-                          style: TextStyle(
-                            fontFamily: englishFontfamily,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            color: textColor2,
-                          ),
+                      return const Text("請重新連接",
+                        style: TextStyle(
+                          fontFamily: englishFontfamily,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: textColor2,
                         ),
                       );
                     }

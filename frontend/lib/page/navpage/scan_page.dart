@@ -10,6 +10,7 @@ QRCODE掃描要有介面計數 要掃描兩個QR
 
 import 'dart:developer';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
@@ -39,6 +40,7 @@ class _ScanPageState extends State<ScanPage> {
   int twoQRcheck = 0; //  步驟偵測
   QRViewController? controller; // 控制器 不要刪
   final GlobalKey qrkey = GlobalKey(debugLabel: 'QR');
+  final user = FirebaseAuth.instance.currentUser!;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -232,6 +234,39 @@ class _ScanPageState extends State<ScanPage> {
                 );
               },
             ),
+            //* 底部按鈕
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 32.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        setState(() {});
+                      },
+                      child: const Text(
+                        "重新掃描",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: chineseFontfamily,
+                          color: textColor,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -278,15 +313,21 @@ class _ScanPageState extends State<ScanPage> {
         if (goodinfo[cargosort].contains("**")) {
           goodinfo[cargosort] = goodinfo[cargosort].substring(2);
         }
-        insert_data(goodinfo[cargosort], goodinfo[cargosort + 1],
+        insertData(goodinfo[cargosort], goodinfo[cargosort + 1],
             goodinfo[cargosort + 2]);
       }
     }
   }
 
-  void insert_data(String n, String co, String cs) async {
+  void insertData(String name, String count, String cost) async {
     var _id = M.ObjectId();
-    final data = ScanQrModel(id: _id, name: n, count: co, cost: cs);
+    final data = ScanQrModel(
+      id: _id,
+      uid: user.uid.toString(),
+      name: name,
+      count: count,
+      cost: cost,
+    );
     var result = await MongoDatabase.insertscan(data);
     twoQRcheck = 0;
     datainfo = "";

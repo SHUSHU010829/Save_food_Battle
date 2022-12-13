@@ -26,7 +26,7 @@ class _InsertPageState extends State<InsertPage> {
 
   DateTime _dateTime = DateTime.now();
 
-  List<String> items = ['肉類', '蛋', '豆', '魚', '水果'];
+  List<String> items = ['肉類', '蛋', '豆', '魚', '水果', '其他'];
 
   var _checkInsertUpdate = "Insert";
   double _usedValue = 0;
