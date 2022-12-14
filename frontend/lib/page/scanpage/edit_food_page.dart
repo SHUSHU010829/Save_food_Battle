@@ -80,7 +80,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
                     if (snapshot.hasData) {
                       if (snapshot.data.length == 0) {
                         return const Center(
-                          child: Text('沒有這樣食物喔！'),
+                          child: Text('空資料，請再掃描一次！'),
                         );
                       } else {
                         return ListView.builder(
