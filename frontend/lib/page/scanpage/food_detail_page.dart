@@ -8,11 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/dbModel/alertFood_model.dart';
 import 'package:frontend/models/dbModel/scan_qrmodel.dart';
 import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
-import 'package:frontend/models/dbModel/wallet_model.dart';
-import 'package:frontend/models/market_data_model.dart';
 import 'package:frontend/page/storefood/money_separate.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
@@ -29,7 +26,7 @@ class FoodDetailPage extends StatefulWidget {
 class _FoodDetailPageState extends State<FoodDetailPage> {
   final user = FirebaseAuth.instance.currentUser!;
   final formKey = GlobalKey<FormState>();
-  List _foodData = [];
+  List _foodData = []; // 儲存json資料
 
   // Fetch content from the json file
   Future<void> readJson() async {
@@ -38,12 +35,14 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     final data = await json.decode(response);
     setState(() {
       _foodData = data["items"];
-      // print("..items ${_foodData}");
+      print("..items ${_foodData[0].length}");
     });
   }
 
   List<String> items = ['肉類', '蛋', '蔬果', '飲料', '其他'];
   var _dateTime = DateTime.now();
+
+  // ------------------ 用到資料宣告 --------------------
   var instantdate = '';
   String foodType = '肉類';
   String storePlace = '';
@@ -52,340 +51,334 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   var splaceController = TextEditingController();
   var id;
   var cost = '';
+  bool ifRead = false; // 讓他只讀一次json檔
 
   @override
   Widget build(BuildContext context) {
-    // List<dynamic> args = settings.arguments;
-    
     ScanQrModel? data =
         ModalRoute.of(context)!.settings.arguments as ScanQrModel?;
     if (data != null) {
+      if (!ifRead) {
+        readJson();
+        if (kDebugMode) {
+          print(_foodData);
+        }
+        ifRead = true;
+      }
       titleController.text = data.name;
       countController.text = data.count;
       id = data.id;
       cost = data.cost;
-      for (var i = 0; i < _foodData.length; ++i) {
-        // print(_foodData[i]["name"]);
-        if (data.name == _foodData[i]["name"]) {
+      for (var i = 0; i < _foodData[0].length; ++i) {
+        if (data.name == _foodData[0][i]["name"]) {
           // 有效日期
-          instantdate = _foodData[i]["date"];
+          instantdate = _foodData[0][i]["date"];
           _dateTime = _dateTime.add(Duration(days: int.parse(instantdate)));
           // 收納地方
-          if (_foodData[i]["temperature"] == '常溫') {
-            instantdate = '櫃子';
-          } else if (_foodData[i]["temperature"] == '冷凍') {
-            instantdate = '冷凍';
+          if (_foodData[0][i]["temperature"] == '常溫') {
+            storePlace = '櫃子';
+          } else if (_foodData[0][i]["temperature"] == '冷凍') {
+            storePlace = '冷凍';
           } else {
-            instantdate = '冷藏';
+            storePlace = '冷藏';
           }
+          // 食物類別（爬蟲沒有）
+          foodType = _foodData[0][i]["foodType"];
+          break;
         }
       }
-      // if (data.name == '光泉100純鮮乳(無調整)1857ml') {
-      //   storePlace = '冷藏';
-      //   foodType = '飲料';
-      //   instantdate = '14';
-      //   int day = int.parse(instantdate);
-      //   _dateTime = _dateTime.add(Duration(days: day));
-      // } else if (data.name == '乖乖-椰子') {
-      //   storePlace = '櫃子';
-      //   foodType = '其他';
-      //   instantdate = '239';
-      //   _dateTime = _dateTime.add(const Duration(days: 239));
-      // } else if (data.name == '活舒菜_生菜輕食盒180g') {
-      //   storePlace = '冷藏';
-      //   foodType = '蔬果';
-      //   instantdate = '20';
-      //   _dateTime = _dateTime.add(const Duration(days: 20));
-      // } else if (data.name == '原萃日式綠茶580ml') {
-      //   storePlace = '櫃子';
-      //   foodType = '飲料';
-      //   instantdate = '179';
-      //   _dateTime = _dateTime.add(const Duration(days: 179));
-      // }
     }
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        child: Form(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          key: formKey,
-          child: Container(
-            padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 28,
-                ),
-                //* BAR
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Insert",
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: englishFontfamily,
-                        color: textColor,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.close_rounded),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-                //* Title
-                Padding(
-                  padding: const EdgeInsets.only(top:20.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+    //讀取完再顯示畫面
+    if (!ifRead) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: backgroundColor,
+        body: SingleChildScrollView(
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: formKey,
+            child: Container(
+              padding: const EdgeInsets.only(left: 32, top: 36, right: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 28,
+                  ),
+                  //* BAR
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 180,
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              controller: titleController,
-                              maxLines: null,
-                              textInputAction: TextInputAction.done,
-                              decoration: const InputDecoration.collapsed(
-                                hintText: 'FoodTitle',
-                                hintStyle: TextStyle(
-                                  color: primaryColor1,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: chineseFontfamily,
-                                ),
-                              ),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Empty!";
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                            const Divider(color: Colors.black)
-                          ],
+                      const Text(
+                        "Insert",
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: englishFontfamily,
+                          color: textColor,
                         ),
                       ),
-                      const Icon(
-                        Icons.drive_file_rename_outline_rounded,
-                        color: secondary4,
+                      IconButton(
+                        icon: const Icon(Icons.close_rounded),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                //* 存放地點
-                const Text(
-                  "存放地點",
-                  style: TextStyle(
-                    fontFamily: chineseFontfamily,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                placeCard(),
-                //* 有效日期
-                const Text(
-                  "有效日期",
-                  style: TextStyle(
-                    fontFamily: chineseFontfamily,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                StatefulBuilder(
-                  builder: (context, state) => Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shadowColor: Colors.black,
-                            elevation: 4.0,
-                            primary: primaryColor1,
-                          ),
-                          onPressed: () async {
-                            DateTime? _newDate = await showDatePicker(
-                              context: context,
-                              initialDate: _dateTime,
-                              // final fiftyDaysFromNow = today.add(const Duration(days: 50));
-                              firstDate: DateTime(DateTime.now().year),
-                              lastDate: DateTime(DateTime.now().year + 10),
-                              builder: (context, child) {
-                                return Theme(
-                                  data: Theme.of(context).copyWith(
-                                    colorScheme: const ColorScheme(
-                                      // uses the brightness of the user (Light or Dark)
-                                      brightness: Brightness.light,
-                                      primary: primaryColor7,
-                                      onPrimary: primaryColor1,
-                                      secondary: secondary1,
-                                      onSecondary: secondary1,
-                                      error: secondary6,
-                                      onError: secondary1,
-                                      background: primaryColor1,
-                                      onBackground: primaryColor1,
-                                      surface: secondary1,
-                                      onSurface: secondary4,
-                                    ),
-                                    textButtonTheme: TextButtonThemeData(
-                                      style: TextButton.styleFrom(
-                                        primary: secondary6,
-                                      ),
-                                    ),
-                                  ),
-                                  child: child!,
-                                );
-                              },
-                            );
-                            if (_newDate != null) {
-                              state(() {
-                                _dateTime = _newDate;
-                              });
-                            }
-                          },
+                  //* Title
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 180,
                           child: Column(
                             children: [
-                              Text(
-                                '${_dateTime.year}-${_dateTime.month}-${_dateTime.day}',
-                                style: const TextStyle(
-                                  fontFamily: englishFontfamily,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
+                              TextFormField(
+                                controller: titleController,
+                                maxLines: null,
+                                textInputAction: TextInputAction.done,
+                                decoration: const InputDecoration.collapsed(
+                                  hintText: 'FoodTitle',
+                                  hintStyle: TextStyle(
+                                    color: primaryColor1,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: chineseFontfamily,
+                                  ),
                                 ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Empty!";
+                                  } else {
+                                    return null;
+                                  }
+                                },
                               ),
+                              const Divider(color: Colors.black)
                             ],
                           ),
                         ),
-                      ),
+                        const Icon(
+                          Icons.drive_file_rename_outline_rounded,
+                          color: secondary4,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                //* 數量 & 百分比
-                countSlide(),
-                const SizedBox(
-                  height: 8,
-                ),
-                //* 類別
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "類別",
-                      style: TextStyle(
-                        fontFamily: chineseFontfamily,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  //* 存放地點
+                  const Text(
+                    "存放地點",
+                    style: TextStyle(
+                      fontFamily: chineseFontfamily,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
                     ),
-                    foodTypeDropdown(),
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                //* 底部按鈕
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        child: OutlinedButton(
-                          child: const Text(
-                            '分配食材',
-                            style: TextStyle(
-                              color: textColor,
-                              fontFamily: chineseFontfamily,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
+                  ),
+                  placeCard(),
+                  //* 有效日期
+                  const Text(
+                    "有效日期",
+                    style: TextStyle(
+                      fontFamily: chineseFontfamily,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  StatefulBuilder(
+                    builder: (context, state) => Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shadowColor: Colors.black,
+                              elevation: 4.0,
+                              primary: primaryColor1,
+                            ),
+                            onPressed: () async {
+                              DateTime? _newDate = await showDatePicker(
+                                context: context,
+                                initialDate: _dateTime,
+                                // final fiftyDaysFromNow = today.add(const Duration(days: 50));
+                                firstDate: DateTime(DateTime.now().year),
+                                lastDate: DateTime(DateTime.now().year + 10),
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                      colorScheme: const ColorScheme(
+                                        // uses the brightness of the user (Light or Dark)
+                                        brightness: Brightness.light,
+                                        primary: primaryColor7,
+                                        onPrimary: primaryColor1,
+                                        secondary: secondary1,
+                                        onSecondary: secondary1,
+                                        error: secondary6,
+                                        onError: secondary1,
+                                        background: primaryColor1,
+                                        onBackground: primaryColor1,
+                                        surface: secondary1,
+                                        onSurface: secondary4,
+                                      ),
+                                      textButtonTheme: TextButtonThemeData(
+                                        style: TextButton.styleFrom(
+                                          primary: secondary6,
+                                        ),
+                                      ),
+                                    ),
+                                    child: child!,
+                                  );
+                                },
+                              );
+                              if (_newDate != null) {
+                                state(() {
+                                  _dateTime = _newDate;
+                                });
+                              }
+                            },
+                            child: Column(
+                              children: [
+                                Text(
+                                  '${_dateTime.year}-${_dateTime.month}-${_dateTime.day}',
+                                  style: const TextStyle(
+                                    fontFamily: englishFontfamily,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          style: OutlinedButton.styleFrom(
-                            primary: textColor,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            side:
-                                const BorderSide(width: 1, color: Colors.black),
-                          ),
-                          onPressed: () {
-                            readJson();
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (BuildContext context) {
-                            //       return const MoneySeparatePage();
-                            //     },
-                            //     settings: const RouteSettings(arguments: null),
-                            //   ),
-                            // ).then((value) {
-                            //   setState(() {});
-                            // });
-                          },
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          final isValidForm = formKey.currentState!.validate();
-                          String d, m;
-                          if (isValidForm) {
-                            if (_dateTime.day < 10 && _dateTime.day > 0) {
-                              d = '0${_dateTime.day}';
-                            } else {
-                              d = '${_dateTime.day}';
-                            }
-                            if (_dateTime.month < 10 && _dateTime.month > 0) {
-                              m = '0${_dateTime.month}';
-                            } else {
-                              m = '${_dateTime.month}';
-                            }
-                            _insertData(
-                              id,
-                              titleController.text.trim(),
-                              _dateTime.year.toString(),
-                              m,
-                              d,
-                              countController.text.trim(),
-                              storePlace.toString().trim(),
-                              foodType.trim(),
-                              "100",
-                              cost,
-                            );
-                          }
-                        },
-                        child: const Text("確認輸入"),
-                        style: ElevatedButton.styleFrom(
-                          primary: secondary6,
-                          padding: const EdgeInsets.symmetric(horizontal: 50),
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            color: secondary3,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: chineseFontfamily,
-                          ),
+                    ),
+                  ),
+                  //* 數量 & 百分比
+                  countSlide(),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  //* 類別
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "類別",
+                        style: TextStyle(
+                          fontFamily: chineseFontfamily,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
+                      foodTypeDropdown(),
                     ],
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  //* 底部按鈕
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          child: OutlinedButton(
+                            child: const Text(
+                              '分配食材',
+                              style: TextStyle(
+                                color: textColor,
+                                fontFamily: chineseFontfamily,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              primary: textColor,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              side: const BorderSide(
+                                  width: 1, color: Colors.black),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return const MoneySeparatePage();
+                                  },
+                                  settings:
+                                      const RouteSettings(arguments: null),
+                                ),
+                              ).then((value) {
+                                setState(() {});
+                              });
+                            },
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            final isValidForm =
+                                formKey.currentState!.validate();
+                            String d, m;
+                            if (isValidForm) {
+                              if (_dateTime.day < 10 && _dateTime.day > 0) {
+                                d = '0${_dateTime.day}';
+                              } else {
+                                d = '${_dateTime.day}';
+                              }
+                              if (_dateTime.month < 10 && _dateTime.month > 0) {
+                                m = '0${_dateTime.month}';
+                              } else {
+                                m = '${_dateTime.month}';
+                              }
+                              _insertData(
+                                id,
+                                titleController.text.trim(),
+                                _dateTime.year.toString(),
+                                m,
+                                d,
+                                countController.text.trim(),
+                                storePlace.toString().trim(),
+                                foodType.trim(),
+                                "100",
+                                cost,
+                              );
+                            }
+                          },
+                          child: const Text("確認輸入"),
+                          style: ElevatedButton.styleFrom(
+                            primary: secondary6,
+                            padding: const EdgeInsets.symmetric(horizontal: 50),
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              color: secondary3,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: chineseFontfamily,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   //* 數量
