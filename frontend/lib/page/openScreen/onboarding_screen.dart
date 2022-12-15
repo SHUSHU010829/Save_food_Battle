@@ -19,9 +19,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final _controller = PageController();
   int _currentPage = 0;
   List colors = [
-    const Color(0xffDAD3C8),
-    const Color(0xffFFE5DE),
-    const Color(0xffDCF6E6)
+    const Color(0xffE7D7c9),
+    const Color(0xffD4b2a7),
+    const Color(0xffcdc6c3)
   ];
 
   AnimatedContainer _buildDots({int? index}) {
@@ -54,7 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Column(
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: PageView.builder(
                 controller: _controller,
                 onPageChanged: (value) => setState(() => _currentPage = value),
@@ -76,8 +76,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'GenRyuMin',
-                            fontWeight: FontWeight.w700,
-                            fontSize: (width <= 550) ? 30 : 35,
+                            fontWeight: FontWeight.w800,
+                            fontSize: (width <= 550) ? 24 : 30,
+                            color: textColor,
                           ),
                         ),
                         const SizedBox(
@@ -89,6 +90,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             fontFamily: 'GenRyuMin',
                             fontWeight: FontWeight.w600,
                             fontSize: (width <= 550) ? 17 : 25,
+                            height: 1.5,
+                            color: textColor,
                           ),
                           textAlign: TextAlign.center,
                         )

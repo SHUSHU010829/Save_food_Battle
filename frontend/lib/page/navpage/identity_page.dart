@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/main.dart';
+import 'package:frontend/theme/size_config.dart';
 
 int id = 0;
 
@@ -75,6 +76,31 @@ class _IdentityPageState extends State<IdentityPage> {
                   ],
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/pic.png",
+                      height: SizeConfig.blockV! * 40,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "開發中...",
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: chineseFontfamily,
+                        color: primaryColor7,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
