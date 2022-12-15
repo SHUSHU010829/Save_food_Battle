@@ -1,3 +1,7 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:frontend/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/dbModel/alertFood_model.dart';
-import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/scan_qrmodel.dart';
 import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 import 'package:frontend/models/dbModel/wallet_model.dart';
+import 'package:frontend/models/market_data_model.dart';
 import 'package:frontend/page/storefood/money_separate.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
@@ -24,14 +29,24 @@ class FoodDetailPage extends StatefulWidget {
 class _FoodDetailPageState extends State<FoodDetailPage> {
   final user = FirebaseAuth.instance.currentUser!;
   final formKey = GlobalKey<FormState>();
+  List _foodData = [];
 
-  DateTime _dateTime = DateTime.now();
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/data/food_data.json');
+    final data = await json.decode(response);
+    setState(() {
+      _foodData = data["items"];
+      // print("..items ${_foodData}");
+    });
+  }
 
-  List<String> items = ['肉類', '蛋', '豆', '魚', '水果', '其他'];
-
+  List<String> items = ['肉類', '蛋', '蔬果', '飲料', '其他'];
+  var _dateTime = DateTime.now();
+  var instantdate = '';
   String foodType = '肉類';
   String storePlace = '';
-
   var titleController = TextEditingController();
   var countController = TextEditingController();
   var splaceController = TextEditingController();
@@ -40,6 +55,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    // List<dynamic> args = settings.arguments;
+    
     ScanQrModel? data =
         ModalRoute.of(context)!.settings.arguments as ScanQrModel?;
     if (data != null) {
@@ -47,8 +64,44 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       countController.text = data.count;
       id = data.id;
       cost = data.cost;
-      // storePlace = data.place;
-      // foodType = data.foodType;
+      for (var i = 0; i < _foodData.length; ++i) {
+        // print(_foodData[i]["name"]);
+        if (data.name == _foodData[i]["name"]) {
+          // 有效日期
+          instantdate = _foodData[i]["date"];
+          _dateTime = _dateTime.add(Duration(days: int.parse(instantdate)));
+          // 收納地方
+          if (_foodData[i]["temperature"] == '常溫') {
+            instantdate = '櫃子';
+          } else if (_foodData[i]["temperature"] == '冷凍') {
+            instantdate = '冷凍';
+          } else {
+            instantdate = '冷藏';
+          }
+        }
+      }
+      // if (data.name == '光泉100純鮮乳(無調整)1857ml') {
+      //   storePlace = '冷藏';
+      //   foodType = '飲料';
+      //   instantdate = '14';
+      //   int day = int.parse(instantdate);
+      //   _dateTime = _dateTime.add(Duration(days: day));
+      // } else if (data.name == '乖乖-椰子') {
+      //   storePlace = '櫃子';
+      //   foodType = '其他';
+      //   instantdate = '239';
+      //   _dateTime = _dateTime.add(const Duration(days: 239));
+      // } else if (data.name == '活舒菜_生菜輕食盒180g') {
+      //   storePlace = '冷藏';
+      //   foodType = '蔬果';
+      //   instantdate = '20';
+      //   _dateTime = _dateTime.add(const Duration(days: 20));
+      // } else if (data.name == '原萃日式綠茶580ml') {
+      //   storePlace = '櫃子';
+      //   foodType = '飲料';
+      //   instantdate = '179';
+      //   _dateTime = _dateTime.add(const Duration(days: 179));
+      // }
     }
 
     return Scaffold(
@@ -89,7 +142,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 ),
                 //* Title
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(top:20.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -167,6 +220,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             DateTime? _newDate = await showDatePicker(
                               context: context,
                               initialDate: _dateTime,
+                              // final fiftyDaysFromNow = today.add(const Duration(days: 50));
                               firstDate: DateTime(DateTime.now().year),
                               lastDate: DateTime(DateTime.now().year + 10),
                               builder: (context, child) {
@@ -267,17 +321,18 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                                 const BorderSide(width: 1, color: Colors.black),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return const MoneySeparatePage();
-                                },
-                                settings: const RouteSettings(arguments: null),
-                              ),
-                            ).then((value) {
-                              setState(() {});
-                            });
+                            readJson();
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (BuildContext context) {
+                            //       return const MoneySeparatePage();
+                            //     },
+                            //     settings: const RouteSettings(arguments: null),
+                            //   ),
+                            // ).then((value) {
+                            //   setState(() {});
+                            // });
                           },
                         ),
                       ),

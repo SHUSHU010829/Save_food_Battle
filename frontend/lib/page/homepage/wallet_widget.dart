@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
 import 'package:frontend/models/dbModel/wallet_model.dart';

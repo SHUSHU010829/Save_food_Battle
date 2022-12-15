@@ -14,7 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/theme/constants.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/scan_qrmodel.dart';
 import 'package:frontend/page/scanpage/edit_food_page.dart';
 import 'package:progress_stepper/progress_stepper.dart';
 import 'package:toggle_switch/toggle_switch.dart';

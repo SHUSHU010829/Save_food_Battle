@@ -1,8 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:frontend/dbHelper/user/mongodb.dart';
-import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/scan_qrmodel.dart';
 import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 import 'package:frontend/page/scanpage/food_detail_page.dart';
 import 'package:frontend/theme/constants.dart';
@@ -17,6 +20,17 @@ class EditFoodPage extends StatefulWidget {
 class _EditFoodPageState extends State<EditFoodPage> {
   var titleController = TextEditingController();
   var keyWord = '';
+  List _foodData = [];
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/data/food_data.json');
+    final data = await json.decode(response);
+    setState(() {
+      _foodData = data["items"];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +158,7 @@ class _EditFoodPageState extends State<EditFoodPage> {
   Widget displayData(ScanQrModel data) => Padding(
         padding: const EdgeInsets.only(top: 4, bottom: 4, left: 8, right: 8),
         child: Slidable(
+          //* 刪除卡片
           startActionPane: ActionPane(
             motion: const ScrollMotion(),
             children: [
@@ -203,6 +218,8 @@ class _EditFoodPageState extends State<EditFoodPage> {
               ),
             ],
           ),
+
+          //* 編輯卡片
           endActionPane: ActionPane(
             motion: const ScrollMotion(),
             children: [

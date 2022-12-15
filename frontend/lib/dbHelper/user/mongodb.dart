@@ -5,7 +5,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/dbHelper/user/constant.dart';
 import 'package:frontend/models/dbModel/alertFood_model.dart';
-import 'package:frontend/models/dbModel/scanQRmodel.dart';
+import 'package:frontend/models/dbModel/scan_qrmodel.dart';
 import 'package:frontend/models/dbModel/tobuy_model.dart';
 import 'package:frontend/models/dbModel/user_allstorefood_model.dart';
 import 'package:frontend/models/dbModel/wallet_model.dart';

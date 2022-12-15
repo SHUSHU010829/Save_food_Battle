@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:frontend/splash_screen.dart';
@@ -76,4 +75,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
