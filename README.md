@@ -1,20 +1,18 @@
 # 畢業專題
 
+![App Icon](https://user-images.githubusercontent.com/55850823/208358365-174986fd-4492-4b4a-907a-b3e287eb1ade.png)
+
 ## 食物拯救計畫
 
 食物拯救計畫前端（Frontend Folder）
 
 ### UI/UX
-https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=970%3A698&t=kIrKH0wGtadwgRcK-3
+https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3
 
-#### 使用工具
+### 使用工具
 
 - Flutter:
   - 詳細資訊請查閱-> Save_food_Battle/frontend/pubspec.yaml
-
-#### 注意
-
-可以在 vscode 插件載 "Better Comments" 可以看到更多種類的註解。
 
 #### 致謝
 
