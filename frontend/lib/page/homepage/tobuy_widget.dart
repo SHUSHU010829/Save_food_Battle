@@ -267,12 +267,18 @@ class _TobuyWidgetState extends State<TobuyWidget> {
                 const SizedBox(
                   width: 16,
                 ),
-                Text(
-                  data.title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: englishFontfamily,
+                SizedBox(
+                  width: 144,
+                  child: Text(
+                    data.title,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: englishFontfamily,
+                    ),
                   ),
                 ),
                 const SizedBox(
