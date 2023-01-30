@@ -233,12 +233,17 @@ class _AllfoodCardWidgetState extends State<AllfoodCardWidget> {
                         Row(
                           children: [
                             //* title
-                            Text(
-                              data.title,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: chineseFontfamily,
+                            SizedBox(
+                              width: 160,
+                              child: Text(
+                                data.title,
+                                maxLines: 1,
+                                softWrap: false,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: chineseFontfamily,
+                                ),
                               ),
                             ),
                             //* used
