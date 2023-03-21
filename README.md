@@ -7,7 +7,7 @@
 食物拯救計畫前端（Frontend Folder）
 
 ### UI/UX
-https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3
+[Figma](https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3)
 
 ### 使用工具
 
