@@ -6,13 +6,17 @@
 
 食物拯救計畫前端（Frontend Folder）
 
-### UI/UX
-[Figma](https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3)
+### See this project prototype
+[https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3](https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3)
+
+### See the poster about this
+[https://www.behance.net/gallery/162510349/](https://www.behance.net/gallery/162510349/_)
 
 ### 使用工具
 
 - Flutter:
   - 詳細資訊請查閱-> Save_food_Battle/frontend/pubspec.yaml
+- MongoDB Altas
 
 #### 致謝
 
