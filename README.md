@@ -4,8 +4,6 @@
 
 ## 食物拯救計畫
 
-[專題報告.pdf](./docs/report.pdf)
-
 ### 展示畫面
 ![pic1](./docs/Project2-1.png)
 ![pic2](./docs/Project2-2.png)
