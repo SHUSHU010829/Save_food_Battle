@@ -1,25 +1,32 @@
 # 畢業專題
 
-![App Icon](https://user-images.githubusercontent.com/55850823/208358365-174986fd-4492-4b4a-907a-b3e287eb1ade.png)
+![App Icon](./docs/app_icon.png)
 
 ## 食物拯救計畫
 
-食物拯救計畫前端（Frontend Folder）
+[專題報告.pdf](./docs/report.pdf)
 
-### See this project prototype
-[https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3](https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3)
+### 展示畫面
+![pic1](./docs/Project2-1.png)
+![pic2](./docs/Project2-2.png)
 
-### See the poster about this
+### Prototype
+[Save Food Battle Prototype](https://www.figma.com/file/wPBuftN4MyDxRAxKJ8Qxvr/Save_food_battle?node-id=0%3A1&t=sr97F96W21HiKYZA-3)
+
+### Poster
 [https://www.behance.net/gallery/162510349/](https://www.behance.net/gallery/162510349/_)
-
+![poster](./docs/poster.jpg)
 ### 使用工具
 
-- Flutter:
+- Flutter
   - 詳細資訊請查閱-> Save_food_Battle/frontend/pubspec.yaml
 - MongoDB Altas
+- Firebase
 
 #### 致謝
-
-icon:  
-  Food icons created by FBJan - Flaticon
-  Battle icons created by Royyan Wijaya - Flaticon
+- 林明言 教授
+- Font Awesome
+- Google Fonts
+- icon:
+  - Food icons created by FBJan - Flaticon
+  - Battle icons created by Royyan Wijaya - Flaticon
